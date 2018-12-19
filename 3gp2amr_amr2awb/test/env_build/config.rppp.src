@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="GB2312" ?>
+<rpsProcess>
+    <process domanId="rpsid" feId="27" instanceId="8">
+        <ipsBoardConfig>
+            <server ip="imp_ip" port="imp_port" timeout="20" sender_pid="0" />
+            <resource       R4audio="AMR" bearer="IP_RTP" num="res_num" confBoardType="ip"/> <!--R4audio:AMR/G711A/G711U-->
+            <moduleid       sid="11" did="1" />
+        </ipsBoardConfig>
+    </process>
+
+</rpsProcess>

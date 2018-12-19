@@ -1,0 +1,167 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings
+END
+noRiff.wav
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/noRiff.wav
+END
+badDataChunkID.wav
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/badDataChunkID.wav
+END
+badTotalLen.wav
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/badTotalLen.wav
+END
+nonftyp.3gp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/nonftyp.3gp
+END
+badboxlen.3gp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/badboxlen.3gp
+END
+badFormatCode.wav
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/badFormatCode.wav
+END
+unknownChunk_after_wave.wav
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/unknownChunk_after_wave.wav
+END
+badFmtLen.wav
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/badFmtLen.wav
+END
+nonhdlr.3gp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/nonhdlr.3gp
+END
+nonsawb.3gp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/nonsawb.3gp
+END
+badSampleRate.wav
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/badSampleRate.wav
+END
+unknownbox.3gp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/unknownbox.3gp
+END
+pcm_has_cbsize_fact.wav
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/pcm_has_cbsize_fact.wav
+END
+pcm_has_fact.wav
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/pcm_has_fact.wav
+END
+non_pcm_without_cbsize_fact.wav
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/non_pcm_without_cbsize_fact.wav
+END
+non_pcm_without_fact.wav
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/non_pcm_without_fact.wav
+END
+nonsamr.3gp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/nonsamr.3gp
+END
+pcm_has_cbsize.wav
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/pcm_has_cbsize.wav
+END
+non_pcm_without_cbsize.wav
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/non_pcm_without_cbsize.wav
+END
+error.amr
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/error.amr
+END
+noFmtChunk.wav
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/noFmtChunk.wav
+END
+badDataLen_expect_more_real.wav
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/badDataLen_expect_more_real.wav
+END
+badBlockAlign.wav
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/badBlockAlign.wav
+END
+badMono.wav
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/badMono.wav
+END
+unknownChunk_after_fmt.wav
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/unknownChunk_after_fmt.wav
+END
+badDataLen_expect_less_real.wav
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/badDataLen_expect_less_real.wav
+END
+badBitsPerSample.wav
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/special_rings/badBitsPerSample.wav
+END

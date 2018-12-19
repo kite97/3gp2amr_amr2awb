@@ -1,0 +1,38 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<configuration>
+    <programs>
+        <fe id="1" name="ininit" forward="0" executable="ininit" timeout="15" />
+        <fe id="11" name="msgr" forward="1" executable="msgr" timeout="15" />
+        <fe id="21" name="rcs" forward="0" executable="rcpp" timeout="15" />
+        <fe id="27" name="rps" forward="0" executable="rppp" timeout="300" />
+        <fe id="31" name="rms" forward="0" executable="rmpp" timeout="15" />
+        <fe id="41" name="ringmgr" forward="0" executable="ringmgr" timeout="15" />
+        <fe id="63" name="inaccessd" forward="0" executable="inaccessd" timeout="15" />
+    </programs>
+
+    <processes>
+        <domain id="11" name="rcs11.domain" host="10.1.69.144">
+            <subnet name="ininit" fe="ininit" startinstance="1" number="1" initialnumber="1" />
+            <subnet name="msgr" fe="msgr" startinstance="4" number="1" initialnumber="1" />
+            <subnet name="rcs" fe="rcs" startinstance="8" number="1" initialnumber="1" />
+        </domain>
+
+        <domain id="101" name="rps101.domain" host="10.1.93.241">
+            <subnet name="ininit" fe="ininit" startinstance="1" number="1" initialnumber="1" />
+            <subnet name="msgr" fe="msgr" startinstance="4" number="1" initialnumber="1" />
+            <subnet name="rps" fe="rps" startinstance="8" number="1" initialnumber="1" />
+        </domain>
+
+    </processes>
+    <links>
+
+        <linkset domain1="rcs11.domain" subnet1="ininit" domain2="rcs11.domain" subnet2="msgr" startport="35700" />
+        <linkset domain1="rcs11.domain" subnet1="ininit" domain2="rcs11.domain" subnet2="rcs" startport="35700" />
+        <linkset domain1="rcs11.domain" subnet1="msgr" domain2="rcs11.domain" subnet2="rcs" startport="35701" />
+        <linkset domain1="rcs11.domain" subnet1="msgr" domain2="rps101.domain" subnet2="msgr" startport="35701" />
+
+        <linkset domain1="rps101.domain" subnet1="ininit" domain2="rps101.domain" subnet2="msgr" startport="35702" />
+        <linkset domain1="rps101.domain" subnet1="ininit" domain2="rps101.domain" subnet2="rps" startport="35702" />
+        <linkset domain1="rps101.domain" subnet1="msgr" domain2="rps101.domain" subnet2="rps" startport="35703" />
+    </links>
+</configuration>

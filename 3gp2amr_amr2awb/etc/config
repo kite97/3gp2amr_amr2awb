@@ -1,0 +1,11 @@
+{lport, {5200}}.
+{worker_max, {1024}}.
+{port_base, {30000}}.
+{ssrc_base, {10000}}.
+{ipv4, "0.0.0.0"}.
+{log_file, "ocarina.log"}.
+{session_max_time, {300}}.
+{pfmc, {"127.0.0.1", 1700}}.
+{comm, {"101", "config.comm"}}.
+{sdp, {"config.sdp"}}.
+{amr_trans, {true}}.

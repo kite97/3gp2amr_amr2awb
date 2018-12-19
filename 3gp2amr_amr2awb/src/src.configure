@@ -1,0 +1,29 @@
+%%%配置文件
+%%%每一项以句点结束，每一项的内容由一个标识和标识的内容组成。类比于xml。
+%%%但起止是由花括号确定的。
+%%%配置文件使用utf-8编码。
+
+
+%% lport用于指定监听端口。
+{lport, {7777}}.
+%% worker_max用于确定最大并发量
+{worker_max, {1000}}.
+%% port_base用于指定发送rtp数据端口的起始值。
+%% port_base + worker_max 应该小于65535
+{port_base, {30000}}.
+%% ssrc用于指定发送rtp数据可以使用的ssrc的起始值。
+{ssrc_base, {10000}}.
+%% 本机用于媒体的ip地址
+{ipv4, "10.1.93.149"}.
+{ipv6, "2001:470:8287:903:eea8:6bff:fe80:d986"}.
+%% 默认用于媒体的ip，只能为ipv4或ipv6
+{default_ip, ipv4}.
+%%{log_level, debug}.
+{log_file, "ocarina.log"}.
+%% session_max_time用于指定session的最长持续时间(s)。
+{session_max_time, {infinity}}.
+%% pfmc用于指定网管pfmc的地址和端口。
+{pfmc, {"127.0.0.1", 1700}}.
+%%{debug_level, all}.
+
+%%{file_type, {audio, wav}}.

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SEND:  -->
+<!-- EXPECT:  dtmf.end=dtmf.noinput-->
+<!-- TIMELEN: 5s-->
+<!-- TAG: -->
+<msml version="1.1">
+    <dialogstart target="conn:12345" name="audioPlay" mark="7">
+        <dtmf fdt="5" idt="10" starttimer="true">
+            <pattern digits="xxxx#" format="moml+digits">
+                <send target="source" event="done"
+                    namelist="dtmf.digits dtmf.end"/>
+            </pattern>
+            <noinput>
+                <send target="source" event="done"
+                    namelist="dtmf.end"/>
+            </noinput>
+            <nomatch>
+                <send target="source" event="done"
+                    namelist="dtmf.end"/>
+            </nomatch>
+        </dtmf>
+    </dialogstart>
+</msml>
+

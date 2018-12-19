@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE scenario SYSTEM "sipp.dtd">
+
+
+<scenario name="Basic Sipstone UAC">
+
+<!-------------------------------------------------------------->
+<!--              Start Conversation                          -->
+<!-------------------------------------------------------------->
+  
+<send retrans="500">
+    <![CDATA[
+
+      INVITE sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      From: sipp <sip:sipp@[local_ip]:[local_port]>;tag=[call_number]
+      To: sut <sip:[service]@[remote_ip]:[remote_port]>
+      Call-ID: [call_id]
+      CSeq: 1 INVITE
+      Contact: sip:sipp@[local_ip]:[local_port]
+      Max-Forwards: 70
+      Subject: Performance Test
+      Content-Type: application/sdp
+      Content-Length: [len]    
+
+v=0
+o=caller 0 0 IN IP4 10.1.69.144
+s=caller
+i=-
+c=IN IP4 10.1.69.144
+b=AS:256
+t=0 0
+m=audio 5002 RTP/AVP 0 101
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-15
+a=sendrecv
+    ]]>
+</send>
+
+<recv response="100" optional="true">
+</recv>
+
+  
+<recv response="200" rtd="true">
+</recv>
+
+
+<!-------------------------------------------------------------->
+<!--              Start Pa                                   -->
+<!-------------------------------------------------------------->
+<send>
+    <![CDATA[
+
+      ACK sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      From: sipp <sip:sipp@[local_ip]:[local_port]>;tag=[call_number]
+      To: sut <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
+      Call-ID: [call_id]
+      CSeq: 1 ACK
+      Contact: sip:sipp@[local_ip]:[local_port]
+      Max-Forwards: 70
+      Subject: Performance Test
+      Content-Length: 0
+
+    ]]>
+</send>
+
+<pause milliseconds="1000" /> 
+
+<send retrans="500">
+    <![CDATA[
+
+      INFO sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      From: sipp <sip:sipp@[local_ip]:[local_port]>;tag=[call_number]
+      To: sut <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
+      Call-ID: [call_id]
+      CSeq: 2 INFO
+      Contact: sip:sipp@[local_ip]:[local_port]
+      Max-Forwards: 70
+      Subject: Performance Test
+      Content-Type: application/msml+xml
+      Content-Length: [len]
+
+<msml version="1.1">
+<dialogstart target="conn:-0127-2-1851fe04aba9fd5c" type="application/moml+xml" name="PCLeg12">
+  <dtmf fdt="16s" idt="5s" cleardb="false" starttimer="true">
+    <pattern digits="min=1;max=20;rtk=#;cancel=*" format="moml+digits">
+      <send target="source" event="app.done" namelist="dtmf.digits dtmf.end"/>
+    </pattern>
+    <noinput>
+      <send target="source" event="app.done" namelist="dtmf.digits dtmf.end"/>
+    </noinput>
+    <nomatch>
+      <send target="source" event="app.done" namelist="dtmf.digits dtmf.end"/>
+    </nomatch>
+    <dtmfexit>
+      <send event="done" namelist="dtmf.end" target="source"/>
+    </dtmfexit>
+  </dtmf>
+</dialogstart>
+</msml>]]>
+</send>
+
+<recv response="200" crlf="true">
+</recv>
+
+<!--
+<nop>
+  <action>
+    <exec play_pcap_audio="16.pcap"/>
+  </action>
+</nop>
+
+<recv request="INFO" crlf="true">
+</recv>
+
+<send>
+    <![CDATA[
+
+      SIP/2.0 200 OK
+      [last_Via:]
+      [last_From:]
+      [last_To:]
+      [last_Call-ID:]
+      [last_CSeq:]
+      Contact: <sip:[local_ip]:[local_port];transport=[transport]>
+      Content-Length: 0
+
+    ]]>
+</send>
+-->
+
+<pause milliseconds="10000" />
+
+<!-------------------------------------------------------------->
+<!--              End Conversation                            -->
+<!-------------------------------------------------------------->
+<send retrans="500">
+    <![CDATA[
+
+      BYE sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      From: sipp <sip:sipp@[local_ip]:[local_port]>;tag=[call_number]
+      To: sut <sip:[service]@[remote_ip]:[remote_port]>[peer_tag_param]
+      Call-ID: [call_id]
+      CSeq: 10 BYE
+      Contact: sip:sipp@[local_ip]:[local_port]
+      Max-Forwards: 70
+      Subject: Performance Test
+      Content-Length: 0
+
+    ]]>
+</send>
+
+<recv response="500" crlf="true" optional="true">
+</recv>
+
+<recv response="200" crlf="true" timeout="2000">
+</recv>
+
+<!-- definition of the response time repartition table (unit is ms)   -->
+<ResponseTimeRepartition value="10, 20, 30, 40, 50, 100, 150, 200"/>
+
+<!-- definition of the call length repartition table (unit is ms)     -->
+<CallLengthRepartition value="10, 50, 100, 500, 1000, 5000, 10000"/>
+
+</scenario>

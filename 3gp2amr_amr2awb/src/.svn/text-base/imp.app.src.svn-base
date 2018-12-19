@@ -1,0 +1,16 @@
+{application, imp,
+ [{description, "The IP Media Platform"},
+  {vsn, "3.0.0"},
+  {registered, [imp_sup
+               ,rps_emulator
+               ,info_manager
+               ,status
+               ,pulse_server
+               ,worker_pool]},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { imp_app, []}},
+  {env, []}
+ ]}.

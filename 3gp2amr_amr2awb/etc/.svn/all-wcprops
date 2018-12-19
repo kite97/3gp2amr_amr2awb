@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/ebmsII/!svn/ver/1814/ocarina/trunk/etc
+END
+config.comm
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/etc/config.comm
+END
+config
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/etc/config
+END
+config.clean
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/ebmsII/!svn/ver/1556/ocarina/trunk/etc/config.clean
+END
+test_sdp.config
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/etc/test_sdp.config
+END
+config.sdp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/ebmsII/!svn/ver/1814/ocarina/trunk/etc/config.sdp
+END

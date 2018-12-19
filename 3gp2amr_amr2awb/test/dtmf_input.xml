@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<msml version="1.1">
+  <tag name="dtmf"/>
+  <dialogstart target="conn:12345" name="12345">
+    <dtmf cleardb="false">
+      <test>
+        <attrtest defaultvalue="15s" name="fdt">
+          <item send=""         value="10s"  timelen="10.0s" expect="dtmf.end=dtmf.noinput"/>
+          <item send="s@10,*@1" value="0s"   timelen="15.0s" expect="dtmf.end=dtmf.nomatch"/>
+          <item send="s@10,#@1" value="NONE" timelen="15.0s" expect="dtmf.end=dtmf.nomatch"/>
+        </attrtest>
+      </test>
+      <test>
+        <attrtest defaultvalue="4s" name="idt">
+          <item send="0@1"  value="2s"   timelen="3.0s" expect="dtmf.end=dtmf.nomatch"/>
+          <item send="*#@1" value="NONE" timelen="6.0s" expect="dtmf.digits=*#,dtmf.len=2,dtmf.end=dtmf.match"/>
+        </attrtest>
+      </test>
+      <test>
+        <attrtest defaultvalue="1" name="iterate">
+          <item send="6@1,s@4,123@1" value="2"    timelen="12.0s" expect="dtmf.digits=123,dtmf.len=3,dtmf.end=dtmf.match"/>
+          <item send="6@1,s@4,8@1"   value="2"    timelen="10.0s" expect="dtmf.end=dtmf.nomatch"/>
+          <item send="1234@2"        value="2"    timelen="11.0s" expect="dtmf.digits=1234,dtmf.len=4,dtmf.end=dtmf.match"/>
+          <item send="666@3,#"       value="2"    timelen="10.0s" expect="dtmf.digits=666,dtmf.len=3,dtmf.end=dtmf.match" condition="digits,rtk=#,min=2,pattern"/>
+          <item send="5"             value="2"    timelen="25.0s" expect="dtmf.end=dtmf.noinput" condition="idt,9s,4s,dtmf"/>
+          <item send="8"             value="NONE" timelen="5.0s"  expect="dtmf.end=dtmf.nomatch"/>
+          <item send="987@2"         value="NONE" timelen="9.0s"  expect="dtmf.digits=987,dtmf.len=3,dtmf.end=dtmf.match"/>
+        </attrtest>
+      </test>
+      <test>
+        <attrtest defaultvalue="true" name="starttimer">
+          <item send=""         value="true"  timelen="15.0s" expect="dtmf.end=dtmf.noinput"/>
+          <item send="s@25,9@1" value="false" timelen="30.0s" expect="dtmf.end=dtmf.nomatch"/>
+          <item send="s@25,9@1" value="NONE"  timelen="30.0s" expect="dtmf.end=dtmf.nomatch"/>
+        </attrtest>
+      </test>
+      <pattern>
+        <test>
+          <attrtest defaultvalue="moml+digits" name="format">
+            <item send="6321@3,#" value="megaco"      expect="dtmf.digits=6321#,dtmf.len=5,dtmf.end=dtmf.match" condition="digits,[5-9]xxxF,*"/>
+            <item send="1321@3,#" value="megaco"      expect="dtmf.end=dtmf.nomatch"                            condition="digits,[5-9]xxxF,*"/>
+            <item send="6321@3,#" value="mgcp"        expect="dtmf.digits=6321#,dtmf.len=5,dtmf.end=dtmf.match" condition="digits,[5-9]xxx#,*"/>
+            <item send="1321@3,#" value="mgcp"        expect="dtmf.end=dtmf.nomatch"                            condition="digits,[5-9]xxx#,*"/>
+            <item send="9876@3,#" value="moml+digits" expect="dtmf.digits=9876#,dtmf.len=5,dtmf.end=dtmf.match" condition="digits,9876#,*"/>
+            <item send="1234@3,#" value="moml+digits" expect="dtmf.end=dtmf.nomatch"                            condition="digits,9876#,*"/>
+          </attrtest>
+        </test>
+        <test>
+          <attrtest defaultvalue="min=2;max=5" name="digits">
+            <item send=""           value="min=1" expect="dtmf.end=dtmf.noinput" condition="fdt,10s,*,dtmf"/>
+            <item send="1@1"        value="min=2" expect="dtmf.end=dtmf.nomatch" condition="idt,10s,4s,dtmf"/>
+            <item send="###@3"      value="min=2" expect="dtmf.digits=###,dtmf.len=3,dtmf.end=dtmf.match"/>
+            <item send="666@3"      value="min=3" expect="dtmf.digits=666,dtmf.len=3,dtmf.end=dtmf.match"/>
+
+            <item send="1@1"        value="max=3" expect="dtmf.digits=1,dtmf.len=1,dtmf.end=dtmf.match" timelen="5.0s"/>
+            <item send="888@3"      value="max=3" expect="dtmf.digits=888,dtmf.len=3,dtmf.end=dtmf.match"/>
+            <item send="#66*@3"     value="max=3" expect="dtmf.end=dtmf.nomatch"/>
+
+            <item send="8*8@3"      value="min=2;max=1" expect="dtmf.end=dtmf.nomatch"/>
+            <item send="8#8@3"      value="min=4;max=4" expect="dtmf.end=dtmf.nomatch"/>
+            <item send="8#8@3"      value="min=3;max=3" expect="dtmf.digits=8#8,dtmf.len=3,dtmf.end=dtmf.match"/>
+
+            <item send="555@3"      value="min=2;max=5" expect="dtmf.digits=555,dtmf.len=3,dtmf.end=dtmf.match"/>
+
+            <item send="9876@3,#"   value="rtk=#" expect="dtmf.digits=9876,dtmf.len=4,dtmf.end=dtmf.match"  timelen="13.0s"/>
+            <item send="#"          value="rtk=#" expect="dtmf.digits=,dtmf.len=0,dtmf.end=dtmf.match"  timelen="1.0s"/>
+            <item send="9876@3,#"   value="9876#" expect="dtmf.digits=9876#,dtmf.len=5,dtmf.end=dtmf.match" timelen="17.0s"/>
+            <item send="9876@3,#"   value="1357#" expect="dtmf.end=dtmf.nomatch"/>
+            <item send="1@1"        value="min=2;max=5;cancel=*;rtk=#" expect="dtmf.end=dtmf.nomatch" timelen="5.0s"/>
+            <item send="#"          value="min=2;max=5;cancel=*;rtk=#" expect="dtmf.end=dtmf.nomatch" timelen="1.0s"/>
+            <item send="246#@3"     value="min=2;max=5;cancel=*;rtk=#" expect="dtmf.digits=246,dtmf.len=3,dtmf.end=dtmf.match"/>
+            <item send="445599#@2"  value="min=2;max=5;cancel=*;rtk=#" expect="dtmf.end=dtmf.nomatch"/>
+            <item send="12*34@2"    value="min=2;max=5;cancel=*;rtk=#" expect="dtmf.digits=34,dtmf.len=2,dtmf.end=dtmf.match"/>
+            <item send="12*6888@2"  value="min=2;max=3;cancel=*;rtk=#" expect="dtmf.end=dtmf.nomatch"/>
+            <item send="12*789#@2"  value="cancel=*;rtk=#"             expect="dtmf.digits=789,dtmf.len=3,dtmf.end=dtmf.match"/>
+            <item send="9*8*7*6#@2" value="cancel=*;rtk=#"             expect="dtmf.digits=6,dtmf.len=1,dtmf.end=dtmf.match"/>
+            <!--item send="123456#@2"  value="min=2;max=5;cancel=*;rtk=#" expect="dtmf.digits=12345,dtmf.len=5,dtmf.end=dtmf.match"  condition="cleardb,true,false,dtmf"/-->
+            <item send="12121212121212121212@1" value="min=1" expect="dtmf.digits=12121212121212121212,dtmf.len=20,dtmf.end=dtmf.match"/>
+          </attrtest>
+        </test>
+        <send event="done" namelist="dtmf.digits dtmf.len dtmf.end" target="source"/>
+      </pattern>
+      <noinput>
+        <send target="source" event="done" namelist="dtmf.end"/>
+      </noinput>
+      <nomatch>
+        <send target="source" event="done" namelist="dtmf.end"/>
+      </nomatch>
+      <dtmfexit>
+        <send target="source" event="done" namelist="dtmf.end" />
+      </dtmfexit>
+    </dtmf>
+  </dialogstart>
+</msml>
+

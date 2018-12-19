@@ -1,0 +1,63 @@
+<application name="TESTPR" id="2">
+        <event name="TIMEOUT">
+                <handler ref="testpr" method="todotimeout"/>
+        </event>
+         
+        <session name="sip.caller"> 
+                <event name="SIP.INVITE">
+                        <handler ref="testpr" method="todoinvite"/>
+                        <handler ref="testpr" method="send200caller"/>
+                        <!--<handler ref="testpr" method="tfsendMS"/>-->
+                </event>    
+                 <event name="SIP.ACK">
+                        <handler ref="testpr" method="todocallerbye"/>
+			                  <handler ref="testpr" method="tfsendMS"/>
+                 </event> 
+        </session>
+
+        <session name="sip.ms">
+                <event name="SIP.INVITE.200">
+                        <handler ref="testpr" method="todomsinviteok"/>
+                        <handler ref="testpr" method="sendInviteMGW"/>
+                 </event>   
+    
+                 <event name="SIP.INFO.200">
+                        <handler ref="testpr" method="todomsinfook"/>
+                        <handler ref="testpr" method="sendInfoMGW"/>
+                 </event> 
+    
+                  <event name="SIP.INFO">
+                        <handler ref="testpr" method="send200MS"/>
+                        <handler ref="testpr" method="analysismsinfo"/>
+                        <handler ref="testpr" method="todomsbye"/>                    
+                	      <!--<handler ref="testpr" method="todorelease"/>-->
+                   </event> 
+    
+                   <event name="SIP.BYE.200">
+                        <handler ref="testpr" method="todomsbye200"/>
+                        <handler ref="testpr" method="todorelease"/>
+                   </event> 
+            </session>
+  
+             <session name="sip.mgw"> 
+                   <event name="SIP.INVITE.200">
+                        <handler ref="testpr" method="todomgwinviteok"/>
+                        <handler ref="testpr" method="sendAckMGW"/>
+                        <handler ref="testpr" method="sendAckMS"/>
+                        <handler ref="testpr" method="sendINFOMS"/>
+                   </event>  
+    
+                   <event name="SIP.INFO">
+                   	    <handler ref="testpr" method="send200MGW"/>
+                        <handler ref="testpr" method="analysismgwinfo"/>
+                        <handler ref="testpr" method="todomgwbye"/>                    
+                	      <!--<handler ref="testpr" method="todorelease"/>-->
+                   </event> 
+
+		               <event name="SIP.BYE.200">
+                        <handler ref="testpr" method="todomgwbye200"/>
+                        <handler ref="testpr" method="todorelease"/>
+                   </event> 
+              </session>
+
+</application>

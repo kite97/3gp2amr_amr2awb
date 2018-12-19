@@ -1,0 +1,437 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/ebmsII/!svn/ver/1813/ocarina/trunk/src
+END
+mp4.erl
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/mp4.erl
+END
+wave.erl
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/ebmsII/!svn/ver/1505/ocarina/trunk/src/wave.erl
+END
+rtp.erl
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/rtp.erl
+END
+sdp_tests.erl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/src/sdp_tests.erl
+END
+rtcp.erl
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/rtcp.erl
+END
+nfs_accessor.erl
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1648/ocarina/trunk/src/nfs_accessor.erl
+END
+imp_sup.erl
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/src/imp_sup.erl
+END
+event_holder.erl
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1592/ocarina/trunk/src/event_holder.erl
+END
+RcsRpsMsg.erl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/src/RcsRpsMsg.erl
+END
+core_module_sup.erl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/src/core_module_sup.erl
+END
+version.erl
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/ebmsII/!svn/ver/1756/ocarina/trunk/src/version.erl
+END
+conf_event.erl
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/conf_event.erl
+END
+srtp.erl
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/srtp.erl
+END
+ring_manager.erl
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1480/ocarina/trunk/src/ring_manager.erl
+END
+tester_pool.erl
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/tester_pool.erl
+END
+evs_decode.erl
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/evs_decode.erl
+END
+codec_sup.erl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/codec_sup.erl
+END
+rings_cache.erl
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/rings_cache.erl
+END
+digit_collect.erl
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1746/ocarina/trunk/src/digit_collect.erl
+END
+test_aupc_amrnb.erl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/test_aupc_amrnb.erl
+END
+audio_core.erl
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1813/ocarina/trunk/src/audio_core.erl
+END
+vox_codec.erl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/vox_codec.erl
+END
+media_record.erl
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1764/ocarina/trunk/src/media_record.erl
+END
+crc32c.erl
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/crc32c.erl
+END
+nfs_manager.erl
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1480/ocarina/trunk/src/nfs_manager.erl
+END
+mp4_reader.erl
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/mp4_reader.erl
+END
+RcsRpsMsg.asn
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/src/RcsRpsMsg.asn
+END
+status.erl
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/status.erl
+END
+test_conf.erl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/test_conf.erl
+END
+rtp_utils.erl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/rtp_utils.erl
+END
+sdp.erl
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/ebmsII/!svn/ver/1812/ocarina/trunk/src/sdp.erl
+END
+req_event.erl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/req_event.erl
+END
+stun.erl
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/stun.erl
+END
+zrtp.erl
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/zrtp.erl
+END
+imp.start
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/src/imp.start
+END
+worker_pool.erl
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/worker_pool.erl
+END
+mp4_multi_writer.erl
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/mp4_multi_writer.erl
+END
+pfmc_daemon.erl
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/pfmc_daemon.erl
+END
+imp.app.src
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/imp.app.src
+END
+worker.erl
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/ebmsII/!svn/ver/1761/ocarina/trunk/src/worker.erl
+END
+port_server.erl
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/port_server.erl
+END
+evs_encode.erl
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/evs_encode.erl
+END
+test_conf_member.erl
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/test_conf_member.erl
+END
+amr_codec.erl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/amr_codec.erl
+END
+test_aupc_ulaw.erl
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/test_aupc_ulaw.erl
+END
+comm_server.erl
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1813/ocarina/trunk/src/comm_server.erl
+END
+mixer.erl
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/src/mixer.erl
+END
+imp.erl
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/src/imp.erl
+END
+imp_app.erl
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/src/imp_app.erl
+END
+tester_worker.erl
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/tester_worker.erl
+END
+evs_port.erl
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/ebmsII/!svn/ver/1806/ocarina/trunk/src/evs_port.erl
+END
+media_play.erl
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1813/ocarina/trunk/src/media_play.erl
+END
+module_daemon.erl
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/module_daemon.erl
+END
+worker_event.erl
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/worker_event.erl
+END
+rps_emulator.erl
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/rps_emulator.erl
+END
+data_transfer.erl
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1813/ocarina/trunk/src/data_transfer.erl
+END
+codec_app.erl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/codec_app.erl
+END
+codec.erl
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/codec.erl
+END
+pulse_server.erl
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/pulse_server.erl
+END
+conf_pool.erl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/conf_pool.erl
+END
+audio_mix.erl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/audio_mix.erl
+END
+log_event.erl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/log_event.erl
+END
+test_play_amrnb.erl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/test_play_amrnb.erl
+END
+iso_base_file.erl
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/src/iso_base_file.erl
+END
+session_event.erl
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/session_event.erl
+END
+conf.erl
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/src/conf.erl
+END
+info_manager.erl
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/info_manager.erl
+END
+src.configure
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1553/ocarina/trunk/src/src.configure
+END
+dtmf.erl
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/dtmf.erl
+END
+test_play_ulaw.erl
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/src/test_play_ulaw.erl
+END
+mp4_writer.erl
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/mp4_writer.erl
+END
+rtp_channel.erl
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/src/rtp_channel.erl
+END

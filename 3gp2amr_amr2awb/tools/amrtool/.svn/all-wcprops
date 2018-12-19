@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/tools/amrtool
+END
+amrnb_dec_raw.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/tools/amrtool/amrnb_dec_raw.c
+END
+amrtool.py
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/tools/amrtool/amrtool.py
+END
+amrwb_dec.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/tools/amrtool/amrwb_dec.c
+END
+amrnb_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/tools/amrtool/amrnb_enc.c
+END
+amrnb_dec.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/tools/amrtool/amrnb_dec.c
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/tools/amrtool/Makefile
+END
+amrwb_dec_raw.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/tools/amrtool/amrwb_dec_raw.c
+END
+amrwb_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/tools/amrtool/amrwb_enc.c
+END

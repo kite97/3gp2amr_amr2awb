@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<msml version="1.1">
+  <tag name="play"/>
+  <dialogstart target="conn:12345" name="12345">
+    <play>
+      <test>
+        <attrtest defaultvalue="1" name="iterate">
+          <item expect="play.end=play.complete" medialen="5.0s"  value="1"/>
+          <item expect="play.end=play.complete" medialen="10.0s" value="2"/>
+          <item expect="play.end=play.complete" medialen="8.0s"  value="2" condition="uri,amrwb_4s.amr,func_test.wav,audio" mediatype="wb"/>
+          <item expect="play.end=play.complete" medialen="5.0s"  value="NONE"/>
+        </attrtest>
+      </test>
+      <test>
+        <attrtest defaultvalue="NONE" name="interval">
+          <item expect="play.end=play.complete" medialen="13.0s" value="3s" condition="iterate,2,NONE"/>
+          <item expect="play.end=play.complete" medialen="8.0s"  value="5s" condition="iterate,2,NONE;uri,amrwb_4s.amr,func_test.wav,audio" timelen="13.0s" mediatype="wb"/>
+          <item expect="play.end=play.complete" medialen="10.0s" value="NONE" condition="iterate,2,NONE"/>
+        </attrtest>
+      </test>
+      <test>
+        <attrtest defaultvalue="NONE" name="maxtime">
+          <item expect="play.end=play.complete" medialen="6.0s"  value="6s"  condition="iterate,2,NONE"/>
+          <item expect="play.end=play.complete" medialen="5.0s"  value="NONE"/>
+          <item expect="play.end=play.complete" medialen="6.0s"  value="6s"  condition="iterate,2,NONE;interval,5,NONE"/>
+          <item expect="play.end=play.complete" medialen="12.0s" value="12s"  condition="iterate,2,NONE;interval,5,NONE"/>
+          <item expect="play.end=play.complete" medialen="14.0s" value="14s"  condition="iterate,2,NONE;interval,5,NONE"/>
+          <item expect="play.end=play.complete" medialen="3.0s"  value="3s"/>
+          <item expect="play.end=play.complete" medialen="10.0s" value="10s" condition="uri,amrnb.amr,func_test.wav,audio" mediatype="nb"/>
+        </attrtest>
+      </test>
+      <test>
+        <attrtest defaultvalue="NONE" name="offset">
+          <item expect="play.end=play.complete" medialen="3.0s" value="2s"/>
+          <item expect="play.end=play.complete" medialen="5.0s" value="NONE"/>
+        </attrtest>
+      </test>
+      <test>
+        <attrtest defaultvalue="false" name="barge">
+          <item send="1" expect="play.end=play.complete" medialen="1.0s" value="true"/>
+          <item send="1" expect="play.end=play.complete" medialen="5.0s" value="false"/>
+          <item send="1" expect="play.end=play.complete" medialen="5.0s" value="NONE"/>
+        </attrtest>
+      </test>
+      <audio>
+        <test>
+          <attrtest defaultvalue="func_test.wav" name="uri">
+            <item expect="dialog.exit.status=520,dialog.exit.description=No resource to fulfill request" value="none.wav"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="209.vid"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="209.wav"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="noRiff.wav"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="badFmtLen.wav"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="badFormatCode.wav"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="badMono.wav"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="badSampleRate.wav"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="badBitsPerSample.wav"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="noFmtChunk.wav"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="badDataChunkID.wav"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="wav_empty.wav"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="amr_empty.amr"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="error.amr"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="badTotalLen.wav"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="badDataRate.wav"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="badBlockAlign.wav"/>
+            <item expect="play.end=play.complete" medialen="3.0s" value="badDataLen_expect_less_real.wav"/>
+            <item expect="play.end=play.complete" medialen="6.0s" value="badDataLen_expect_more_real.wav"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="pcm_has_cbsize_fact.wav"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="pcm_has_cbsize.wav"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="pcm_has_fact.wav"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="non_pcm_without_cbsize_fact.wav"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="non_pcm_without_cbsize.wav"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="non_pcm_without_fact.wav"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="unknownChunk_after_wave.wav"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="unknownChunk_after_fmt.wav"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="alaw.wav" mediatype="ulaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="alaw.wav" mediatype="alaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="alaw.wav" mediatype="nb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="alaw.wav" mediatype="wb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="alaw.wav" mediatype="evs"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="ulaw.wav" mediatype="ulaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="ulaw.wav" mediatype="alaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="ulaw.wav" mediatype="nb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="ulaw.wav" mediatype="wb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="ulaw.wav" mediatype="evs"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="8k8bit.wav" mediatype="ulaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="8k8bit.wav" mediatype="alaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="8k8bit.wav" mediatype="nb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="8k8bit.wav" mediatype="wb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="8k8bit.wav" mediatype="evs"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="8k16bit.wav" mediatype="ulaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="8k16bit.wav" mediatype="alaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="8k16bit.wav" mediatype="nb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="8k16bit.wav" mediatype="wb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="8k16bit.wav" mediatype="evs"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="func_test.vox" mediatype="ulaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="func_test.vox" mediatype="alaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="func_test.vox" mediatype="nb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="func_test.vox" mediatype="wb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="func_test.vox" mediatype="evs"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="func_test.ulaw" mediatype="ulaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="func_test.alaw" mediatype="alaw"/>
+            <item expect="play.end=play.complete" medialen="0.0s" value="wav_only_with_head.wav"/>
+            <item expect="play.end=play.complete" medialen="0.0s" value="amr_only_with_head.amr"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="audio.evs" condition="maxtime,5,NONE,play" mediatype="evs"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="audio.evs" condition="maxtime,5,NONE,play" mediatype="ulaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="audio.evs" condition="maxtime,5,NONE,play" mediatype="alaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="audio.evs" condition="maxtime,5,NONE,play" mediatype="nb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="audio.evs" condition="maxtime,5,NONE,play" mediatype="wb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrnb.amr" condition="maxtime,5,NONE,play" mediatype="nb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrnb.amr" condition="maxtime,5,NONE,play" mediatype="wb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrnb.amr" condition="maxtime,5,NONE,play" mediatype="ulaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrnb.amr" condition="maxtime,5,NONE,play" mediatype="alaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb.awb" condition="maxtime,5,NONE,play" mediatype="nb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb.awb" condition="maxtime,5,NONE,play" mediatype="wb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb.awb" condition="maxtime,5,NONE,play" mediatype="ulaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb.awb" condition="maxtime,5,NONE,play" mediatype="alaw"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_0.amr" condition="maxtime,5,NONE,play" mediatype="nb" modeset="7"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_0.amr" condition="maxtime,5,NONE,play" mediatype="wb" modeset="8"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrnb_7.3gp" condition="maxtime,5,NONE,play" mediatype="nb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_8.3gp" condition="maxtime,5,NONE,play" mediatype="wb"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="unknownbox.3gp" condition="maxtime,5,NONE,play" mediatype="wb" />
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="nonsamr.3gp"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="nonsawb.3gp"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="nonhdlr.3gp"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="nonftyp.3gp"/>
+            <item expect="dialog.exit.status=511,dialog.exit.description=Service Unavailable" value="badboxlen.3gp"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_0.amr" mediatype="nb" modeset="0" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_0.amr" mediatype="nb" modeset="0" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_1.amr" mediatype="nb" modeset="1" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_1.amr" mediatype="nb" modeset="1" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_2.amr" mediatype="nb" modeset="2" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_2.amr" mediatype="nb" modeset="2" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_3.amr" mediatype="nb" modeset="3" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_3.amr" mediatype="nb" modeset="3" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_4.amr" mediatype="nb" modeset="4" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_4.amr" mediatype="nb" modeset="4" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_5.amr" mediatype="nb" modeset="5" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_5.amr" mediatype="nb" modeset="5" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_6.amr" mediatype="nb" modeset="6" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_6.amr" mediatype="nb" modeset="6" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_7.amr" mediatype="nb" modeset="7" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amr_7.amr" mediatype="nb" modeset="7" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_0.amr" mediatype="wb" modeset="0" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_0.amr" mediatype="wb" modeset="0" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_1.amr" mediatype="wb" modeset="1" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_1.amr" mediatype="wb" modeset="1" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_2.amr" mediatype="wb" modeset="2" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_2.amr" mediatype="wb" modeset="2" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_3.amr" mediatype="wb" modeset="3" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_3.amr" mediatype="wb" modeset="3" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_4.amr" mediatype="wb" modeset="4" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_4.amr" mediatype="wb" modeset="4" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_5.amr" mediatype="wb" modeset="5" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_5.amr" mediatype="wb" modeset="5" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_6.amr" mediatype="wb" modeset="6" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_6.amr" mediatype="wb" modeset="6" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_7.amr" mediatype="wb" modeset="7" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_7.amr" mediatype="wb" modeset="7" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_8.amr" mediatype="wb" modeset="8" octetalign="0" condition="maxtime,5,NONE,play"/>
+            <item expect="play.end=play.complete" medialen="5.0s" value="amrwb_8.amr" mediatype="wb" modeset="8" octetalign="1" condition="maxtime,5,NONE,play"/>
+            <item send="1" expect="play.end=play.complete" medialen="5.0s" value="ulaw.wav"/>
+          </attrtest>
+        </test>
+      </audio>
+      <playexit>
+        <send target="source" event="terminate" valuelist="play.end"/>
+      </playexit>
+    </play>
+  </dialogstart>
+</msml>

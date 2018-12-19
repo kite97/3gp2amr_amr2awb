@@ -1,0 +1,106 @@
+%!Tex Program = xelatex
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{graphicx}
+\setmainfont[Mapping=tex-text,BoldFont=WenQuanYi Zen Hei]{WenQuanYi Zen Hei}
+\begin{document}
+\section{基本功能验证总结及改进方向}
+\subsection{音频播放}
+    解决的技术点：
+    \begin{itemize}
+        \item wav文件解析
+        \item rtp音频封包
+        \item 发送数据至网络，客户端正确解码
+    \end{itemize}
+
+    效果演示方法：
+        
+        使用无误的wav音频文件，启动演示程序，使用vlc监听指定端口，
+        可以听到正常放音。
+
+    改进方向：
+    \begin{itemize}
+        \item wav文件兼容性，如多声道文件正确解码
+    \end{itemize}
+
+    性能测试：
+    \begin{itemize}
+        \item 800路全文件读取，并发，内存约800MB，cpu i5 2400 3.1G 4核平均占用约
+              百分之70
+    \end{itemize}
+\subsection{视频播放}
+    解决的技术点：
+    \begin{itemize}
+        \item 3gp文件中视频部分解析
+        \item rtp视频封包
+        \item 发送数据至网络，客户端正确解码
+    \end{itemize}
+
+    效果演示方法：
+        
+        使用无误的3gp视频文件，启动演示程序，使用ffplay监听指定端口，
+        可以看到正常播放视频。
+
+    改进方向：
+    \begin{itemize}
+        \item 3gp文件兼容性，如音视频在不同段落的3gp文件
+    \end{itemize}
+\subsection{音视频同时播放}
+    解决的技术点：
+    \begin{itemize}
+        \item 确认3gp文件中无法存储mu-law音频数据
+        \item 音视频数据同时发送至网络
+    \end{itemize}
+
+    效果演示方法：
+        
+        使用无误的3gp视频文件和wav音频文件，启动演示程序，使用ffplay和vlc监听
+        指定端口，可以看到正常播放音视频。
+
+\subsection{录音}
+    解决的技术点：
+    \begin{itemize}
+        \item 音频数据接收
+        \item rtp音频解包
+        \item 音频存储为无格式文件，并可被正确解码播放，实现录音功能
+    \end{itemize}
+
+    效果演示方法：
+        
+    启动演示程序监听指定端口，对于收到的rtp音频数据存储成无格式音频文件，使用
+    audacity导入，可以正常播放录制的音频。
+
+\subsection{音频会议}
+    解决的技术点：
+    \begin{itemize}
+        \item mu-law音频解码为14bit原始音频数据
+        \item 双路原始音频数据混音
+        \item 14bit原始音频数据压缩为mu-law音频
+        \item 三路音频两两混合
+        \item 网络接收三路音频数据，即时两两混合，并输出至网络，客户端接收
+              解码正常，实现基本三方会议
+    \end{itemize}
+
+    效果演示方法：
+        
+        启动演示程序，向3路指定端口发送音频，同时监听3路指定端口，可以收到两两
+        混合的3路音频。
+
+
+    改进方向：
+    \begin{itemize}
+        \item mu-law与14bit原始数据转换使用查表法提升性能
+        \item 多路音频混合具体方式选择：直接多路混合（整数，实数）、多级双
+              路混合、外调函数库
+    \end{itemize}
+\section{其他改进方向}
+    \begin{itemize}
+        \item 性能优化，以及测试性能极限
+        \item 高并发下的性能及稳定性测试，如多核压力不均，处理能力抖动，5ms内
+              响应的百分比等
+        \item erlang标准库的使用
+        \item （高阶）其他高级音视频能力，如声效，视频叠加，图像变形等
+        \item （高阶）其他音视频格式的支持，如amr，g.729，mp3，mp4等
+    \end{itemize}
+\end{document}

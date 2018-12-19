@@ -1,0 +1,10 @@
+###############################
+# config file 
+###############################
+PATH=$PATH:$HOME/bin
+
+export PATH
+export DOMAINID=rcsid
+export CINDIR=$(pwd)/../
+export MRFDIR=$CINDIR
+export CLUSTER="eb_rcs"

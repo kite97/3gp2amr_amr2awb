@@ -1,0 +1,13 @@
+*~
+*.beam
+*.o
+*.d
+*.swp
+*.orig
+*.3gp
+*.awb
+*.amr
+*.log
+ebin/
+priv/
+pfmc/pfmc

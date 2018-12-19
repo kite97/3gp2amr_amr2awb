@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play_collect
+END
+EBIVR.1.32.aupcBargeTrue.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play_collect/EBIVR.1.32.aupcBargeTrue.xml
+END
+EBIVR.1.37.aupcBargeFlase.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play_collect/EBIVR.1.37.aupcBargeFlase.xml
+END
+EBIVR.1.12.aupcInterval.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play_collect/EBIVR.1.12.aupcInterval.xml
+END
+EBIVR.1.22.aupcMaxtime.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play_collect/EBIVR.1.22.aupcMaxtime.xml
+END
+EBIVR.1.2.aupcIterate.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play_collect/EBIVR.1.2.aupcIterate.xml
+END
+testcase
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play_collect/testcase
+END

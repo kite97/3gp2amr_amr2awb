@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="GB2312" ?>
+<rpsConfig>
+	<boardName name = "boardtype"/>
+	<nmsConfig >
+		<initSDP sdp="v=0|o=EBMS 0 1 IN IP4 192.168.3.200|s=-|c=IN IP4 192.168.3.200|t=0 0|m=audio 0 RTP/AVP 0|m=video 0 RTP/AVP 34" />
+		<audioCodecList audioCodec="0 4 8 15 18" />
+		<videoCodecList videoCodec="34" />
+		<dynamicCodecList dynamicCodec="AMR MPEG4 h263-2000/90000 AMR/8000/1" />
+
+		<nmsBoardConfig>
+			<boardset g_board="0" g_bus="2" g_dsp_out_stream="65" >
+				<resset resName="muxEP" num="0" startSlot="0"/>
+				<resset resName="ds0EP" num="400" startSlot="0"/>
+				<resset resName="ivrDsp" num="400" startSlot="500"/>
+				<resset resName="rtpEP" num="400" startSlot="1000"/>
+				<resset resName="confDsp" num="0" />
+			</boardset>
+		</nmsBoardConfig>
+	</nmsConfig>
+
+	<hmpConfig>
+            <initSDP sdp="v=0|o=EBMS 0 0 IN IP4 0.0.0.0|s=-|c=IN IP4 0.0.0.0|t=0 0|m=audio 0 RTP/AVP 0 8 97 98|a=rtpmap:97 AMR/8000/1|a=fmtp:97 mode-set=0|a=rtpmap:98 AMR-WB/16000/1|m=video 0 RTP/AVP 34 96|a=fmtp:34 CIF=1 QCIF=1|a=rtpmap:96 H264/90000/1" />
+		<audioCodecList audioCodec="0 4 8 18" />
+		<videoCodecList videoCodec="34" />
+		<dynamicCodecList dynamicCodec="AMR AMR-WB H264" />
+		<dtmfType dtmf="Inband" />       <!--Inband or RFC2833-->
+		<audFileCodeType audfile="pcm" /> <!--pcm or g711a or g711u or amr_nb or amr_wb,default is pcm-->
+		<licenseCheck switch="off" />
+		<RTCPInfo switch="off"/>
+		<!--HMPResourceNumLimit IP="1" VOICE="1" MM="1" CONF="1" /-->
+	</hmpConfig>
+
+	<ipsConfig>
+            <initSDP sdp="v=0|o=- 0 1 IN IP4 0.0.0.0|s=0|c=IN IP4 0.0.0.0|t=0 0|m=audio 0 RTP/AVP 0 8 97 98 99|a=rtpmap:97 AMR/8000/1|a=fmtp:97 mode-set=7|a=rtpmap:98 AMR-WB/16000|a=fmtp:98 mode-set=8|a=rtpmap:99 telephone-event/8000"/>
+		<audioCodecList audioCodec="0 2 4 8 15 18" />
+		<videoCodecList videoCodec="34" />
+		<dynamicCodecList dynamicCodec="AMR AMR-WB H264" />
+                <amrSelfAdaption switch="off"/>
+	</ipsConfig>
+
+        <negotiateConfig>
+                <negotiate type="normal" />
+                <priority audio="AMR-WB AMR-NB G711U G711A" video="H263" />
+        </negotiateConfig>
+
+	<resCollectionConfig>
+	        <ResourceCollect switch="on" />
+	        <TimeOut seconds="200" />
+	        <CheckPeriod seconds="1" />
+	</resCollectionConfig>
+
+	<INMSReportConfig>
+	        <report switch="off" />
+          <INMSServer ip="10.1.70.180" port="5020" version="2.0"/><!--2.0 or 3.0-->
+          <UDPTrace switch="on" />
+	        <collectPeriod secs="1" />
+	        <reportPeriod secs="900" />
+	</INMSReportConfig>
+
+	<!--delayReport:report message deal delay in files-->
+	<delayReportConfig>
+	        <report switch="off" /> <!-- switch: whether to write files !!! -->
+	        <reportPeriod secs="900" /> <!-- secs: Delay Statistic Period,also file creation period if switch is on!!! -->
+	</delayReportConfig>
+
+	<!-- resReport:report resouce num to rcs-->
+	<resReportConfig>
+		<share    IdentifyID="1210" />   <!-- IdentifyID: the boardid the rps use,only effective for ips board !!! -->
+	</resReportConfig>
+
+	<ringServiceConfig>
+		<rsattr number="2" type="ha" />  <!--[type]: working mode of rings-servers, value of ha, balance .[number]: number of rings-servers-->
+	</ringServiceConfig>
+
+	<RingManager>
+		<MaxLocalSize>10</MaxLocalSize> <!--Max size of local rings in MB-->
+		<CleanTime>3:00</CleanTime>	 <!--Time for cleaning-->
+		<Expiration>24</Expiration> <!--rings that are recently played before 'Expiration' hours will be removed-->
+		<ExFile>exdir</ExFile> <!--a file that to be checked to examine the NFS status-->
+	</RingManager>
+
+	<MemoryMapFile>
+		<switch value="off" />
+		<audio switch="on" maxsize="2048" />  	<!-- maxsize: in MB unit -->
+		<video switch="on" maxsize="1024" />
+	</MemoryMapFile>
+
+	<!--To make sure rps can work properly, we set a threshold-->
+	<!--If IO percent exceeds the value, then rps would reject new reques-->
+	<IOProtection>
+		<switch value="off" />
+		<threshold value="55" />
+	</IOProtection>
+
+	<ttsConfig>
+	  <StartUp switch="off" />
+		<serverPort port="65007" />
+		<RoutineCheck switch="off" />
+		<CacheSection switch="off" license="4" />
+	</ttsConfig>
+</rpsConfig>

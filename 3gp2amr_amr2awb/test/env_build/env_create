@@ -1,0 +1,183 @@
+#!/bin/bash
+
+TOPDIR=$PWD
+DESTDIR=$TOPDIR/builds
+export RCSDIR=$DESTDIR/rcs
+export RPSDIR=$DESTDIR/rps
+export RMSDIR=$DESTDIR/rms
+
+SVN_IP=10.1.1.212
+LOCAL_IP=$1
+
+# rcs vars
+RCS_TAG=5.1.6
+RCS_VERSION=2894
+RCS_DOMAINID=6
+RCS_IP=$LOCAL_IP
+RCPP_NUM=1
+RCS_SIP_PORT=7080
+RCS_RMS_FLAG=true
+RCS_NMSTAT_FLAG=FALSE
+RCS_DELAYSTAT_INTERVAL=120
+RCS_VAR_TYPE=EC_VAR
+RCS_VERSION_TYPE=MRF_TYPE
+RCS_TRACE_LEVEL=2
+NMSTAT_VERSION=2.0
+ALARM_VERSION=2.0
+
+# rps vars
+RPS_TAG=9.2.5
+RPS_VERSION=2920
+RPS_DOMAINID=106
+RPS_IP=$LOCAL_IP
+BOARD_TYPE=ips
+RPS_RES_NUM=2048
+RPS_BOARD_TYPE=IPS200
+RPS_TRACE_LEVEL=2
+
+# rms vars
+RMS_TAG=2.2.0
+RMS_DOMAINID=206
+RMS_IP=$LOCAL_IP
+RMS_TRACE_LEVEL=2
+
+# imp vars
+IMP_TAG=3.0.0
+IMP_VERSION=1683
+IMP_IP=$LOCAL_IP
+IMP_PORT=7709
+IMP_MAX_WORKER=1024
+IMP_PORT_BASE=30000
+IMP_SSRC_BASE=20000
+IMP_SESSION_MAXTIME=300
+
+# misc
+PORT_BASE=24510
+
+# create comm config
+cd $TOPDIR
+cp comm_config.src comm_config
+sed -i "s/rcsid/$RCS_DOMAINID/" comm_config 
+sed -i "s/rcsip/$RCS_IP/" comm_config
+sed -i "s/rcpp_num/$RCPP_NUM/" comm_config 
+sed -i "s/rpsid/$RPS_DOMAINID/" comm_config 
+sed -i "s/rpsip/$RPS_IP/" comm_config 
+sed -i "s/rmsid/$RMS_DOMAINID/" comm_config 
+sed -i "s/rmsip/$RMS_IP/" comm_config 
+sed -i "s/port_start/$PORT_BASE/" comm_config
+./create_comm comm_config imp >config.comm.imp
+./create_comm comm_config ms >config.comm.ms
+
+mkdir -p $DESTDIR
+
+# chectout imp
+cd $DESTDIR
+#svn co http://$SVN_IP/svn/ebmsII/ocarina/tags/$IMP_TAG imp
+#svn co http://10.1.1.212/svn/ebmsII/ocarina/branches/grig-develop imp
+svn co http://$SVN_IP/svn/ebmsII/ocarina/trunk imp
+# make imp
+cd $DESTDIR/imp/
+make all
+
+# configure imp
+cd $TOPDIR
+cp imp_config.src imp_config
+sed -i "s/imp_port/$IMP_PORT/" imp_config
+sed -i "s/max_worker/$IMP_MAX_WORKER/" imp_config
+sed -i "s/imp_base_port/$IMP_PORT_BASE/" imp_config
+sed -i "s/imp_base_ssrc/$IMP_SSRC_BASE/" imp_config
+sed -i "s/imp_ip/$IMP_IP/" imp_config
+sed -i "s/imp_session_maxtime/$IMP_SESSION_MAXTIME/" imp_config
+sed -i "s/rpsid/$RPS_DOMAINID/" imp_config
+mv imp_config $DESTDIR/imp/etc/config
+cp config.comm.imp $DESTDIR/imp/etc/config.comm
+# imp complete
+
+# checkout rcs
+cd $DESTDIR
+#svn co http://$SVN_IP/svn/ebms/rcs/tags/$RCS_TAG rcs
+svn co http://$SVN_IP/svn/ebms/rcs/trunk/rcs rcs
+# configure rcs
+cd $TOPDIR
+cp rcs_env.cfg.src rcs_env.cfg
+sed -i "s/rcsid/$RCS_DOMAINID/" rcs_env.cfg
+mv rcs_env.cfg $DESTDIR/rcs/etc/env.cfg
+
+cp rcs_stack.cfg.src rcs_stack.cfg
+sed -i "s/sip_port/$RCS_SIP_PORT/" rcs_stack.cfg
+sed -i "s/rms_flag/$RCS_RMS_FLAG/" rcs_stack.cfg
+sed -i "s/nmstat_flag/$RCS_NMSTAT_FLAG/" rcs_stack.cfg
+sed -i "s/delay/$RCS_DELAYSTAT_INTERVAL/" rcs_stack.cfg
+mv rcs_stack.cfg $DESTDIR/rcs/etc/stack.cfg
+
+cp rcs_makefile.config.src rcs_makefile.config
+sed -i "s/rcs_var_type/$RCS_VAR_TYPE/" rcs_makefile.config
+sed -i "s/rcs_version_type/$RCS_VERSION_TYPE/" rcs_makefile.config
+sed -i "s/nmst_version/$NMSTAT_VERSION/" rcs_makefile.config
+sed -i "s/nmalarm_version/$ALARM_VERSION/" rcs_makefile.config
+sed -i "s/rcs_trace_level/$RCS_TRACE_LEVEL/" rcs_makefile.config
+mv rcs_makefile.config $DESTDIR/rcs/src/makefile.config
+
+cp config.comm.ms $DESTDIR/rcs/etc/config.comm
+# make rcs
+cd $DESTDIR/rcs/src
+make -j6
+# rcs complete
+
+# checkout rps
+cd $DESTDIR
+#svn co http://$SVN_IP/svn/ebms/rps/tags/$RPS_TAG rps
+svn co http://$SVN_IP/svn/ebms/rps/trunk/rps rps
+#svn co http://$SVN_IP/svn/ebms/rps/trunk/rps -r $RPS_VERSION rps
+# configure rps
+cd $TOPDIR
+cp rps_env.cfg.src rps_env.cfg
+sed -i "s/rpsid/$RPS_DOMAINID/" rps_env.cfg
+mv rps_env.cfg $DESTDIR/rps/etc/env.cfg
+
+cp rpsConfig.xml.src rpsConfig.xml
+sed -i "s/boardtype/$BOARD_TYPE/" rpsConfig.xml
+mv rpsConfig.xml $DESTDIR/rps/etc/rpsConfig.xml
+
+cp config.rppp.src config.rppp
+sed -i "s/rpsid/$RPS_DOMAINID/" config.rppp
+sed -i "s/imp_ip/$IMP_IP/" config.rppp
+sed -i "s/imp_port/$IMP_PORT/" config.rppp
+sed -i "s/res_num/$RPS_RES_NUM/" config.rppp
+mv config.rppp $DESTDIR/rps/etc/config.rppp
+
+cp rps_makefile.config.src rps_makefile.config
+sed -i "s/rps_board_type/$RPS_BOARD_TYPE/" rps_makefile.config
+sed -i "s/nmst_version/$NMSTAT_VERSION/" rps_makefile.config
+sed -i "s/nmalarm_version/$ALARM_VERSION/" rps_makefile.config
+sed -i "s/rps_trace_level/$RPS_TRACE_LEVEL/" rps_makefile.config
+mv rps_makefile.config $DESTDIR/rps/src/makefile.config
+
+cp config.comm.ms $DESTDIR/rps/etc/config.comm
+# make rps
+cd $DESTDIR/rps/src
+make -j6
+# rps complete
+
+# checkout rms
+cd $DESTDIR
+svn co http://$SVN_IP/svn/ebms/rms/tags/$RMS_TAG rms
+# configure rms
+cd $TOPDIR
+cp rms_env.cfg.src rms_env.cfg
+sed -i "s/rmsid/$RMS_DOMAINID/" rms_env.cfg
+mv rms_env.cfg $DESTDIR/rms/etc/env.cfg
+
+cp rms_makefile.config.src rms_makefile.config
+sed -i "s/nmalarm_version/$ALARM_VERSION/" rms_makefile.config
+sed -i "s/rms_trace_level/$RMS_TRACE_LEVEL/" rms_makefile.config
+mv rms_makefile.config $DESTDIR/rms/src/makefile.config
+
+cp config.comm.ms $DESTDIR/rms/etc/config.comm
+# make rms
+cd $DESTDIR/rms/src
+make -j6
+# rms complete
+
+cd $TOPDIR
+rm comm_config config.comm.imp config.comm.ms

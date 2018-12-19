@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play
+END
+EBIVR.1.11.aupaInterval.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play/EBIVR.1.11.aupaInterval.xml
+END
+EBIVR.1.16.aupaNoInterval.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play/EBIVR.1.16.aupaNoInterval.xml
+END
+EBIVR.1.94.aupaNotExist.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play/EBIVR.1.94.aupaNotExist.xml
+END
+EBIVR.1.106.aupaMulAttrPlayend.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play/EBIVR.1.106.aupaMulAttrPlayend.xml
+END
+EBIVR.1.105.aupaMulAttrMaxtime.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play/EBIVR.1.105.aupaMulAttrMaxtime.xml
+END
+EBIVR.1.36.aupaBargeFalse.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play/EBIVR.1.36.aupaBargeFalse.xml
+END
+EBIVR.1.21.aupaMaxtime.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play/EBIVR.1.21.aupaMaxtime.xml
+END
+EBIVR.1.26.aupaNoMaxtime.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play/EBIVR.1.26.aupaNoMaxtime.xml
+END
+EBIVR.1.104.aupaMulAttrBarge.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play/EBIVR.1.104.aupaMulAttrBarge.xml
+END
+EBIVR.1.1.aupaIterate.xml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play/EBIVR.1.1.aupaIterate.xml
+END
+EBIVR.1.6.aupaNoIterate.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play/EBIVR.1.6.aupaNoIterate.xml
+END
+testcase
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play/testcase
+END
+EBIVR.1.41.aupaNoBarge.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play/EBIVR.1.41.aupaNoBarge.xml
+END
+EBIVR.1.99.aupaErrFormat.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play/EBIVR.1.99.aupaErrFormat.xml
+END
+EBIVR.1.31.aupaBargeTrue.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/play/EBIVR.1.31.aupaBargeTrue.xml
+END

@@ -1,0 +1,27 @@
+env_create:
+    env_create <local ip>
+    用于下载rcs,rps,rms,ocarina的原码于builds目录下，并完成编译。如需要调整
+任何参数，直接修改env_create文件。
+
+env_start & env_stop:
+    env_start & env_stop
+    用于启动或停止整体待测系统。
+
+所有的命令需运行于同一目录下，并包含以下所有文件：
+comm_config.src
+config.rppp.src
+create_comm
+env_create
+env_start
+env_stop
+imp_config.src
+rcs_config.src
+rcs_env.cfg.src
+rcs_makefile.config.src
+rcs_stack.cfg.src
+README
+rms_env.cfg.src
+rms_makefile.config.src
+rpsConfig.xml.src
+rps_env.cfg.src
+rps_makefile.config.src

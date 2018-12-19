@@ -1,0 +1,287 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/amr
+END
+dec_acelp.c
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec_acelp.c
+END
+interf_dec.c
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/interf_dec.c
+END
+enc_lpc.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc_lpc.c
+END
+enc_gain.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc_gain.c
+END
+dec_acelp.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec_acelp.h
+END
+interf_dec.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/interf_dec.h
+END
+sp_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/sp_enc.c
+END
+enc_lpc.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc_lpc.h
+END
+enc_gain.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc_gain.h
+END
+dec_rom.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec_rom.c
+END
+enc_main.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc_main.c
+END
+enc.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc.h
+END
+sp_enc.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/sp_enc.h
+END
+rom_dec.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/rom_dec.h
+END
+enc_main.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc_main.h
+END
+enc_if.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc_if.c
+END
+enc_dtx.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc_dtx.c
+END
+enc_if.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc_if.h
+END
+enc_dtx.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc_dtx.h
+END
+dec_gain.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec_gain.c
+END
+dec_lpc.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec_lpc.c
+END
+sp_dec.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/sp_dec.c
+END
+dec_gain.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec_gain.h
+END
+dec_lpc.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec_lpc.h
+END
+dec_main.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec_main.c
+END
+dec.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec.h
+END
+enc_util.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc_util.c
+END
+sp_dec.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/sp_dec.h
+END
+dec_main.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec_main.h
+END
+typedef.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/amr/typedef.h
+END
+enc_util.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc_util.h
+END
+enc_acelp.c
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc_acelp.c
+END
+dec_if.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec_if.c
+END
+interf_rom.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/interf_rom.h
+END
+dec_dtx.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec_dtx.c
+END
+if_rom.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/if_rom.c
+END
+interf_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/interf_enc.c
+END
+enc_acelp.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc_acelp.h
+END
+dec_if.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec_if.h
+END
+dec_dtx.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec_dtx.h
+END
+if_rom.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/if_rom.h
+END
+amrnb_rom.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/amrnb_rom.h
+END
+interf_enc.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/interf_enc.h
+END
+enc_rom.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/enc_rom.c
+END
+rom_enc.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/rom_enc.h
+END
+dec_util.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec_util.c
+END
+dec_util.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr/dec_util.h
+END

@@ -1,0 +1,4 @@
+#size in GB
+THRESHOLD=100
+#if last access time beyond MAXATIME in days, it will delete by next clean time
+MAXATIME=180

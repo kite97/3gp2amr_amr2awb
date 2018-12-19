@@ -1,0 +1,1280 @@
+-define(PARSE_CONFIG_TESTCASES,
+                 [{[{ulaw}], #sdp{audio = #media_descript{codeclist = [#codec{type = ulaw, payload = 0}]}}}
+                , {[{alaw}], #sdp{audio = #media_descript{codeclist = [#codec{type = alaw, payload = 8}]}}}
+                , {[{telephone, {pt, 100}}], #sdp{audio = #media_descript{digit = [#codec{type = telephone, payload = 100
+                                                                                       ,ext = #ext{rate = 8000}}]}}}
+                , {[{ulaw}, {alaw}, {telephone, {pt, 101}}]
+                  ,#sdp{audio = #media_descript{codeclist = [#codec{type = ulaw, payload = 0}
+                                                            ,#codec{type = alaw, payload = 8}]
+                                               ,digit = [#codec{type = telephone, payload = 101, ext = #ext{rate = 8000}}]}}}
+                , {[{amrnb, {pt, 102}, {align, {[oct, eff], {default, oct}}}, {modeset, {[7], {default, [7]}}}}]
+                  ,#sdp{audio = #media_descript{codeclist = [#codec{type = amrnb, payload = 102
+                                                                  , ext = #ext{align = {[oct, eff], {default, oct}}
+                                                                              ,modeset = {[7], {default, [7]}}}}]}}}
+                , {[{amrwb, {pt, 104}, {align, {[oct, eff], {default, oct}}}, {modeset, {[8], {default, [8]}}}}]
+                  ,#sdp{audio = #media_descript{codeclist = [#codec{type = amrwb, payload = 104
+                                                                  , ext = #ext{align = {[oct, eff], {default, oct}}
+                                                                              ,modeset = {[8], {default, [8]}}}}]}}}
+                , {[{ulaw}, {alaw}, {telephone, {pt, 101}}
+                   ,{amrnb, {pt, 102}, {align, {[oct, eff], {default, oct}}}, {modeset, {[1, 7], {default, [7]}}}}
+                   ,{amrwb, {pt, 104}, {align, {[oct, eff], {default, eff}}}, {modeset, {[1, 8], {default, [8]}}}}]
+                  ,#sdp{audio = #media_descript{codeclist = [#codec{type = ulaw, payload = 0}
+                                                            ,#codec{type = alaw, payload = 8}
+                                                            ,#codec{type = amrnb, payload = 102
+                                                                  , ext = #ext{align = {[oct, eff], {default, oct}}
+                                                                              ,modeset = {[1, 7], {default, [7]}}}}
+                                                            ,#codec{type = amrwb, payload = 104
+                                                                  , ext = #ext{align = {[oct, eff], {default, eff}}
+                                                                              ,modeset = {[1, 8], {default, [8]}}}}]
+                                               ,digit = [#codec{type = telephone, payload = 101, ext = #ext{rate = 8000}}]}}}
+                , {[{h263}], #sdp{video = #media_descript{codeclist = [#codec{type = h263, payload = 34}]}}}
+                , {[{h264, {pt, 108}}], #sdp{video = #media_descript{codeclist = [#codec{type = h264, payload = 108}]}}}
+                , {[{h263}, {h264, {pt, 108}}]
+                  ,#sdp{video = #media_descript{codeclist = [#codec{type = h263, payload = 34}
+                                                            ,#codec{type = h264, payload = 108}]}}}
+                , {[{addrtype, {[ipv4, ipv6], {default, ipv4}}}], #sdp{addrtype = {[inet, inet6], {default, inet}}}}
+                , {[{negotype, {common}}], #sdp{negotype = {common}}}
+                , {[{negotype, {remote}}], #sdp{negotype = {remote}}}
+                , {[{negotype, {local, {{audio, []}, {video, []}}}}], #sdp{negotype = {local, {{audio,[]}, {video,[]}}}}}
+                , {[{amrnb, {pt, 102}, {align, {oct, {default, oct}}}, {modeset, {[7], {default, [7]}}}}]
+                  ,"amr para format configuration error"}
+                , {[{amrnb, {pt, 102}, {align, {[oct, eff], {default, oct}}}, {modeset, {[7], {default, [0]}}}}]
+                  ,"amr para value configuration error"}
+                , {[{amrnb, {pt, 102}, {align, {[oct, eff], {default, oct}}}, {modeset, {[0,8], {default, [0]}}}}]
+                  ,"amr para value configuration error"}
+                , {[{amrwb, {pt, 104}, {align, {oct, {default, oct}}}, {modeset, {[8], {default, [8]}}}}]
+                  ,"amr para format configuration error"}
+                , {[{amrwb, {pt, 104}, {align, {[oct, eff], {default, oct}}}, {modeset, {[8], {default, [0]}}}}]
+                  ,"amr para value configuration error"}
+                , {[{amrwb, {pt, 104}, {align, {[oct, eff], {default, oct}}}, {modeset, {[0,9], {default, [0]}}}}]
+                  ,"amr para value configuration error"}
+                , {[{addrtype, {{ipv4, ipv6}, {default, ipv4}}}], "addrtype format configuration error"}
+                , {[{addrtype, {[ipv4], {default, ipv6}}}], "addrtype value configuration error"}
+                , {[{addrtype, {[ipv], {default, ipv4}}}], "addrtype value configuration error"} ]).
+
+
+-define(PARSE_SDP_TESTCASES,
+    [{asn1_NOVALUE, none}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,70,3}
+         , audio = #media_descript{port = 5002, addr = {10,1,70,3}, codeclist = [#codec{type = ulaw, payload = 0}]}
+         , video = #media_descript{addr = {10,1,70,3}}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 97\r\na=rtpmap:97 pcmu/8000/1\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,70,3}
+         , audio = #media_descript{port = 5002, addr = {10,1,70,3}, codeclist = [#codec{type = ulaw, payload = 97,
+                                                                                        ext = #ext{rate = 8000, channel = 1}}]}
+         , video = #media_descript{addr = {10,1,70,3}}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 97 98\r\na=rtpmap:97 pcmu/8000/1\r\na=rtpmap:98 pcma/8000\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,70,3}
+         , audio = #media_descript{port = 5002, addr = {10,1,70,3}, codeclist = [#codec{type = ulaw, payload = 97
+                                                                                       ,ext = #ext{rate = 8000, channel = 1}}
+                                                                                ,#codec{type = alaw, payload = 98
+                                                                                       ,ext = #ext{rate = 8000}}]}
+         , video = #media_descript{addr = {10,1,70,3}}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=audio 5002 RTP/AVP 8 101\r\na=rtpmap:101 telephone-event/8000\r\na=fmtp:101 0-15\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{port = 5002, addr = {10,1,93,70}, codeclist = [#codec{type = alaw, payload = 8}]
+                                                                   , digit = [#codec{type = telephone, payload = 101,
+                                                                                     ext = #ext{rate=8000, others=["0-15"]}}]}
+         , video = #media_descript{addr = {10,1,93,70}}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=audio 5002 RTP/AVP 102\r\na=rtpmap:102 AMR/8000\r\na=fmtp:102 octet-align=1;mode-set=0,2,7\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{port = 5002, addr = {10,1,93,70}, codeclist = [#codec{type = amrnb, payload = 102,
+                                                                                         ext = #ext{rate=8000,align_mark=true
+                                                                                                  , align=oct,modeset_mark=true
+                                                                                                  , modeset=[0,2,7]}}]}
+         , video = #media_descript{addr = {10,1,93,70}}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=audio 5002 RTP/AVP 102\r\na=fmtp:102 octet-align=1;mode-set=0,2,7\r\na=rtpmap:102 AMR/8000\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{port = 5002, addr = {10,1,93,70}, codeclist = [#codec{type = amrnb, payload = 102,
+                                                                                         ext = #ext{rate=8000,align_mark=true
+                                                                                                  , align=oct,modeset_mark=true
+                                                                                                  , modeset=[0,2,7]}}]}
+         , video = #media_descript{addr = {10,1,93,70}}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=audio 5002 RTP/AVP 102\r\na=rtpmap:102 AMR/8000\r\na=fmtp:102 max-red=0\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{port = 5002, addr = {10,1,93,70}, codeclist = [#codec{type = amrnb, payload = 102,
+                                                                                         ext = #ext{rate=8000
+                                                                                                   ,modeset = [0,1,2,3,4,5,6,7]
+                                                                                                   ,others = ["max-red=0"]}}]}
+         , video = #media_descript{addr = {10,1,93,70}}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=audio 5002 RTP/AVP 104\r\na=rtpmap:104 AMR-WB/16000\r\na=fmtp:104 octet-align=1;mode-set=0,4,8\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{port = 5002, addr = {10,1,93,70}, codeclist = [#codec{type = amrwb, payload = 104,
+                                                                                         ext = #ext{rate=16000,align_mark=true
+                                                                                                  , align=oct,modeset_mark=true
+                                                                                                  , modeset=[0,4,8]}}]}
+         , video = #media_descript{addr = {10,1,93,70}}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=audio 5002 RTP/AVP 104\r\na=rtpmap:104 AMR-WB/16000\r\na=fmtp:104 octet-align=0\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{port = 5002, addr={10,1,93,70}, codeclist=[#codec{type = amrwb, payload = 104,
+                                                                                     ext = #ext{rate=16000
+                                                                                              , align_mark=true, align=eff
+                                                                                              , modeset=[0,1,2,3,4,5,6,7,8]}}]}
+         , video = #media_descript{addr = {10,1,93,70}}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0 102\r\na=rtpmap:102 AMR/8000\r\na=fmtp:102 mode-set=1,7\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{port = 5002, addr = {10,1,93,70}, codeclist = [#codec{type = ulaw, payload = 0}
+                                                                                 ,#codec{type = amrnb, payload = 102,
+                                                                                         ext = #ext{rate=8000,modeset_mark=true
+                                                                                                   ,modeset=[1,7]}}]}
+         , video = #media_descript{addr = {10,1,93,70}}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=audio 5002 RTP/AVP 102 104\r\na=rtpmap:102 AMR/8000\r\na=fmtp:102 mode-set=7\r\na=rtpmap:104 AMR-WB/16000\r\na=fmtp:104 octet-align=0\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{port = 5002, addr={10,1,93,70}, codeclist=[#codec{type = amrnb, payload = 102,
+                                                                                     ext = #ext{rate=8000,modeset_mark=true
+                                                                                              , modeset=[7]}}
+                                                                             ,#codec{type = amrwb, payload = 104,
+                                                                                     ext = #ext{rate=16000
+                                                                                              , align_mark=true, align=eff
+                                                                                              , modeset=[0,1,2,3,4,5,6,7,8]}}]}
+         , video = #media_descript{addr = {10,1,93,70}}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0 101 104\r\na=rtpmap:101 telephone-event/8000\r\na=fmtp:101 0-15\r\na=rtpmap:104 AMR-WB/16000\r\na=fmtp:104 mode-set=8\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{port = 5002, addr = {10,1,93,70}, codeclist = [#codec{type = ulaw, payload = 0},
+                                                                                  #codec{type = amrwb, payload = 104,
+                                                                                  ext = #ext{rate=16000
+                                                                                           , modeset_mark = true,modeset=[8]}}]
+                                                                   , digit = [#codec{type = telephone, payload = 101,
+                                                                                     ext = #ext{rate=8000, others=["0-15"]}}]}
+         , video = #media_descript{addr = {10,1,93,70}}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=video 5004 RTP/AVP 34\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{addr = {10,1,93,70}}
+         , video = #media_descript{port = 5004, addr = {10,1,93,70}, codeclist = [#codec{type = h263, payload = 34
+                                                                                        ,ext = #ext{rate = 90000}}]}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=video 5004 RTP/AVP 34\r\na=fmtp:34 QCIF=1\r\na=framerate:7\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{addr = {10,1,93,70}}
+         , video = #media_descript{port=5004,addr={10,1,93,70},codeclist=[#codec{type = h263, payload = 34
+                                                                                ,ext = #ext{rate = 90000,framerate_mark=true
+                                                                                           ,framerate=7,others=["QCIF=1"]}}]}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=video 5004 RTP/AVP 34\r\na=rtpmap:34 H263/90000\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{addr = {10,1,93,70}}
+         , video = #media_descript{port = 5004, addr = {10,1,93,70}, codeclist = [#codec{type = h263, payload = 34
+                                                                                        ,ext = #ext{rate = 90000}}]}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=video 5004 RTP/AVP 34\r\na=rtpmap:34 H263/90000\r\na=framerate:7\r\na=framesize:34 480-640\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{addr = {10,1,93,70}}
+         , video = #media_descript{port = 5004,addr={10,1,93,70},codeclist=[#codec{type = h263, payload = 34
+                                                                                  ,ext = #ext{rate = 90000, framesize={480,640}
+                                                                                            , framesize_mark=true, framerate=7
+                                                                                            , framerate_mark=true}}]}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=video 5004 RTP/AVP 118\r\na=rtpmap:118 H264/90000\r\na=fmtp:118 profile-level-id=428016;packetization-mode=1\r\na=framerate:15\r\na=framesize:118 1280-720\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{addr = {10,1,93,70}}
+         , video = #media_descript{port=5004,addr={10,1,93,70},codeclist=[#codec{type = h264, payload = 118
+                                                                                ,ext = #ext{rate = 90000, framesize={1280,720}
+                                                                                           ,framesize_mark=true, framerate=15
+                                                                                           ,framerate_mark=true
+                                                                                           ,others=["profile-level-id=428016"
+                                                                                                 ,"packetization-mode=1"]}}]}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=video 5004 RTP/AVP 118\r\na=fmtp:118 profile-level-id=428016;packetization-mode=1\r\na=framesize:118 1280-720\r\na=rtpmap:118 H264/90000\r\na=framerate:15\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{addr = {10,1,93,70}}
+         , video = #media_descript{port=5004,addr={10,1,93,70},codeclist=[#codec{type = h264, payload = 118
+                                                                                ,ext = #ext{rate = 90000, framesize={1280,720}
+                                                                                           ,framesize_mark=true, framerate=15
+                                                                                           ,framerate_mark=true
+                                                                                           ,others=["profile-level-id=428016"
+                                                                                                 ,"packetization-mode=1"]}}]}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=video 5004 RTP/AVP 34 118\r\na=rtpmap:34 H263/90000\r\na=framerate:7\r\na=rtpmap:118 H264/90000\r\na=fmtp:118 packetization-mode=1;profile-level-id=428016\r\na=framerate:15\r\na=framesize:118 1280-720\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{addr = {10,1,93,70}}
+         , video = #media_descript{port=5004,addr={10,1,93,70},codeclist=[#codec{type = h263, payload = 34
+                                                                                ,ext = #ext{rate = 90000
+                                                                                          , framerate_mark=true, framerate=7}}
+                                                                        , #codec{type = h264, payload = 118
+                                                                                ,ext = #ext{rate = 90000, framesize={1280,720}
+                                                                                           ,framesize_mark=true, framerate=15
+                                                                                           ,framerate_mark=true
+                                                                                           ,others=["packetization-mode=1"
+                                                                                            ,"profile-level-id=428016"]}}]}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=video 5004 RTP/AVP 34 118\r\na=rtpmap:34 H263/90000\r\na=framesize:118 1280-720\r\na=rtpmap:118 H264/90000\r\na=framerate:15\r\na=fmtp:118 profile-level-id=428016;packetization-mode=1\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{addr = {10,1,93,70}}
+         , video = #media_descript{port=5004,addr={10,1,93,70},codeclist=[#codec{type = h263, payload = 34
+                                                                                ,ext = #ext{rate = 90000}}
+                                                                        , #codec{type = h264, payload = 118
+                                                                                ,ext = #ext{rate = 90000, framesize={1280,720}
+                                                                                           ,framesize_mark=true, framerate=15
+                                                                                           ,framerate_mark=true
+                                                                                           ,others=["profile-level-id=428016"
+                                                                                                 ,"packetization-mode=1"]}}]}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=video 5004 RTP/AVP 34 118\r\na=fmtp:34 QCIF=1 CIF=1\r\na=framerate:7\r\na=rtpmap:118 H264/90000\r\na=framesize:118 1280-720\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{addr = {10,1,93,70}}
+         , video = #media_descript{port=5004,addr={10,1,93,70},codeclist=[#codec{type = h263, payload = 34
+                                                                                ,ext = #ext{rate = 90000
+                                                                                          , framerate_mark=true, framerate=7
+                                                                                          , others = ["QCIF=1","CIF=1"]}}
+                                                                        , #codec{type = h264, payload = 118
+                                                                                ,ext = #ext{rate = 90000, framesize={1280,720}
+                                                                                           ,framesize_mark=true}}]}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=video 5004 RTP/AVP 118 34\r\na=rtpmap:118 H264/90000\r\na=framerate:10\r\na=fmtp:34 CIF=1 QCIF=1\r\na=framerate:7\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{addr = {10,1,93,70}}
+         , video = #media_descript{port=5004, addr={10,1,93,70},codeclist=[#codec{type = h264, payload = 118
+                                                                                 ,ext = #ext{rate = 90000, framerate=10
+                                                                                            ,framerate_mark=true}}
+                                                                         , #codec{type = h263, payload = 34
+                                                                                 ,ext = #ext{rate = 90000
+                                                                                           , framerate_mark=true, framerate=7
+                                                                                           , others = ["CIF=1","QCIF=1"]}}]}}}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.93.70\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0 8 101 102 104\r\na=rtpmap:101 telephone-event/8000\r\na=fmtp:101 0-15\r\na=rtpmap:102 AMR/8000\r\na=fmtp:102 octet-align=1\r\na=rtpmap:104 AMR-WB/16000\r\na=fmtp:104 mode-set=2,8;max-red=0\r\nm=video 5004 RTP/AVP 34 118\r\na=rtpmap:34 H263/90000\r\na=rtpmap:118 H264/90000\r\na=fmtp:118 profile-level-id=428016;packetization-mode=1\r\na=framerate:15\r\na=framesize:118 1280-720\r\n"
+     ,#sdp{addrtype = inet, addr = {10,1,93,70}
+         , audio = #media_descript{port=5002,addr={10,1,93,70},codeclist=[#codec{type = ulaw, payload = 0}
+                                                                        , #codec{type = alaw, payload = 8}
+                                                                        , #codec{type = amrnb, payload = 102,
+                                                                                 ext = #ext{rate=8000 
+                                                                                          , align_mark=true, align=oct
+                                                                                          , modeset = [0,1,2,3,4,5,6,7]}}
+                                                                        , #codec{type = amrwb, payload = 104,
+                                                                                 ext = #ext{rate=16000, others=["max-red=0"]
+                                                                                          , modeset_mark=true, modeset=[2,8]}}]
+                                                              ,digit = [#codec{type = telephone, payload = 101,
+                                                                               ext = #ext{rate=8000, others=["0-15"]}}]}
+         , video = #media_descript{port=5004,addr={10,1,93,70},codeclist = [#codec{type = h263, payload = 34
+                                                                                  ,ext = #ext{rate = 90000}}
+                                                                          , #codec{type = h264, payload = 118
+                                                                                  ,ext = #ext{rate = 90000,framesize={1280,720}
+                                                                                             ,framesize_mark=true, framerate=15
+                                                                                             ,framerate_mark=true
+                                                                                             ,others=["profile-level-id=428016"
+                                                                                                 ,"packetization-mode=1"]}}]}}}
+   , {"v=0\r\n \r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"
+     ,"remoteSdp error: sdp value error"}
+   , {"vv=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"
+     ,"remoteSdp error: sdp value error"}
+   , {"v=0 1\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"
+     ,"remoteSdp error: proto-version format error"}
+   , {"v=test\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"
+     ,"remoteSdp error: proto-version value error"}
+   , {"v=0\r\no=- 0 0 IN 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"
+     ,"remoteSdp error: origin-field format error"}
+   , {"v=0\r\no=\t 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"
+     ,"remoteSdp error: origin username value error"}
+   , {"v=0\r\no=- error 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"
+     ,"remoteSdp error: origin sess-id value error"}
+   , {"v=0\r\no=- 0 0 In IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"
+     ,"remoteSdp error: origin nettype value error"}
+   , {"v=0\r\no=- 0 0 IN IP8 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"
+     ,"remoteSdp error: origin/connection addrtype value error"}
+   , {"v=0\r\no=- 0 0 IN IP6 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"
+     ,"remoteSdp error: origin address value error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"
+     ,"remoteSdp error: connection-field format error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=In IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"
+     ,"remoteSdp error: connection nettype value error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP2 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"
+     ,"remoteSdp error: origin/connection addrtype value error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10,1,70,3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"
+     ,"remoteSdp error: connection address value error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP\r\n"
+     ,"remoteSdp error: media-description format error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=test 5002 RTP/AVP 8\r\n"
+     ,"remoteSdp error: media_type value error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 500a2 RTP/AVP 8\r\n"
+     ,"remoteSdp error: media_port value error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP/test 8\r\n"
+     ,"remoteSdp error: media_proto value error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 udp 8\r\n"
+     ,"remoteSdp error: media_proto value not support"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0 8 a\r\n"
+     ,"remoteSdp error: media_fmt value error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 102\r\na=rtpmap:test AMR/8000\r\n", "remoteSdp error: attribute value error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=video 5004 RTP/AVP 106\r\na=rtpmap:118 H264/90000\r\n", "remoteSdp error: attribute rtpmap payload error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=video 5004 RTP/AVP 106\r\na=rtpmap:106 H264/a0000\r\n", "remoteSdp error: attribute rtpmap value error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 102\r\na=rtpmap:102 AMR/8000\r\na=fmtp:114 octet-align=1\r\n", "remoteSdp error: attribute fmtp payload error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 102\r\na=rtpmap:102 AMR/8000\r\na=fmtp:102 octet-align=oct\r\n", "remoteSdp error: attribute fmtp value error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 102\r\na=rtpmap:102 AMR/8000\r\na=fmtp:102 octet-align=1;mode-set=1,2,a,7\r\n", "remoteSdp error: attribute fmtp value error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=video 5004 RTP/AVP 106\r\na=rtpmap:106 H264/90000\r\na=framesize:116 640-480\r\n", "remoteSdp error: attribute framesize payload error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=video 5004 RTP/AVP 106\r\na=rtpmap:106 H264/90000\r\na=framesize:106 6a0-4b0\r\n", "remoteSdp error: attribute framesize value error"}
+   , {"v=0\r\no=- 0 0 IN IP4 10.1.93.70\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=video 5004 RTP/AVP 106\r\na=rtpmap:106 H264/90000\r\na=framerate:7c\r\n", "remoteSdp error: attribute framerate value error"}]).
+
+
+-define(INITSDP_NORAML_ALAW, #sdp{negotype = {common}, addrtype = {[inet], {default, inet}}
+                                , audio = #media_descript{codeclist = [#codec{type = alaw, payload = 8}]}}).
+
+-define(INITSDP_NORAML_AMRNB, #sdp{negotype = {common}, addrtype = {[inet], {default, inet}}
+                                 , audio = #media_descript{codeclist = [#codec{type = amrnb, payload = 102
+                                                                              ,ext = #ext{align = {[oct, eff], {default, eff}}
+                                                                                         ,modeset = {[0,1,2,3,4,5,6,7],
+                                                                                                     {default, [0,2,7]}}}}]}}).
+
+-define(INITSDP_NORAML_AMRWB, #sdp{negotype = {common}, addrtype = {[inet], {default, inet}}
+                                 , audio = #media_descript{codeclist = [#codec{type = amrwb, payload = 104
+                                                                              ,ext = #ext{align = {[eff], {default, eff}}
+                                                                                         ,modeset = {[8], {default, [8]}}}}]}}).
+
+-define(INITSDP_NORAML_TELE, #sdp{negotype = {common}, addrtype = {[inet], {default, inet}}
+                                , audio = #media_descript{codeclist = [#codec{type = ulaw, payload = 0}
+                                                                      ,#codec{type = alaw, payload = 8}]
+                                                         ,digit = [#codec{type = telephone, payload = 101}]}}).
+
+-define(INITSDP_NORAML_VIDEO, #sdp{negotype = {common}, addrtype = {[inet], {default, inet}}
+                                 , video = #media_descript{codeclist = [#codec{type = h263, payload = 34}
+                                                                       ,#codec{type = h264, payload = 117}]}}).
+
+-define(INITSDP_NORAML_3, #sdp{negotype = {common}, addrtype = {[inet], {default, inet}}
+                             , audio = #media_descript{codeclist = [#codec{type = amrwb, payload = 115
+                                                                          ,ext = #ext{align = {[eff], {default, eff}}
+                                                                                     ,modeset = {[0,5,8], {default, [8]}}}}
+                                                                   ,#codec{type = alaw, payload = 8}]
+                                                      ,digit = [#codec{type = telephone, payload = 109}]}}).
+
+-define(INITSDP_NORAML_AV, #sdp{negotype = {common}, addrtype = {[inet], {default, inet}}
+                              , audio = #media_descript{codeclist = [#codec{type = amrnb, payload = 114
+                                                                           ,ext = #ext{align = {[eff], {default, eff}}
+                                                                                      ,modeset = {[0,4,7], {default, [7]}}}}
+                                                                    ,#codec{type = amrwb, payload = 116
+                                                                           ,ext = #ext{align = {[oct], {default, oct}}
+                                                                                      ,modeset = {[0,8], {default, [8]}}}}
+                                                                    ,#codec{type = ulaw, payload = 0}]
+                                                       ,digit = [#codec{type = telephone, payload = 109}]}
+                              , video = #media_descript{codeclist = [#codec{type = h264, payload = 118}]}}).
+
+-define(INITSDP_REMOTE_G711, #sdp{negotype = {remote}, addrtype = {[inet], {default, inet}}
+                                , audio = #media_descript{codeclist = [#codec{type = ulaw, payload = 0}
+                                                                      ,#codec{type = alaw, payload = 8}]
+                                                         ,digit = [#codec{type = telephone, payload = 109}]}}).
+
+-define(INITSDP_REMOTE_AV, #sdp{negotype = {remote}, addrtype = {[inet], {default, inet}}
+                              , audio = #media_descript{codeclist = [#codec{type = amrnb, payload = 114
+                                                                           ,ext = #ext{align = {[eff], {default, eff}}
+                                                                                      ,modeset = {[0,4,7], {default, [7]}}}}
+                                                                    ,#codec{type = amrwb, payload = 116
+                                                                           ,ext = #ext{align = {[oct], {default, oct}}
+                                                                                      ,modeset = {[0,8], {default, [8]}}}}
+                                                                    ,#codec{type = ulaw, payload = 0}]
+                                                       ,digit = [#codec{type = telephone, payload = 109}]}
+                              , video = #media_descript{codeclist = [#codec{type = h264, payload = 118}
+                                                                    ,#codec{type = h263, payload = 34}]}}).
+
+-define(INITSDP_LOCAL_AV, #sdp{negotype = {local, {{audio, [amrnb, amrwb_oct, ulaw]}, {video, [h264]}}}
+                             , addrtype = {[inet], {default, inet}}
+                             , audio = #media_descript{codeclist = [#codec{type = amrnb, payload = 114
+                                                                          ,ext = #ext{align = {[oct, eff], {default, eff}}
+                                                                                     ,modeset = {[0,2,5,7], {default, [7]}}}}
+                                                                   ,#codec{type = amrwb, payload = 116
+                                                                          ,ext = #ext{align = {[oct, eff], {default, oct}}
+                                                                                     ,modeset = {[0,4,8], {default, [8]}}}}
+                                                                   ,#codec{type = ulaw, payload = 0}
+                                                                   ,#codec{type = alaw, payload = 8}]
+                                                      ,digit = [#codec{type = telephone, payload = 109}]}
+                             , video = #media_descript{codeclist = [#codec{type = h264, payload = 118}
+                                                                   ,#codec{type = h263, payload = 34}]}}).
+
+-define(NEGO_TESTCASES,
+                 [{{none, #sdp{}}, #sdp{}}
+                , {{#sdp{addr = {10,1,70,3}, audio = #media_descript{codeclist = [#codec{type = ulaw, payload = 0}]}}
+                   ,#sdp{addrtype = inet, audio = #media_descript{codeclist = [#codec{type = ulaw, payload = 0}]}}}
+                  ,"negotiate error: input para error"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}]}}
+                   ,#sdp{addrtype = {[inet6], {default, inet6}}
+                                   , audio = #media_descript{codeclist = [#codec{type = ulaw, payload = 0}]}}}
+                  ,"negotiation fails: addrtype failed"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = alaw, payload = 98
+                                                                                , ext = #ext{rate = 8000}}]}}
+                   ,?INITSDP_NORAML_ALAW}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = alaw, payload = 98
+                                                                               , ext = #ext{rate = 8000}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 97
+                                                                                , ext = #ext{rate = 8000}}
+                                                                          ,#codec{type = alaw, payload = 98
+                                                                                , ext = #ext{rate = 8000, channel = 1}}]}}
+                   ,?INITSDP_NORAML_ALAW}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = alaw, payload = 98
+                                                                               , ext = #ext{rate = 8000, channel = 1}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = alaw, payload = 8
+                                                                                , ext = #ext{rate = 1000}}]}}
+                   ,?INITSDP_NORAML_ALAW}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = alaw, payload = 8
+                                                                                , ext = #ext{channel = 2}}]}}
+                   ,?INITSDP_NORAML_ALAW}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrnb, payload = 116
+                                                                                , ext = #ext{rate = 9000, modeset_mark = true
+                                                                                            ,modeset = [0,1,2,6]}}]}}
+                   ,?INITSDP_NORAML_AMRNB}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrnb, payload = 116
+                                                                                , ext = #ext{rate = 8000, channel = 2
+                                                                                            ,align_mark = true, align = oct
+                                                                                            ,modeset = [0,1,2,3,4,5,6,7]}}]}}
+                   ,?INITSDP_NORAML_AMRNB}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrwb, payload = 118
+                                                                                , ext = #ext{rate = 9000, modeset_mark = true
+                                                                                            ,modeset = [1,4,6,8]}}]}}
+                   ,?INITSDP_NORAML_AMRWB}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrwb, payload = 118
+                                                                                , ext = #ext{rate = 16000, modeset_mark = true
+                                                                                            ,modeset = [1,2,5,7]}}]}}
+                   ,?INITSDP_NORAML_AMRWB}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrwb, payload = 118
+                                                                                , ext = #ext{rate = 16000
+                                                                                            ,align_mark = true, align = oct
+                                                                                            ,modeset = [0,1,2,3,4,5,6,7,8]}}]}}
+                   ,?INITSDP_NORAML_AMRWB}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}]}}
+                   ,?INITSDP_NORAML_ALAW}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}
+                                                                          ,#codec{type = alaw, payload = 8}]
+                                                            , digit = [#codec{type = telephone, payload = 101
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}
+                   ,?INITSDP_NORAML_AMRNB}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = alaw, payload = 8}]}}
+                   ,?INITSDP_NORAML_ALAW}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = alaw, payload = 8}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}
+                                                                          ,#codec{type = amrnb, payload = 112
+                                                                                 ,ext = #ext{rate = 8000
+                                                                                            ,align = eff, align_mark = true
+                                                                                            ,modeset = [2,7],modeset_mark = true
+                                                                                            ,others = ["max-red=0"]}}]}}
+                   ,?INITSDP_NORAML_AMRNB}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrnb, payload = 112
+                                                                                ,ext = #ext{rate = 8000
+                                                                                           ,align = eff, align_mark = true
+                                                                                           ,modeset = [2,7], modeset_mark = true
+                                                                                           ,others = ["max-red=0"]}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}
+                                                                          ,#codec{type = alaw, payload = 8}
+                                                                          ,#codec{type = amrwb, payload = 114
+                                                                                 ,ext = #ext{rate = 16000
+                                                                                            ,modeset = [0,1,2,3,4,5,6,7,8]}}]}}
+                   ,?INITSDP_NORAML_AMRWB}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrwb, payload = 114
+                                                                                ,ext = #ext{rate = 16000, modeset = [8]}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5006, codeclist = [#codec{type = amrnb, payload = 112
+                                                                                 ,ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [0,2,7]}}]
+                                                            , digit = [#codec{type = telephone, payload = 101
+                                                                             ,ext = #ext{rate = 9000, others = ["0-15"]}}]}}
+                   ,?INITSDP_NORAML_TELE}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5006, codeclist = [#codec{type = amrnb, payload = 112
+                                                                                 ,ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [0,2,7]}}
+                                                                          ,#codec{type = ulaw, payload = 0}]
+                                                            , digit = [#codec{type = telephone, payload = 101
+                                                                             ,ext = #ext{rate = 16000, others = ["0-15"]}}]}}
+                   ,?INITSDP_NORAML_TELE}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5006, codeclist = [#codec{type = ulaw, payload = 0}]
+                                                           , digit = [#codec{type = telephone, payload = 101
+                                                                            ,ext = #ext{rate = 16000, others = ["0-15"]}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5006, codeclist = [#codec{type = alaw, payload = 8}
+                                                                          ,#codec{type = ulaw, payload = 0}]
+                                                            , digit = [#codec{type = telephone, payload = 101
+                                                                             ,ext = #ext{rate = 8000,others = ["0-9,11,12"]}}]}}
+                   ,?INITSDP_NORAML_TELE}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5006, codeclist = [#codec{type = alaw, payload = 8}
+                                                                         ,#codec{type = ulaw, payload = 0}]
+                                                           , digit = [#codec{type = telephone, payload = 101
+                                                                            ,ext = #ext{rate = 8000,others = ["0-9,11,12"]}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , video = #media_descript{port = 5006, codeclist = [#codec{type = h263, payload = 34
+                                                                                , ext = #ext{rate = 1000}}]}}
+                   ,?INITSDP_NORAML_VIDEO}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , video = #media_descript{port = 5006, codeclist = [#codec{type = h264, payload = 118
+                                                                                , ext = #ext{rate = 8000, framesize_mark = true
+                                                                                            ,framesize = {320,240}}}]}}
+                   ,?INITSDP_NORAML_VIDEO}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , video = #media_descript{port = 5006, codeclist = [#codec{type = h264, payload = 118
+                                                                                , ext = #ext{rate = 90000, framesize_mark = true
+                                                                                            ,framesize = {320,240}}}
+                                                                          ,#codec{type = h263, payload = 34
+                                                                                , ext = #ext{rate = 90000}}]}}
+                   ,?INITSDP_NORAML_VIDEO}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , video = #media_descript{port = 5006, codeclist = [#codec{type = h264, payload = 118
+                                                                               , ext = #ext{rate = 90000, framesize_mark = true
+                                                                                           ,framesize = {320,240}}}
+                                                                         ,#codec{type = h263, payload = 34
+                                                                               , ext = #ext{rate = 90000}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}]}}
+                   ,?INITSDP_NORAML_3}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrwb, payload = 117
+                                                                                , ext = #ext{rate = 16000, modeset_mark = true
+                                                                                            ,modeset = [1,5,8]}}]}}
+                   ,?INITSDP_NORAML_3}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrwb, payload = 117
+                                                                                ,ext = #ext{rate = 16000, modeset_mark = true
+                                                                                           ,modeset = [5,8]}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}
+                                                                          ,#codec{type = amrnb, payload = 117
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,6]}}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}
+                   ,?INITSDP_NORAML_3}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}
+                                                                          ,#codec{type = amrwb, payload = 118
+                                                                                , ext = #ext{rate = 16000, modeset_mark = true
+                                                                                            ,modeset = [2,8]}}]
+                                                            , digit = [#codec{type = telephone, payload = 102
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}
+                   ,?INITSDP_NORAML_3}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrwb, payload = 118
+                                                                               , ext = #ext{rate = 16000, modeset_mark = true
+                                                                                           ,modeset = [8]}}]
+                                                           , digit = [#codec{type = telephone, payload = 102
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrnb, payload = 116
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,7]}}
+                                                                          ,#codec{type = amrwb, payload = 118
+                                                                                , ext = #ext{rate = 16000
+                                                                                            ,align = oct, align_mark = true
+                                                                                            ,modeset = [0,1,2,3,4,5,6,7,8]}}
+                                                                          ,#codec{type = ulaw, payload = 0}
+                                                                          ,#codec{type = alaw, payload = 8}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}
+                   ,?INITSDP_NORAML_3}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = alaw, payload = 8}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrnb, payload = 116
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,7]}}
+                                                                          ,#codec{type = amrwb, payload = 118
+                                                                                , ext = #ext{rate = 16000
+                                                                                            ,align = eff, align_mark = true
+                                                                                            ,modeset = [0,1,2,3,4,5,6,7,8]}}
+                                                                          ,#codec{type = ulaw, payload = 0}
+                                                                          ,#codec{type = alaw, payload = 8}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}
+                   ,?INITSDP_NORAML_3}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrwb, payload = 118
+                                                                               , ext = #ext{rate = 16000, align_mark = true
+                                                                                           ,align = eff, modeset = [0,5,8]}}
+                                                                         ,#codec{type = alaw, payload = 8}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = alaw, payload = 8}]}}
+                   ,?INITSDP_NORAML_AV}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}]}}
+                   ,?INITSDP_NORAML_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}
+                                                                          ,#codec{type = amrwb, payload = 116
+                                                                                , ext = #ext{rate = 16000, modeset_mark = true
+                                                                                            ,modeset = [0,2,3,4,5,7,8]}}
+                                                                          ,#codec{type = amrnb, payload = 118
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,3,6]}}]}}
+                   ,?INITSDP_NORAML_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrwb, payload = 116
+                                                                                , ext = #ext{rate = 16000
+                                                                                            ,align_mark = true, align = oct
+                                                                                            ,modeset = [0,2,3,4,5,7,8]}}
+                                                                          ,#codec{type = amrnb, payload = 118
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,5,7]}}
+                                                                          ,#codec{type = ulaw, payload = 0}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}
+                   ,?INITSDP_NORAML_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrwb, payload = 116
+                                                                               , ext = #ext{rate = 16000, modeset = [0,8]
+                                                                                           ,align_mark = true, align = oct}}
+                                                                         ,#codec{type = amrnb, payload = 118
+                                                                               , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                           ,modeset = [7]}}
+                                                                         ,#codec{type = ulaw, payload = 0}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5004, codeclist = [#codec{type = amrwb, payload = 116
+                                                                                , ext = #ext{rate = 16000
+                                                                                            ,align_mark = true, align = eff 
+                                                                                            ,modeset = [0,2,3,4,5,7,8]}}
+                                                                          ,#codec{type = amrnb, payload = 118
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,5]}}
+                                                                          ,#codec{type = alaw, payload = 8}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 5006, codeclist = [#codec{type = h264, payload = 122
+                                                                                 ,ext = #ext{rate = 90000}}]}}
+                   ,?INITSDP_NORAML_AV}, "negotiation fails: audio resource failed"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5004, codeclist = [#codec{type = amrwb, payload = 116
+                                                                                , ext = #ext{rate = 16000
+                                                                                            ,align_mark = true, align = oct
+                                                                                            ,modeset = [0,2,3,4,5,7,8]}}
+                                                                          ,#codec{type = amrnb, payload = 118
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,5]}}
+                                                                          ,#codec{type = ulaw, payload = 0}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 5006, codeclist = [#codec{type = h263, payload = 34
+                                                                                 ,ext = #ext{rate = 90000}}]}}
+                   ,?INITSDP_NORAML_AV}, "negotiation fails: video resource failed"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5004, codeclist = [#codec{type = amrwb, payload = 116
+                                                                                , ext = #ext{rate = 16000
+                                                                                            ,align_mark = true, align = oct
+                                                                                            ,modeset = [0,2,3,4,5,7,8]}}
+                                                                          ,#codec{type = amrnb, payload = 118
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,5]}}
+                                                                          ,#codec{type = ulaw, payload = 0}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 5006, codeclist = [#codec{type = h263, payload = 34
+                                                                                 ,ext = #ext{rate = 90000}}
+                                                                          ,#codec{type = h264, payload = 122
+                                                                                 ,ext = #ext{rate = 90000}}]}}
+                   ,?INITSDP_NORAML_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5004, codeclist = [#codec{type = amrwb, payload = 116
+                                                                               , ext = #ext{rate = 16000, modeset = [0,8]
+                                                                                           ,align_mark = true, align = oct}}
+                                                                         ,#codec{type = ulaw, payload = 0}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                      , video = #media_descript{port = 5006, codeclist = [#codec{type = h264, payload = 122
+                                                                                ,ext = #ext{rate = 90000}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5004, codeclist = [#codec{type = amrwb, payload = 116
+                                                                                , ext = #ext{rate = 16000
+                                                                                            ,align_mark = true, align = eff
+                                                                                            ,modeset = [0,2,3,4,5,7,8]}}
+                                                                          ,#codec{type = amrnb, payload = 118
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,5]}}
+                                                                          ,#codec{type = ulaw, payload = 0}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 0, codeclist = [#codec{type = h263, payload = 34
+                                                                              ,ext = #ext{rate = 90000}}
+                                                                       ,#codec{type = h264, payload = 122
+                                                                              ,ext = #ext{rate = 90000}}]}}
+                   ,?INITSDP_NORAML_3}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5004, codeclist = [#codec{type = amrwb, payload = 116
+                                                                               , ext = #ext{rate = 16000, modeset = [0,5,8]
+                                                                                           ,align_mark = true, align = eff}}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                      , video = #media_descript{port = 0, codeclist = [#codec{type = h263, payload = 34
+                                                                             ,ext = #ext{rate = 90000}}
+                                                                       ,#codec{type = h264, payload = 122
+                                                                              ,ext = #ext{rate = 90000}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5004, codeclist = [#codec{type = amrwb, payload = 116
+                                                                                , ext = #ext{rate = 16000
+                                                                                            ,align_mark = true, align = eff
+                                                                                            ,modeset = [0,2,3,4,5,7,8]}}
+                                                                          ,#codec{type = amrnb, payload = 118
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,5]}}
+                                                                          ,#codec{type = ulaw, payload = 0}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 0, codeclist = [#codec{type = h263, payload = 34
+                                                                              ,ext = #ext{rate = 90000}}
+                                                                       ,#codec{type = h264, payload = 122
+                                                                              ,ext = #ext{rate = 90000}}]}}
+                   ,?INITSDP_NORAML_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5004, codeclist = [#codec{type = ulaw, payload = 0}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                      , video = #media_descript{port = 0, codeclist = [#codec{type = h263, payload = 34
+                                                                             ,ext = #ext{rate = 90000}}
+                                                                       ,#codec{type = h264, payload = 122
+                                                                              ,ext = #ext{rate = 90000}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5004, codeclist = [#codec{type = amrwb, payload = 116
+                                                                                , ext = #ext{rate = 16000
+                                                                                            ,align_mark = true, align = eff
+                                                                                            ,modeset = [0,2,3,4,5,7,8]}}
+                                                                          ,#codec{type = amrnb, payload = 118
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,5]}}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 0, codeclist = [#codec{type = h263, payload = 34
+                                                                              ,ext = #ext{rate = 90000}}
+                                                                       ,#codec{type = h264, payload = 122
+                                                                              ,ext = #ext{rate = 90000}}]}}
+                   ,?INITSDP_NORAML_AV}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5004, codeclist = [#codec{type = amrwb, payload = 116
+                                                                                , ext = #ext{rate = 16000
+                                                                                            ,align_mark = true, align = eff
+                                                                                            ,modeset = [0,2,3,4,5,7,8]}}
+                                                                          ,#codec{type = amrnb, payload = 118
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,5]}}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 0, codeclist = [#codec{type = h263, payload = 34
+                                                                              ,ext = #ext{rate = 90000}}
+                                                                       ,#codec{type = h264, payload = 122
+                                                                              ,ext = #ext{rate = 90000}}]}}
+                   ,?INITSDP_NORAML_VIDEO}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 0, codeclist = [#codec{type = amrwb, payload = 116
+                                                                             , ext = #ext{rate = 16000
+                                                                                         ,align_mark = true, align = eff
+                                                                                         ,modeset = [0,5,8]}}
+                                                                       ,#codec{type = ulaw, payload = 0}]
+                                                         , digit = [#codec{type = telephone, payload = 112
+                                                                              ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                 ,ext = #ext{rate = 90000}}
+                                                                          ,#codec{type = h264, payload = 122
+                                                                                 ,ext = #ext{rate = 90000, framesize_mark = true
+                                                                                            ,framesize = {320,240}}}]}}
+                   ,?INITSDP_NORAML_VIDEO}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 0, codeclist = [#codec{type = amrwb, payload = 116
+                                                                            , ext = #ext{rate = 16000, modeset = [0,5,8]
+                                                                                        ,align_mark = true, align = eff}}
+                                                                      ,#codec{type = ulaw, payload = 0}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                      , video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                ,ext = #ext{rate = 90000}}
+                                                                         ,#codec{type = h264, payload = 122
+                                                                                ,ext = #ext{rate = 90000, framesize_mark = true
+                                                                                           ,framesize = {320,240}}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 0, codeclist = [#codec{type = amrwb, payload = 116
+                                                                             , ext = #ext{rate = 16000
+                                                                                         ,align_mark = true, align = eff
+                                                                                         ,modeset = [0,5,8]}}
+                                                                       ,#codec{type = ulaw, payload = 0}]
+                                                         , digit = [#codec{type = telephone, payload = 112
+                                                                              ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                 ,ext = #ext{rate = 90000}}
+                                                                          ,#codec{type = h264, payload = 122
+                                                                                 ,ext = #ext{rate = 90000, framesize_mark = true
+                                                                                            ,framesize = {320,240}}}]}}
+                   ,?INITSDP_NORAML_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 0, codeclist = [#codec{type = amrwb, payload = 116
+                                                                            , ext = #ext{rate = 16000, modeset = [0,5,8]
+                                                                                        ,align_mark = true, align = eff}}
+                                                                      ,#codec{type = ulaw, payload = 0}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                      , video = #media_descript{port = 5004, codeclist = [#codec{type = h264, payload = 122
+                                                                                ,ext = #ext{rate = 90000, framesize_mark = true
+                                                                                           ,framesize = {320,240}}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 0, codeclist = [#codec{type = amrwb, payload = 116
+                                                                             , ext = #ext{rate = 16000
+                                                                                         ,align_mark = true, align = eff
+                                                                                         ,modeset = [0,5,8]}}
+                                                                       ,#codec{type = ulaw, payload = 0}]
+                                                         , digit = [#codec{type = telephone, payload = 112
+                                                                              ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                 ,ext = #ext{rate = 90000}}]}}
+                   ,?INITSDP_NORAML_AV}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 0, codeclist = [#codec{type = amrwb, payload = 116
+                                                                             , ext = #ext{rate = 16000
+                                                                                         ,align_mark = true, align = eff
+                                                                                         ,modeset = [0,5,8]}}
+                                                                       ,#codec{type = ulaw, payload = 0}]
+                                                         , digit = [#codec{type = telephone, payload = 112
+                                                                              ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                 ,ext = #ext{rate = 90000}}]}}
+                   ,?INITSDP_NORAML_3}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrnb, payload = 116
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,7]}}
+                                                                          ,#codec{type = ulaw, payload = 0}
+                                                                          ,#codec{type = alaw, payload = 8}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}
+                                                                      ,#codec{type = telephone, payload = 114
+                                                                             ,ext = #ext{rate = 16000, others = ["0-15"]}}]}}
+                   ,?INITSDP_REMOTE_G711}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrnb, payload = 116
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,7]}}
+                                                                          ,#codec{type = alaw, payload = 8}]}}
+                   ,?INITSDP_REMOTE_G711}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = alaw, payload = 8}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrnb, payload = 116
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,7]}}
+                                                                          ,#codec{type = amrwb, payload = 118
+                                                                                , ext = #ext{rate = 16000, modeset_mark = true
+                                                                                            ,modeset = [2,5]}}]}}
+                   ,?INITSDP_REMOTE_G711}, "negotiation fails"}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5002, codeclist = [#codec{type = amrwb, payload = 116
+                                                                                , ext = #ext{rate = 16000
+                                                                                            ,align_mark = true, align = oct
+                                                                                            ,modeset = [0,5,8]}}
+                                                                          ,#codec{type = ulaw, payload = 0}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 16000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                 ,ext = #ext{rate = 90000}}
+                                                                          ,#codec{type = h264, payload = 122
+                                                                                ,ext = #ext{rate = 90000, framesize_mark = true
+                                                                                            ,framesize = {320,240}}}]}}
+                   ,?INITSDP_REMOTE_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5002, codeclist = [#codec{type = amrwb, payload = 116
+                                                                               , ext = #ext{rate = 16000, modeset = [0,8]
+                                                                                           ,align_mark = true, align = oct}}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 16000, others = ["0-15"]}}]}
+                      , video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                ,ext = #ext{rate = 90000}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5002, codeclist = [#codec{type = amrwb, payload = 116
+                                                                                , ext = #ext{rate = 16000
+                                                                                            ,align_mark = true, align = oct
+                                                                                            ,modeset = [0,5,8]}}
+                                                                          ,#codec{type = ulaw, payload = 0}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                                 ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                 ,ext = #ext{rate = 90000}}
+                                                                          ,#codec{type = h264, payload = 122
+                                                                                 ,ext = #ext{rate = 90000, framesize_mark = true
+                                                                                            ,framesize = {320,240}}}]}}
+                   ,?INITSDP_REMOTE_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5002, digit = [], codeclist = [#codec{type = amrwb, payload = 116
+                                                                                   , ext = #ext{rate = 16000, modeset = [0,8]
+                                                                                           ,align_mark = true, align = oct}}]}
+                      , video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                ,ext = #ext{rate = 90000}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 0, codeclist = [#codec{type = amrwb, payload = 116
+                                                                             , ext = #ext{rate = 16000
+                                                                                         ,align_mark = true, align = eff
+                                                                                         ,modeset = [0,5,8]}}
+                                                                       ,#codec{type = ulaw, payload = 0}]
+                                                         , digit = [#codec{type = telephone, payload = 112
+                                                                          ,ext = #ext{rate = 16000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                 ,ext = #ext{rate = 90000}}
+                                                                          ,#codec{type = h264, payload = 122
+                                                                                 ,ext = #ext{rate = 90000, framesize_mark = true
+                                                                                            ,framesize = {320,240}}}]}}
+                   ,?INITSDP_REMOTE_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 0, codeclist = [#codec{type = amrwb, payload = 116
+                                                                            , ext = #ext{rate = 16000, modeset = [0,5,8]
+                                                                                        ,align_mark = true, align = eff}}
+                                                                      ,#codec{type = ulaw, payload = 0}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 16000, others = ["0-15"]}}]}
+                      , video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                ,ext = #ext{rate = 90000}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrnb, payload = 116
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [2,7]}}
+                                                                          ,#codec{type = ulaw, payload = 0}
+                                                                          ,#codec{type = alaw, payload = 8}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 16000, others = ["0-15"]}}]}}
+                   ,?INITSDP_LOCAL_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, digit = [], codeclist = [#codec{type = amrnb, payload = 116
+                                                                               , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                           ,modeset = [2,7]}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrwb, payload = 116
+                                                                                , ext = #ext{rate = 16000, modeset_mark = true
+                                                                                            ,modeset = [2,8], align_mark = true
+                                                                                            ,align = oct}}
+                                                                          ,#codec{type = ulaw, payload = 0}
+                                                                          ,#codec{type = alaw, payload = 8}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}
+                   ,?INITSDP_LOCAL_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, digit =[], codeclist = [#codec{type = amrwb, payload = 116
+                                                                                           ,ext = #ext{rate = 16000
+                                                                                           ,modeset = [8], modeset_mark = true
+                                                                                          ,align_mark = true, align = oct}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = alaw, payload = 8}
+                                                                          ,#codec{type = amrwb, payload = 116
+                                                                                , ext = #ext{rate = 16000, modeset_mark = true
+                                                                                            ,modeset = [2,8]}}
+                                                                          ,#codec{type = ulaw, payload = 0}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}
+                   ,?INITSDP_LOCAL_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}
+                                                                          ,#codec{type = alaw, payload = 8}
+                                                                          ,#codec{type = amrnb, payload = 116
+                                                                                , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                            ,modeset = [1,5,7]}}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}
+                   ,?INITSDP_LOCAL_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrnb, payload = 116
+                                                                               , ext = #ext{rate = 8000, modeset_mark = true
+                                                                                           ,modeset = [5,7]}}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = ulaw, payload = 0}
+                                                                          ,#codec{type = alaw, payload = 8}
+                                                                          ,#codec{type = amrwb, payload = 116
+                                                                                , ext = #ext{rate = 16000, modeset_mark = true
+                                                                                            ,modeset = [2,8], align_mark = true
+                                                                                            ,align = oct}}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 16000, others = ["0-15"]}}]}}
+                   ,?INITSDP_LOCAL_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrwb, payload = 116
+                                                                               , ext = #ext{rate = 16000
+                                                                                           ,modeset = [8], modeset_mark = true
+                                                                                           ,align_mark = true, align = oct}}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 16000, others = ["0-15"]}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = alaw, payload = 8}
+                                                                          ,#codec{type = amrwb, payload = 116
+                                                                                , ext = #ext{rate = 16000, modeset_mark = true
+                                                                                            ,modeset = [2,4,6,8]}}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}
+                   ,?INITSDP_LOCAL_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = alaw, payload = 8}
+                                                                         ,#codec{type = amrwb, payload = 116
+                                                                               , ext = #ext{rate = 16000, modeset_mark = true
+                                                                                           ,modeset = [4,8]}}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5002, codeclist = [#codec{type = alaw, payload = 8}
+                                                                          ,#codec{type = ulaw, payload = 0}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                 ,ext = #ext{rate = 90000}}
+                                                                          ,#codec{type = h264, payload = 122
+                                                                                 ,ext = #ext{rate = 90000, framesize_mark = true
+                                                                                            ,framesize = {320,240}}}]}}
+                   ,?INITSDP_LOCAL_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5002, codeclist = [#codec{type = ulaw, payload = 0}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                      , video = #media_descript{port = 5004, codeclist = [#codec{type = h264, payload = 122
+                                                                                ,ext = #ext{rate = 90000, framesize_mark = true
+                                                                                           ,framesize = {320,240}}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5002, codeclist = [#codec{type = alaw, payload = 8}
+                                                                          ,#codec{type = ulaw, payload = 0}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 0, codeclist = [#codec{type = h263, payload = 34
+                                                                              ,ext = #ext{rate = 90000}}
+                                                                       ,#codec{type = h264, payload = 122
+                                                                              ,ext = #ext{rate = 90000, framesize_mark = true
+                                                                                         ,framesize = {320,240}}}]}}
+                   ,?INITSDP_LOCAL_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5002, codeclist = [#codec{type = ulaw, payload = 0}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                      , video = #media_descript{port = 0, codeclist = [#codec{type = h263, payload = 34
+                                                                             ,ext = #ext{rate = 90000}}
+                                                                      ,#codec{type = h264, payload = 122
+                                                                                ,ext = #ext{rate = 90000, framesize_mark = true
+                                                                                           ,framesize = {320,240}}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 0, codeclist = [#codec{type = alaw, payload = 8}
+                                                                       ,#codec{type = ulaw, payload = 0}]
+                                                         , digit = [#codec{type = telephone, payload = 112
+                                                                          ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                       , video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                 ,ext = #ext{rate = 90000}}
+                                                                          ,#codec{type = h264, payload = 122
+                                                                                 ,ext = #ext{rate = 90000, framesize_mark = true
+                                                                                            ,framesize = {320,240}}}]}}
+                   ,?INITSDP_LOCAL_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 0, codeclist = [#codec{type = alaw, payload = 8}
+                                                                      ,#codec{type = ulaw, payload = 0}]
+                                                        , digit = [#codec{type = telephone, payload = 112
+                                                                         ,ext = #ext{rate = 8000, others = ["0-15"]}}]}
+                      , video = #media_descript{port = 5004, codeclist = [#codec{type = h264, payload = 122
+                                                                                ,ext = #ext{rate = 90000, framesize_mark = true
+                                                                                           ,framesize = {320,240}}}]}}}
+                , {{#sdp{addrtype = inet, addr = {10,1,70,3}
+                       , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrwb, payload = 118
+                                                                                , ext = #ext{rate = 16000, modeset_mark = true
+                                                                                            ,modeset = [4,8]}}
+                                                                          ,#codec{type = amrnb, payload = 116
+                                                                                , ext = #ext{rate = 8000
+                                                                                            ,align_mark = true, align = oct
+                                                                                            ,modeset = [0,1,2,3,4,5,6,7]}}
+                                                                          ,#codec{type = ulaw, payload = 0}]
+                                                            , digit = [#codec{type = telephone, payload = 112
+                                                                             ,ext = #ext{rate = 8000, others = ["0-15"]}}
+                                                                      ,#codec{type = telephone, payload = 114
+                                                                             ,ext = #ext{rate = 16000, others = ["0-15"]}}]}}
+                   ,?INITSDP_LOCAL_AV}
+                  ,#sdp{addrtype = inet, addr = {10,1,70,3}
+                      , audio = #media_descript{port = 5008, codeclist = [#codec{type = amrnb, payload = 116
+                                                                               , ext = #ext{rate = 8000, modeset = [0,2,5,7]
+                                                                                           ,align_mark = true, align = oct}}]
+                                                           , digit = [#codec{type = telephone, payload = 112
+                                                                            ,ext = #ext{rate = 8000, others = ["0-15"]}}]}}}
+]).
+
+
+-define(GEN_TESTCASES, [{"test", "generate sdp error: input para error"}
+                      , {#sdp{audio = #media_descript{port = "5002", codeclist = [#codec{type = ulaw, payload = 0}]}}
+                        ,"generate error: input sdp record error"}
+                      , {#sdp{audio = #media_descript{port = 5002, codeclist = []}}
+                        ,"generate media descripts error: all codeclists are empty"}
+                      , {#sdp{addr = {10,1,70,3}, addrtype = {[inet, inet6], {default, inet}}
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = ulaw, payload = 0}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\n"}
+                      , {#sdp{addr = {10,1,70,3}, addrtype = {[inet, inet6], {default, inet}}
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = ulaw, payload = 0}]
+                                                                 , digit = [#codec{type = telephone, payload = 101
+                                                                                  ,ext = #ext{rate = 8000}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0 101\r\na=rtpmap:101 telephone-event/8000\r\n"}
+                      , {#sdp{addr = {10,1,70,3}, addrtype = {[inet, inet6], {default, inet}}
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = amrnb, payload = 102
+                                                                                ,ext = #ext{align = {[oct,eff], {default, eff}}
+                                                                        ,modeset = {[0,1,2,3,4,5,6,7], {default, [0,2,7]}}}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 102\r\na=rtpmap:102 AMR/8000\r\na=fmtp:102 octet-align=0;mode-set=0,2,7\r\n"}
+                      , {#sdp{addr = {10,1,70,3}, addrtype = {[inet, inet6], {default, inet}}
+                             ,video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34}
+                                                                               ,#codec{type = h264, payload = 118}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=video 5004 RTP/AVP 34 118\r\na=rtpmap:34 H263/90000\r\na=rtpmap:118 H264/90000\r\n"}
+                      , {#sdp{addr = {10,1,70,3}, sendrecv = sendrecv, sendrecv_mark = true
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = ulaw, payload = 0}]
+                                                     ,sendrecv = sendrecv, ptime = 20, maxptime = 240}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\na=sendrecv\r\nm=audio 5002 RTP/AVP 0\r\na=sendrecv\r\na=ptime:20\r\na=maxptime:240\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = ulaw, payload = 0
+                                                                                      ,ext = #ext{rate = 8000}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0\r\na=rtpmap:0 pcmu/8000\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = alaw, payload = 8
+                                                                                      ,ext = #ext{rate = 8000, channel = 1}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 8\r\na=rtpmap:8 pcma/8000/1\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = alaw, payload = 8}
+                                                                               ,#codec{type = ulaw, payload = 0}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 8 0\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = ulaw, payload = 0}
+                                                                               ,#codec{type = alaw, payload = 8}]
+                                                                 , digit = [#codec{type = telephone, payload = 101
+                                                                                  ,ext = #ext{rate = 8000, others=["0-15"]}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0 8 101\r\na=rtpmap:101 telephone-event/8000\r\na=fmtp:101 0-15\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = ulaw, payload = 0}
+                                                                               ,#codec{type = amrnb, payload = 112
+                                                                                      ,ext = #ext{rate = 8000, modeset = [1,7]
+                                                                                          ,others = ["mode-change-capability=2"
+                                                                                                    ,"max-red=0"]}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0 112\r\na=rtpmap:112 AMR/8000\r\na=fmtp:112 mode-change-capability=2;max-red=0;mode-set=1,7\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = ulaw, payload = 0}
+                                                                               ,#codec{type = alaw, payload = 8}
+                                                                               ,#codec{type = amrnb, payload = 112
+                                                                                      ,ext = #ext{rate=8000,modeset=[0,1,2,7]
+                                                                                                ,align_mark=true,align=oct}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0 8 112\r\na=rtpmap:112 AMR/8000\r\na=fmtp:112 octet-align=1;mode-set=0,1,2,7\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = amrnb, payload = 112
+                                                                                      ,ext = #ext{rate=8000
+                                                                                                 ,modeset=[0,1,2,3,4,5,6,7]
+                                                                                                 ,align_mark=true,align=eff}}
+                                                                               ,#codec{type = alaw, payload = 8}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 112 8\r\na=rtpmap:112 AMR/8000\r\na=fmtp:112 octet-align=0\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = amrwb, payload = 114
+                                                                                      ,ext = #ext{rate = 16000
+                                                                                                 ,modeset = [0,1,2,3,4,5,6,7,8]
+                                                                                                 ,others = ["max-red=0"]}}]
+                                                                 , digit = [#codec{type = telephone, payload = 101
+                                                                                  ,ext = #ext{rate = 8000, others=["0-15"]}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 114 101\r\na=rtpmap:114 AMR-WB/16000\r\na=fmtp:114 max-red=0\r\na=rtpmap:101 telephone-event/8000\r\na=fmtp:101 0-15\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = amrwb, payload = 114
+                                                                                      ,ext = #ext{rate = 16000, align = eff
+                                                                                                 ,modeset = [0,1,2,3,4,5,6,7,8]
+                                                                                                 ,align_mark = true}}
+                                                                               ,#codec{type = ulaw, payload = 0}]
+                                                                 , digit = [#codec{type = telephone, payload = 101
+                                                                                  ,ext = #ext{rate = 8000, others=["0-15"]}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 114 0 101\r\na=rtpmap:114 AMR-WB/16000\r\na=fmtp:114 octet-align=0\r\na=rtpmap:101 telephone-event/8000\r\na=fmtp:101 0-15\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = ulaw, payload = 97
+                                                                                      ,ext = #ext{rate = 8000, channel = 1}}
+                                                                               ,#codec{type = alaw, payload = 98 
+                                                                                      ,ext = #ext{rate = 8000}}
+                                                                               ,#codec{type = amrnb, payload = 112
+                                                                                      ,ext = #ext{rate = 8000, modeset = [7]
+                                                                                          ,others = ["mode-change-capability=2"
+                                                                                                    ,"max-red=0"]}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 97 98 112\r\na=rtpmap:97 pcmu/8000/1\r\na=rtpmap:98 pcma/8000\r\na=rtpmap:112 AMR/8000\r\na=fmtp:112 mode-change-capability=2;max-red=0;mode-set=7\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                      ,ext = #ext{rate = 90000}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=video 5004 RTP/AVP 34\r\na=rtpmap:34 H263/90000\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                      ,ext = #ext{rate = 90000, framerate = 7
+                                                                                                 ,framerate_mark = true}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=video 5004 RTP/AVP 34\r\na=rtpmap:34 H263/90000\r\na=framerate:7\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                      ,ext = #ext{rate = 90000
+                                                                                              ,others = ["CIF=1","QCIF=1"]}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=video 5004 RTP/AVP 34\r\na=rtpmap:34 H263/90000\r\na=fmtp:34 CIF=1;QCIF=1\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,video = #media_descript{port = 5004, codeclist = [#codec{type = h263, payload = 34
+                                                                                      ,ext = #ext{rate = 90000, framerate = 7
+                                                                                              ,framerate_mark = true
+                                                                                              ,others = ["CIF=1","QCIF=1"]}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=video 5004 RTP/AVP 34\r\na=rtpmap:34 H263/90000\r\na=fmtp:34 CIF=1;QCIF=1\r\na=framerate:7\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,video = #media_descript{port = 5004, codeclist = [#codec{type = h264, payload = 118
+                                                                                      ,ext=#ext{rate=90000,framesize_mark=true
+                                                                                              ,framerate_mark=true,framerate=30
+                                                                                              ,framesize={1280,720}}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=video 5004 RTP/AVP 118\r\na=rtpmap:118 H264/90000\r\na=framerate:30\r\na=framesize:118 1280-720\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,video = #media_descript{port = 5004, codeclist = [#codec{type = h264, payload = 118
+                                                                                      ,ext=#ext{rate=90000
+                                                                                          ,others=["profile-level-id=428016"
+                                                                                                  ,"packetization-mode=1"]}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=video 5004 RTP/AVP 118\r\na=rtpmap:118 H264/90000\r\na=fmtp:118 profile-level-id=428016;packetization-mode=1\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,video = #media_descript{port = 5004, codeclist = [#codec{type = h264, payload = 118
+                                                                                      ,ext=#ext{rate=90000
+                                                                                              ,framerate_mark=true,framerate=30
+                                                                                          ,others=["profile-level-id=428016"
+                                                                                                  ,"packetization-mode=1"]}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=video 5004 RTP/AVP 118\r\na=rtpmap:118 H264/90000\r\na=fmtp:118 profile-level-id=428016;packetization-mode=1\r\na=framerate:30\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = ulaw, payload = 0}
+                                                                               ,#codec{type = alaw, payload = 8}
+                                                                               ,#codec{type = amrnb, payload = 112
+                                                                                      ,ext = #ext{rate=8000,modeset=[0,1,2,7]
+                                                                                                ,align_mark=true,align=oct}}]
+                                                                 , digit = [#codec{type = telephone, payload = 101
+                                                                                  ,ext = #ext{rate = 8000, others=["0-15"]}}]}
+                             ,video = #media_descript{port = 5004, codeclist = [#codec{type = h264, payload = 118
+                                                                                      ,ext=#ext{rate=90000
+                                                                                              ,framerate_mark=true,framerate=30
+                                                                                          ,others=["profile-level-id=428016"
+                                                                                                  ,"packetization-mode=1"]}}
+                                                                               ,#codec{type = h263, payload = 34
+                                                                                      ,ext=#ext{rate=90000}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0 8 112 101\r\na=rtpmap:112 AMR/8000\r\na=fmtp:112 octet-align=1;mode-set=0,1,2,7\r\na=rtpmap:101 telephone-event/8000\r\na=fmtp:101 0-15\r\nm=video 5004 RTP/AVP 118 34\r\na=rtpmap:118 H264/90000\r\na=fmtp:118 profile-level-id=428016;packetization-mode=1\r\na=framerate:30\r\na=rtpmap:34 H263/90000\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,audio = #media_descript{port = 0, codeclist = [#codec{type = ulaw, payload = 0}
+                                                                            ,#codec{type = alaw, payload = 8}
+                                                                            ,#codec{type = amrnb, payload = 112
+                                                                                   ,ext = #ext{rate=8000,modeset=[0,1,2,7]
+                                                                                             ,align_mark=true,align=oct}}]
+                                                              , digit = [#codec{type = telephone, payload = 101
+                                                                               ,ext = #ext{rate = 8000, others=["0-15"]}}]}
+                             ,video = #media_descript{port = 5004, codeclist = [#codec{type = h264, payload = 118
+                                                                                      ,ext=#ext{rate=90000
+                                                                                              ,framerate_mark=true,framerate=30
+                                                                                          ,others=["profile-level-id=428016"
+                                                                                                  ,"packetization-mode=1"]}}
+                                                                               ,#codec{type = h263, payload = 34
+                                                                                      ,ext=#ext{rate=90000}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 0 RTP/AVP 0 8 112 101\r\nm=video 5004 RTP/AVP 118 34\r\na=rtpmap:118 H264/90000\r\na=fmtp:118 profile-level-id=428016;packetization-mode=1\r\na=framerate:30\r\na=rtpmap:34 H263/90000\r\n"}
+                      , {#sdp{addr = {10,1,70,3}
+                             ,audio = #media_descript{port = 5002, codeclist = [#codec{type = ulaw, payload = 0}
+                                                                               ,#codec{type = alaw, payload = 8}
+                                                                               ,#codec{type = amrnb, payload = 112
+                                                                                      ,ext = #ext{rate=8000,modeset=[0,1,2,7]
+                                                                                                ,align_mark=true,align=oct}}]
+                                                                 , digit = [#codec{type = telephone, payload = 101
+                                                                                  ,ext = #ext{rate = 8000, others=["0-15"]}}]}
+                             ,video = #media_descript{port = 0, codeclist = [#codec{type = h264, payload = 118
+                                                                                   ,ext=#ext{rate=90000
+                                                                                           ,framerate_mark=true,framerate=30
+                                                                                       ,others=["profile-level-id=428016"
+                                                                                               ,"packetization-mode=1"]}}
+                                                                            ,#codec{type = h263, payload = 34
+                                                                                   ,ext=#ext{rate=90000}}]}}
+                        ,"v=0\r\no=- 0 0 IN IP4 10.1.70.3\r\ns=-\r\nc=IN IP4 10.1.70.3\r\nt=0 0\r\nm=audio 5002 RTP/AVP 0 8 112 101\r\na=rtpmap:112 AMR/8000\r\na=fmtp:112 octet-align=1;mode-set=0,1,2,7\r\na=rtpmap:101 telephone-event/8000\r\na=fmtp:101 0-15\r\nm=video 0 RTP/AVP 118 34\r\n"}
+]).

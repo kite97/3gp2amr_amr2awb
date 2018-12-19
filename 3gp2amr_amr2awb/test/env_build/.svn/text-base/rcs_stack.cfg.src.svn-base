@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="GB2312" ?>
+<stackcfg>
+    <protocol name="SIP">
+        <stack name="RESIP" />
+    </protocol>
+    <!--Process get contact ip from etc/hosts when contactIPV4 config "local" or no config-->
+    <sipstack protocol="UDP" contactIPV4="local" port="sip_port" />
+    <rms flag="rms_flag" />
+    <session>
+    	<clearup interval="1" timer="190" conftimer="180"/>
+    </session>
+    <balance>
+    	<algorithm type="equal"/>
+    </balance>
+    <restype type="mix" rspwhenNoRes="true"/>
+    <HB-RPS flag="TRUE" interval="1"/>
+    <NMSTAT flag="FALSE" interval="900" ip="10.1.70.156" port="5020" version="2.0" UDPTrace="true"/>
+    <sessmaintain enable="true">
+        <minse length="90"/> 
+        <se length="1800"/> 
+    </sessmaintain>
+    <DELAYSTAT flag="TRUE" interval="900"/>
+    <timer>
+        <!-- timer for retransmit invite-200,value should in [1000,31500] millseconds -->
+        <invite200retran time="3000"/>
+    </timer>
+</stackcfg>

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/install
+END
+create_config.py
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/install/create_config.py
+END
+basetool.install
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/install/basetool.install
+END

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+TOPDIR=$PWD
+DESTDIR=$TOPDIR/builds
+export RCSDIR=$DESTDIR/rcs
+export RPSDIR=$DESTDIR/rps
+export RMSDIR=$DESTDIR/rms
+
+RCSBINDIR=$RCSDIR/bin
+RPSBINDIR=$RPSDIR/bin
+RMSBINDIR=$RMSDIR/bin
+RCSSRCDIR=$RCSDIR/src
+RPSSRCDIR=$RPSDIR/src
+export PATH=$RCSBINDIR:$RPSBINDIR:$RMSBINDIR:$PATH
+
+# svn up ms and imp
+cd $RCSSRCDIR && svn up && make
+#cd $RPSSRCDIR && svn up && make
+cd $DESTDIR/imp && svn up && make
+# start ms and imp
+cd $RCSBINDIR && ./rcsup >/dev/null
+#cd $RPSBINDIR && ./rpsup >/dev/null
+#cd $RMSBINDIR && ./rmsup >/dev/null
+cd $DESTDIR/imp/ebin && ./impinit

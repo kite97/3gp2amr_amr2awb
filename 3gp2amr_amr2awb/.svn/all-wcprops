@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/ebmsII/!svn/ver/1814/ocarina/trunk
+END
+rebar.config
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/rebar.config
+END
+Emakefile
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/Emakefile
+END
+.gitignore
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/.gitignore
+END
+COPYING
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/COPYING
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/README
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/Makefile
+END

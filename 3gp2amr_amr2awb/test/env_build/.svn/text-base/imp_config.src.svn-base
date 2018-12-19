@@ -1,0 +1,24 @@
+%%%配置文件
+%%%每一项以句点结束，每一项的内容由一个标识和标识的内容组成。类比于xml。
+%%%但起止是由花括号确定的。
+%%%配置文件使用utf-8编码。
+
+
+%% lport用于指定监听端口。
+{lport, {imp_port}}.
+%% worker_max用于确定最大并发量
+{worker_max, {max_worker}}.
+%% port_base用于指定发送rtp数据端口的起始值。
+%% port_base + worker_max 应该小于65535
+{port_base, {imp_base_port}}.
+%% ssrc用于指定发送rtp数据可以使用的ssrc的起始值。
+{ssrc_base, {imp_base_ssrc}}.
+{ipv4, "imp_ip"}.
+%% session_max_time用于指定session的最长持续时间(s)。
+{session_max_time, {imp_session_maxtime}}.
+{log_file, "ocarina.log"}.
+{pfmc, {"127.0.0.1", 1700}}.
+{comm, {"rpsid", "config.comm"}}.
+{sdp, {"config.sdp"}}.
+{amr_trans, {false}}.
+{nfs, ["../voice/ebrs1", "../voice/ebrs2"]}.

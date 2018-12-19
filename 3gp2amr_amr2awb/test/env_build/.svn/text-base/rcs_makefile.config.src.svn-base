@@ -1,0 +1,23 @@
+#
+#  Copyright(C) 2010 EASTCOM-BUPT Inc.
+#
+#  Filename            : $RCSfile: makefile.include,v $
+#  Last Revision       : $Revision: 0.1$
+#  Last Revision Date  : $Date: 2013/01/21 15:18:15 $
+#  Description         : 
+#
+
+#EC_VAR, no default value
+VAR_TYPE_FlAGS = rcs_var_type
+
+#version type: EB_TYPE, MRF_TYPE, default is MRF_TYPE
+VERSION_TYPE_FlAGS = rcs_version_type
+
+#NM_ST_V20/NM_ST_V30, default is NM_ST_V20
+NM_ST_VERSION = nmst_version
+
+#NM_ALARM_V20/NM_ALARM_V30, default is NM_ALARM_V20
+NM_ALARM_VERSION = nmalarm_version
+
+#1~4
+TRACE_LEVEL = rcs_trace_level

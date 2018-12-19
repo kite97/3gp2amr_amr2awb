@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1802/ocarina/trunk/test/manual_testcase
+END
+instruction
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ebmsII/!svn/ver/1513/ocarina/trunk/test/manual_testcase/instruction
+END
+play_send_bye_before_end.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/ebmsII/!svn/ver/1781/ocarina/trunk/test/manual_testcase/play_send_bye_before_end.xml
+END
+aupc-iter2-barge-false-file-noexist.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/ebmsII/!svn/ver/1802/ocarina/trunk/test/manual_testcase/aupc-iter2-barge-false-file-noexist.xml
+END
+aupa.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/manual_testcase/aupa.xml
+END
+play_barge_aupc_barge_false.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/ebmsII/!svn/ver/1802/ocarina/trunk/test/manual_testcase/play_barge_aupc_barge_false.xml
+END
+var.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/manual_testcase/var.xml
+END
+record_send_bye_before_end.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/ebmsII/!svn/ver/1781/ocarina/trunk/test/manual_testcase/record_send_bye_before_end.xml
+END
+play_succ_succ.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ebmsII/!svn/ver/1802/ocarina/trunk/test/manual_testcase/play_succ_succ.xml
+END
+aupc-iter2-var.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ebmsII/!svn/ver/1511/ocarina/trunk/test/manual_testcase/aupc-iter2-var.xml
+END
+rec-nb.xml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1802/ocarina/trunk/test/manual_testcase/rec-nb.xml
+END
+dtmf_send_bye_before_end.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/ebmsII/!svn/ver/1781/ocarina/trunk/test/manual_testcase/dtmf_send_bye_before_end.xml
+END
+aupc-iter2-barge-true-file-noexist.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/ebmsII/!svn/ver/1802/ocarina/trunk/test/manual_testcase/aupc-iter2-barge-true-file-noexist.xml
+END
+play_barge_aupc_barge_true.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/ebmsII/!svn/ver/1802/ocarina/trunk/test/manual_testcase/play_barge_aupc_barge_true.xml
+END
+play_fail_succ.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ebmsII/!svn/ver/1802/ocarina/trunk/test/manual_testcase/play_fail_succ.xml
+END
+rec-wb.xml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1802/ocarina/trunk/test/manual_testcase/rec-wb.xml
+END

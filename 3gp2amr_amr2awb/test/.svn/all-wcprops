@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/ebmsII/!svn/ver/1802/ocarina/trunk/test
+END
+aupa_input.xml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/test/aupa_input.xml
+END
+ocarina_test_environment_configuration
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/ocarina_test_environment_configuration
+END
+dtmf_input.xml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1801/ocarina/trunk/test/dtmf_input.xml
+END
+record_input.xml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/test/record_input.xml
+END
+readme
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/readme
+END
+vipa_input.xml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/test/vipa_input.xml
+END

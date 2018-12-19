@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<msml version="1.1">
+  <tag name="record"/>
+  <dialogstart name="12345" target="conn:12345">
+    <record>
+      <test>
+        <attrtest defaultvalue="file://imp_record_test.wav" name="dest">
+          <item expect="record.end=record.complete.maxlength" recordlen="15s" value="file://record.01.01.[dest].wav"/>
+        </attrtest>
+      </test>
+      <test>
+        <attrtest defaultvalue="g711u" name="format">
+          <item expect="record.end=record.complete.maxlength" recordlen="15s" value="g711a" condition="dest,file://record.02.01.[format=g711a].wav"/>
+          <item expect="record.end=record.complete.maxlength" recordlen="15s" value="g711u" condition="dest,file://record.02.02.[format=g711u].wav"/>
+          <item expect="record.end=record.complete.maxlength" recordlen="15s" value="pcm"   condition="dest,file://record.02.03.[format=pcm].wav"/>
+          <item expect="record.end=record.complete.maxlength" recordlen="15s" value="evs"   condition="dest,file://record.02.04.[format=evs].evs"/>
+          <item expect="record.end=record.complete.maxlength" recordlen="15s" value="amrnb" condition="dest,file://record.02.05.[format=amrnb].amr"/>
+          <item expect="record.end=record.complete.maxlength" recordlen="15s" value="amrwb" condition="dest,file://record.02.06.[format=amrwb].amr"/>
+        </attrtest>
+      </test>
+      <test>
+        <attrtest defaultvalue="15s" name="maxtime">
+          <item expect="record.end=record.complete.maxlength" recordlen="15s" value="15s" condition="dest,file://record.03.01.[maxtime=15s].wav"/>
+          <item send="s@10,#" data="termkey_11" recordlen="10s" expect="record.end=record.complete.termkey" value="0s" condition="dest,file://record.03.02.[maxtime=0s].wav"/>
+        </attrtest>
+      </test>
+      <test>
+        <attrtest defaultvalue="#" name="termkey">
+          <item send="s@10,*" data="termkey_10" recordlen="10s" expect="record.end=record.complete.termkey" value="*" condition="dest,file://record.04.01.[termkey=*].wav;maxtime,20s,*"/>
+          <item send="s@10,#" data="termkey_11" recordlen="10s" expect="record.end=record.complete.termkey" value="#" condition="dest,file://record.04.02.[termkey=#].wav;maxtime,20s,*"/>
+          <item send="s@10,#" data="termkey_11" recordlen="15s" expect="record.end=record.complete.maxlength" value="NONE" condition="dest,file://record.04.03.[termkey=NONE].wav"/>
+          <item expect="record.end=record.complete.maxlength" recordlen="20s" value="#" condition="dest,file://record.04.04.[maxtime=20s].wav;prespeech,6s,*;postspeech,7s,*;maxtime,20s,*"/>
+          <item send="s@10,#" data="termkey_11" recordlen="10s" expect="record.end=record.complete.termkey" value="#" condition="dest,file://record.04.05.[termkey=#].wav;prespeech,6s,*;postspeech,7s,*;maxtime,20s,*"/>
+        </attrtest>
+      </test>
+      <recordexit>
+        <send target="source" event="done" namelist="record.end"/>
+      </recordexit>
+    </record>
+  </dialogstart>
+</msml>

@@ -1,0 +1,20 @@
+#
+#  Copyright(C) 2010 EASTCOM-BUPT Inc.
+#
+#  Filename            : $RCSfile: makefile.include,v $
+#  Last Revision       : $Revision: 0.1$
+#  Last Revision Date  : $Date: 2013/01/21 15:18:15 $
+#  Description         : 
+#
+
+#HMP/IPS200/IPS800+, no default value
+BOARD_TYPE_FlAGS = rps_board_type
+
+#NM_ST_V20/NM_ST_V30, default is NM_ST_V20
+NM_ST_VERSION = nmst_version
+
+#NM_ALARM_V20/NM_ALARM_V30, default is NM_ALARM_V20
+NM_ALARM_VERSION = nmalarm_version
+
+#1~4
+TRACE_LEVEL = rps_trace_level

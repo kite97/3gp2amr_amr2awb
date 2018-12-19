@@ -1,0 +1,41 @@
+1.配置rps、rcs和rms，保证ms和ocarina能正确连接。目前使用的版本分别为：
+  rps：9.0.2
+  a.rpsConfig.xml中配置<boardName name = "ips"/>，<server ip="10.1.96.184" port="7788" */>，其中ip和port根据ocarina的config来设置。
+  b.确保rpsConfig.xml中配置的sdp带有2833收号。
+  c.配置rpsConfig.xml中的delayReportConfig节点。
+    <delayReportConfig>
+      <report switch="on"/>
+      <reportPeriod secs="120"/>
+    </delayReportConfig>
+  
+  rcs：5.0.2
+  a.etc/config中配置DOMAINID。
+  b.配置stack.cfg中的<DELAYSTAT flag="TRUE" interval="120"/>。
+  c.配置stack.cfg中<sipstack>中的port为sip监听端口
+  
+  rms：2.0.3
+
+  在启动rps和rcs之前，清空所有的日志。将日志级别调整至3。
+
+2.配置ocarina，保证ocarina可以正常启动。
+
+3.在ocarina所在的家目录下创建syslog文件夹，用于存储系统相关的日志。创建ocarina_log文件夹，用于保存ocarina的日志。
+  进入syslog文件夹，创建sarlog文件夹，用于存储系统状态记录。进入ocarina_log文件夹，创建以当天日期命名的文件夹，
+  用于保存ocarina的日志避免覆盖。
+
+4.将syslog作为工作目录，新建一个dtach会话，用dvtm命令创建一个新窗口。随后窗口一启动sar命令，记录系统状态；窗口二启动htop。
+  sar -A -o syslog/sarlog/$(date +%F) 1 >/dev/null
+
+5.将ocarina/ebin/作为工作目录，新建一个dtach会话，启动ocarina。
+  ./ocarina_start
+
+6.选取一个装有sipp的服务器。
+
+7.创建ocarina_test文件夹，用于存储测试用例以及相应的日志。进入ocarina_test，创建以当天日期命名的文件夹。
+
+8.将ocarina_test/“当天日期”作为工作目录，新建一个dtach会话，使用sipp发起呼叫。
+  ~/sipp3.1/sipp -sf test.xml 10.1.69.144:8090 -r 1 -l 1500 -trace_err
+
+9.保证sipp、ocarina、sar和htop命令都能正常运行后，将所有dtach分离。
+
+10.测试结束后，将ocarina/ebin/目录下的ocarina.log和sasl.log备份至ocarina_log/“当天日期”文件夹中。避免下次测试将原有的日志覆盖。

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+TOPDIR=$PWD
+DESTDIR=$TOPDIR/builds
+export RCSDIR=$DESTDIR/rcs
+export RPSDIR=$DESTDIR/rps
+export RMSDIR=$DESTDIR/rms
+
+RCSBINDIR=$RCSDIR/bin
+RPSBINDIR=$RPSDIR/bin
+RMSBINDIR=$RMSDIR/bin
+export PATH=$RCSBINDIR:$RPSBINDIR:$RMSBINDIR:$PATH
+
+cd $RCSBINDIR && ./rcsdown -y
+#cd $RPSBINDIR && ./rpsdown -y
+#cd $RMSBINDIR && ./rms -y
+cd $DESTDIR/imp/ebin && ./impdown

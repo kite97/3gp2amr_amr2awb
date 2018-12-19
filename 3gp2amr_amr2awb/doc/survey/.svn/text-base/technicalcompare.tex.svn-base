@@ -1,0 +1,80 @@
+%!Tex Program = xelatex
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{longtable}
+\usepackage[table]{xcolor}
+\setmainfont[Mapping=tex-text,BoldFont=WenQuanYi Zen Hei]{WenQuanYi Zen Hei}
+\begin{document}
+\begin{center}
+\rowcolors{1}{white}{cyan}
+\begin{longtable}{|l|l|l|l|l|}
+    \endfirsthead
+    \endhead
+    \endfoot
+    \endlastfoot
+
+\hline        &特性，厂商       & 华为MRS6100    &ips       &dialogic\\
+\hline    音频播放  & MGCP            & 支持    &不支持     &不支持\\
+\hline    音频播放  & SIP             & 支持    &不支持     &支持\\
+\hline    音频播放  & vxml            & 支持    &不支持     &不支持\\
+\hline    音频播放  & msml            & 支持    &不支持     &支持\\
+\hline    音频播放  & 单板容量        & 2160    &1000       &1500\\
+\hline    音频播放  & 扩容方式        & 热插拨  &热插拨     &软件安装\\
+\hline    音频播放  & 放送信号音      & 支持    &未知       &未知\\
+\hline    音频播放  & 音频转码        & 支持    &支持       &支持\\
+\hline    音频播放  & 音频转码实现方法& 未知    &未知       &未知\\
+\hline    音频播放  & G.711 a         & 支持    &支持       &支持\\
+\hline    音频播放  & G.711 mu        & 支持    &支持       &支持\\
+\hline    音频播放  & 数据存储        & FTP     &本地磁盘,NFS,TFTP  &本地磁盘\\
+\hline    音频播放  & 变量语音        & 支持    &支持       &未知\\
+\hline    音频播放  & 多声道          & 未知    &不支持     &未知\\
+\hline    录音      & 文件格式        & 未知    &wav        &wav\\
+\hline    录音      & G.711 a         & 支持    &支持       &支持\\
+\hline    录音      & G.711 mu        & 支持    &支持       &支持\\
+\hline    录音      & 文件追加内容    & 不支持  &支持       &未知且未测\\
+\hline    会议      & 会议室最大容量  & 120方   &未知       &1000\\
+\hline    会议      & 三方会议会议室数& 720个   &未知       &333\\
+\hline    会议      & 会场放音        & 支持    &支持       &支持\\
+\hline    会议      & 混音算法        & 未知    &未知       &未知\\
+\hline    会议      & 混音策略        & 未知    &未知       &3个活跃用户\\
+\hline    收号      & RFC2833         & 支持    &支持       &支持\\
+\hline    收号      & RFC4733         & 未知    &未知       &未知\\
+\hline    收号      & DTMF音频收号    & 支持    &支持       &支持\\
+\hline    收号      & 会场收号        & 支持    &不支持     &支持\\
+\hline    发号      & DTMF发号        & 未知    &支持       &支持\\
+\hline    视频播放  & H.261           & 支持    &不支持     &不支持\\
+\hline    视频播放  & H.263           & 支持    &支持       &支持\\
+\hline    视频播放  & H.264(mpeg4)    & 支持    &支持       &支持\\
+\hline    视频播放  & CIF             & 支持    &支持       &支持\\
+\hline    视频播放  & 4CIF            & 支持    &支持但未测 &支持\\
+\hline    视频播放  & QCIF            & 支持    &支持       &支持\\
+\hline    视频播放  & SQCIF           & 未知    &支持但未测 &支持\\
+\hline    视频播放  & VGA             & 未知    &支持但未测 &不支持\\
+\hline    视频播放  & QVGA            & 未知    &支持但未测 &支持\\
+\hline    视频播放  & HVGA            & 未知    &支持但未测 &不支持\\
+\hline    视频播放  & D1              & 未知    &未知       &支持\\
+\hline    视频播放  & 720P            & 未知    &支持       &不支持\\
+\hline    稳定性    & 单框5s放音承压  & 300caps &未测       &未测\\
+\hline    稳定性    & 500ms以内响应   & 95\%    &未测       &未测\\
+\hline    稳定性    & 2000ms以内响应  & 99.9\%  &未测       &未测\\
+\hline    稳定性    & 5000ms以内响应  & 99.99\% &未测       &未测\\
+\hline    媒体容器  & wav             & 支持    &支持       &支持\\
+\hline    媒体容器  & mp3             & 未知    &支持       &未知\\
+\hline    媒体容器  & rm              & 未知    &支持       &未知\\
+\hline    媒体容器  & vox             & 未知    &支持       &支持\\
+\hline    媒体容器  & mp4             & 未知    &支持       &未知\\
+\hline    媒体容器  & amr             & 未知    &支持       &支持\\
+\hline    媒体容器  & evc             & 未知    &支持       &未知\\
+\hline    媒体容器  & avi             & 未知    &支持       &未知\\
+\hline    媒体容器  & qcp             & 未知    &未测       &未知\\
+\hline    媒体容器  & mov             & 未知    &支持       &未知\\
+\hline    其他      & 可控内存        & 未知    &未知       &2G\\
+\hline    其他      & IPV6            & 未知    &支持       &支持\\
+\hline    其他      & RTP1889         & 支持    &未知       &支持\\
+\hline    其他      & RTP3550         & 未知    &支持       &未知\\
+\hline    其他      & SRTP            & 未知    &未知       &支持\\
+\hline
+\end{longtable}
+\end{center}
+\end{document}

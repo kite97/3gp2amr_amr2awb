@@ -1,0 +1,14 @@
+#
+#  Copyright(C) 2010 EASTCOM-BUPT Inc.
+#
+#  Filename            : $RCSfile: makefile.config,v $
+#  Last Revision       : $Revision: 0.1$
+#  Last Revision Date  : $Date: 2013/02/25 10:34:00 $
+#  Description         : 
+#
+
+#NM_ALARM_V20/NM_ALARM_V30, default is NM_ALARM_V20
+NM_ALARM_VERSION = nmalarm_version
+
+#1~4
+TRACE_LEVEL = rms_trace_level

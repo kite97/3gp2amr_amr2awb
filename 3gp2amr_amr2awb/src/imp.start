@@ -1,0 +1,7 @@
+#!/bin/bash
+
+export PFMCAPIDIR=$(pwd)/../pfmc
+NAME=$(whoami)_imp
+
+ulimit -n 4096
+erl +K true -smp disable -sname rps -boot start_sasl -sasl sasl_error_logger '{file, "sasl.log"}' -s imp 

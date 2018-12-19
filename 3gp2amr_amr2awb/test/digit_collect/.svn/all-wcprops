@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/digit_collect
+END
+DigitCollectFdt.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/digit_collect/DigitCollectFdt.xml
+END
+DigitCollectIdt.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/digit_collect/DigitCollectIdt.xml
+END
+DigitCollectStandard.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/digit_collect/DigitCollectStandard.xml
+END
+DigitCollectIdtDefault.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/digit_collect/DigitCollectIdtDefault.xml
+END
+testcase
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/digit_collect/testcase
+END

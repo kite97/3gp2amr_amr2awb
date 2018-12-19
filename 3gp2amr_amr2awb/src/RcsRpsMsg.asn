@@ -1,0 +1,1012 @@
+RcsRpsMsg DEFINITIONS IMPLICIT TAGS::= BEGIN
+
+RcsRpsMessage::=SEQUENCE
+{
+        transactionID           [0]INTEGER,
+        contextID               [1]INTEGER,
+        terminationID           [2]TerminationStruct,
+        endpointID              [3]TerminationStruct,
+        callID                  [4]INTEGER,
+        command                 [5]Cmd
+}
+
+
+TerminationStruct::= SEQUENCE
+{
+        rpsNo                   [0]INTEGER,
+        boardNo                 [1]INTEGER,
+        channelNo               [2]INTEGER
+}
+
+Cmd::=CHOICE
+{
+        resinfo                 [0]ResInfo,
+        addReq                  [1]IntraAdd,
+        subtractReq             [2]INTEGER,
+        modifyReq               [3]IntraModify,
+        creatroomReq            [4]IntraCreateRoom,
+        delroomReq              [5]IntraDeleteRoom,
+        moveReq                 [6]IntraMove,
+        eventReq                [7]IntraEvent,
+        channelReq              [8]IntraChannel,
+        signalReq               [9]IntraSignal,
+        stopReq                 [10]INTEGER,--0:all(default);1:aupa;2:aupc;3:aupr;4:vipa;5:vipc;6:vipr;7:conf-aupa;8:conf-aupc;9:conf-aupr;10:conf-vipa;11:conf-vipc;12:conf-vipr
+        addRep                  [11]IntraAddReply,
+        subtractRep             [12]IntraSubReply,
+        modifyRep               [13]IntraModifyReply,
+        modifyattr              [14]IntraModifyConfereeAttr,
+        creatroomRep            [15]INTEGER,
+        delroomRep              [16]INTEGER,
+        moveRep                 [17]INTEGER,
+        modattrRep              [18]INTEGER,
+        eventRep                [19]IntraEventReply,
+        channelRep              [20]IntraChannelReply,
+        stopRep                 [21]IntraStopReply,
+        addConfirm              [22]IntraAddConfirm,
+        bridgeResourceReq       [23]IntraBridge,
+        bridgeRep               [24]INTEGER,
+        exitroom                [25]IntraExitRoom,
+        ttsReq                  [26]TTS,
+        ttsRep                  [27]INTEGER,
+        notify                  [28]IntraNotification,
+        notifyRep               [29]INTEGER,
+        sendPackReq             [30]IntraBytes,
+        sendPackRep             [31]INTEGER ,
+        volumeadjust    		[32]Volume,
+        volumeadjustRep    		[33]INTEGER,
+        rtspReq					[34]IntraRtsp,
+		rtspRep					[35]IntraRtspRep,
+		osdReq                  [36]IntraOSD,
+        osdRep                  [37]IntraOSDRep,
+        testAlive               [38]IntraTestAlive
+}
+
+IntraChannel::=SEQUENCE
+{
+        channelid               [0]INTEGER,
+        channelswitch           [1]INTEGER --99 switch video
+}
+
+IntraChannelReply::=SEQUENCE
+{
+        channelid               [0]INTEGER,
+        channelswitch           [1]INTEGER --900 switch video success;901,switch video failed
+}
+
+
+ResInfo::=SEQUENCE
+{
+        totalRes                [0]INTEGER,
+        usingRes                [1]INTEGER,
+        badUseNo                [2]INTEGER,
+        totalConf               [3]INTEGER,
+        usingConf               [4]INTEGER,
+        identifyID              [5]INTEGER
+}
+
+IntraAdd::=SEQUENCE
+{
+        remoteSDP               [0]VisibleString           OPTIONAL,
+        ntJt                    [1]VisibleString           OPTIONAL,
+        statistics              [2]Statistics              OPTIONAL,
+        roomID                  [3]INTEGER                 OPTIONAL,
+        cic                     [4]INTEGER                 OPTIONAL,
+        bear                    [5]INTEGER                 OPTIONAL,
+        remoteAddr              [6]IntraIP4AddrList        OPTIONAL,
+        mediafileAddr			[7]VisibleString           OPTIONAL
+}
+
+IntraIP4AddrList::=SEQUENCE OF IntraIP4Addr
+
+Statistics::= BIT STRING
+{
+        ntDur(0)        ,ntOs(1),       ntOr(3),        rtpPs(4),       rtpPr(5),       rtpPl   (6),    rtpJit(7),      rtpDelay(8)
+}
+
+IntraIP4Addr::=SEQUENCE
+{
+        type                    [0]VisibleString,
+        ip                      [1]VisibleString,
+        port                    [2]INTEGER
+}
+
+IntraModify::=SEQUENCE
+{
+        remoteSDP               [0]VisibleString   OPTIONAL,
+	timerlength		[1]INTEGER
+}
+
+IntraModifyConfereeAttr::=SEQUENCE
+{
+        roomID                  [0]INTEGER,
+        attribute               [1]INTEGER,
+        activeTalker            [2]BOOLEAN         OPTIONAL,
+        type                    [3]INTEGER         OPTIONAL,
+        minSize                 [4]INTEGER  OPTIONAL, --cmcc:minparticipants
+        dualvideo               [5]BOOLEAN  OPTIONAL, --default is true
+        reserve                 [8]IntraConfReserve   OPTIONAL,
+        audiomix                [9]IntraConfAudioMix  OPTIONAL,
+        videolayout             [10]IntraConfVideoLyt OPTIONAL
+}
+
+IntraConfPara::=SEQUENCE
+{
+        roomID                  [0]INTEGER,
+        sumNum                  [1]INTEGER         OPTIONAL,
+        roomSize                [2]INTEGER         OPTIONAL,
+        deleteWhen              [3]INTEGER         OPTIONAL,
+        term                    [4]BOOLEAN,
+        volumeControl           [5]VolumeControlCode    OPTIONAL,
+        toneClamping            [6]BOOLEAN,
+        confMode                [7]INTEGER         		OPTIONAL,
+        dualvideo               [8]BOOLEAN 				OPTIONAL, --default is true
+        reserve                 [9]IntraConfReserve   	OPTIONAL,
+        audiomix                [10]IntraConfAudioMix  	OPTIONAL,
+        videolayout             [11]IntraConfVideoLyt 	OPTIONAL,
+        minSize            		[12]INTEGER          	OPTIONAL --cmcc:minparticipants
+}
+
+VolumeControlCode::=SEQUENCE
+{
+        up                      [0]VisibleString   OPTIONAL,
+        down                    [1]VisibleString   OPTIONAL,
+        reset                   [2]VisibleString   OPTIONAL
+}
+
+IntraConfReserve::=SEQUENCE
+{
+        required                [0]BOOLEAN   OPTIONAL,
+        number                  [1]INTEGER   OPTIONAL,
+        type                    [2]INTEGER   OPTIONAL,--type: 0 individual(default)  1 shared
+        start                   [3]VisibleString,
+        dur                     [4]INTEGER   OPTIONAL
+}
+
+IntraConfAudioMix::=SEQUENCE
+{
+        id                      [0]VisibleString OPTIONAL,
+        samplerate              [1]INTEGER  OPTIONAL,
+        nloudest                [2]INTEGER  OPTIONAL,
+        asnri                   [3]INTEGER  OPTIONAL,
+        asnth                   [4]INTEGER  OPTIONAL,
+        gain                    [5]IntraConfGain  OPTIONAL
+}
+
+IntraConfGainAgc::=SEQUENCE
+{
+    	tgtlvl         			[0]INTEGER,
+		maxgain        			[1]INTEGER
+}
+
+IntraConfGain::=SEQUENCE
+{
+        id                      [0]VisibleString OPTIONAL,
+        amt            			[1]INTEGER  OPTIONAL,--exclution with agc
+        agc            			[2]IntraConfGainAgc  OPTIONAL
+}
+
+IntraConfVideoRoot::=SEQUENCE
+{
+        size           		[0]VisibleString,
+        bgcolor         		[1]VisibleString OPTIONAL,--RGB
+        bgimage         		[2]VisibleString OPTIONAL
+
+}
+IntraConfVideoLyt::=SEQUENCE
+{
+        id             			[0]VisibleString OPTIONAL,
+        type					[1]VisibleString OPTIONAL,--default 'text/msml-basic-layout',no use
+        root           			[2]IntraConfVideoRoot,
+        selector        		[3]IntraConfVideoLytSel  OPTIONAL,
+        otherregion     		[4]IntraRegionList OPTIONAL
+}
+
+IntraConfVideoLytSel::=SEQUENCE
+{
+        id             			[0]VisibleString OPTIONAL,
+        method          		[1]INTEGER,--method: 0 vas,  1 ss,  2 fixed
+        status          		[2]INTEGER  OPTIONAL,--status: 0 active(default), 1 diabled
+        blankothers    			[3]BOOLEAN  OPTIONAL, --default is false
+        switchinterval  		[4]INTEGER  OPTIONAL, --only valid when method is not ‘fixed’
+        speakerview     		[5]INTEGER  OPTIONAL,--speakerview: 0 current(default), 1 previous,default is 0,valid when method is ‘vas’
+        region        			[6]IntraRegionList OPTIONAL,--select 1 between region and root 
+        root            		[7]IntraConfVideoRoot OPTIONAL--select 1 between region and root 
+}
+
+IntraRegionList::=SEQUENCE OF IntraRegion
+
+IntraRegion::=SEQUENCE
+{
+         id             		[0]VisibleString,
+         left           		[1]VisibleString OPTIONAL,
+         top            		[2]VisibleString OPTIONAL,
+         relativesize   		[3]VisibleString OPTIONAL,--(0,1]
+         priority       		[4]VisibleString OPTIONAL,--[0,1]
+         title          		[5]VisibleString OPTIONAL,
+         logo           		[6]VisibleString OPTIONAL,
+         freeze         		[7]BOOLEAN OPTIONAL,--default is false
+         titletextcolor 		[8]VisibleString OPTIONAL,
+         titlebackgroundcolor  	[9]VisibleString OPTIONAL,
+         bordercolor           	[10]VisibleString OPTIONAL,
+         borderwidth           	[11]INTEGER OPTIONAL
+}
+
+IntraCreateRoom::=CHOICE
+{
+        audioConf               [0]IntraConfPara,
+        videoConf               [1]IntraConfPara
+}
+
+IntraConfStream::=SEQUENCE
+{
+    	dir            [0]INTEGER  OPTIONAL,--dir: 0 duplex(default), 1 from-direction, 2 to-direction
+		fromcompressed     [1]BOOLEAN  OPTIONAL, --default is false
+		tocompressed     [2]BOOLEAN  OPTIONAL, --default is false
+		fromext            [3]IntraConfStreamExt OPTIONAL,
+		toext            [4]IntraConfStreamExt OPTIONAL
+}
+
+IntraConfStreamExt::=CHOICE
+{
+		audioext	   [0]IntraConfStreamAudioExt,
+		videoext	   [1]IntraConfStreamVideoExt
+}
+
+IntraConfStreamAudioExt::=SEQUENCE
+{ 
+		preferred      [0]BOOLEAN  OPTIONAL, --default is false
+		gain           [1]IntraConfGain  OPTIONAL,
+		clamp          [2]IntraConfClamp OPTIONAL
+}
+
+IntraConfClamp::=SEQUENCE
+{
+		dtmf           [0]BOOLEAN  OPTIONAL,
+		tone           [1]BOOLEAN  OPTIONAL
+}
+
+IntraConfStreamVideoExt::=SEQUENCE
+{
+	--label ‘display’ has an unclear description
+	override       [0]BOOLEAN  OPTIONAL
+	--a reserved label ‘visual’ has an unknown type
+}
+
+
+IntraMove::=SEQUENCE
+{
+        sourceRoomID            [0]INTEGER,
+        destRoomID              [1]INTEGER,
+        attribute               [2]INTEGER OPTIONAL,
+        echoCancle              [3]BOOLEAN,
+        tariffTone              [4]BOOLEAN,
+        administrator           [5]BOOLEAN,
+        activeTalker            [6]BOOLEAN,
+        audiostream             [7]IntraConfStream OPTIONAL,
+        videostream             [8]IntraConfStream OPTIONAL
+}
+
+IntraDeleteRoom::=SEQUENCE
+{
+        roomID        			[0]INTEGER,
+        auId				[1]VisibleString OPTIONAL,
+        viId				[2]VisibleString OPTIONAL
+}
+
+
+IntraSignal::=SEQUENCE
+{
+        signal                  SignalValue
+}
+
+SignalValue::=CHOICE
+{
+        confPa          [0]ConfPa,
+        confPc          [1]ConfPc,
+        confPr          [2]ConfPr,
+        auPa            [3]AuPa,
+        auPc            [4]AuPc,
+        auPr            [5]AuPr,
+        viPa            [6]ViPa,
+        viPc            [7]ViPc,
+        viPr            [8]ViPr,
+        sdPc            [9]SdPc
+}
+
+SdPc::=SEQUENCE
+{
+        type    [0]INTEGER,
+        buffer  [1]VisibleString
+}
+--An used for aupc,aupr,confpa,confpc,confpr
+An::= SEQUENCE
+{
+        file1   [0]VisibleString   OPTIONAL,
+        file2   [1]VisibleString   OPTIONAL,
+        file3   [2]VisibleString   OPTIONAL,
+        file4   [3]VisibleString   OPTIONAL,
+        file5   [4]VisibleString   OPTIONAL,
+        file6   [5]VisibleString   OPTIONAL,
+        file7   [6]VisibleString   OPTIONAL,
+        file8   [7]VisibleString   OPTIONAL,
+        file9   [8]VisibleString   OPTIONAL,
+        file10  [9]VisibleString   OPTIONAL
+}
+--AudioVideoFile used for vipc and vipr
+AudioVideoFile::= SEQUENCE
+{
+        audiofile       [0]VisibleString   OPTIONAL,
+        videofile       [1]VisibleString   OPTIONAL,
+        audiofmt		[2]VisibleString   OPTIONAL,
+        videofmt		[3]VisibleString   OPTIONAL
+}
+--Vn used for vipc and vipr
+Vn::= SEQUENCE
+{
+        file1   [0]AudioVideoFile          OPTIONAL,
+        file2   [1]AudioVideoFile          OPTIONAL,
+        file3   [2]AudioVideoFile          OPTIONAL,
+        file4   [3]AudioVideoFile          OPTIONAL,
+        file5   [4]AudioVideoFile          OPTIONAL,
+        file6   [5]AudioVideoFile          OPTIONAL,
+        file7   [6]AudioVideoFile          OPTIONAL,
+        file8   [7]AudioVideoFile          OPTIONAL,
+        file9   [8]AudioVideoFile          OPTIONAL,
+        file10  [9]AudioVideoFile          OPTIONAL
+}
+TTS::= SEQUENCE
+{
+        fileName        [0]VisibleString   OPTIONAL,
+        text            [1]VisibleString,
+        voiceSourceID   [2]INTEGER         OPTIONAL,
+        speed           [3]INTEGER         OPTIONAL,
+        volume          [4]INTEGER         OPTIONAL,
+        style           [5]INTEGER         OPTIONAL,
+        bgSound         [6]INTEGER         OPTIONAL,
+        lang			[7]VisibleString   OPTIONAL
+}
+
+DateType::=ENUMERATED{mdy, ymd}
+
+DigitsType::=ENUMERATED{gen}
+
+MoneyType::=ENUMERATED{cny, eur, usd}
+
+NumberType::=ENUMERATED{crd, ord, cardinals, ordinals}
+
+TimeType::=ENUMERATED{t12, t24}
+
+VarType::=CHOICE
+{
+		date			[0]DateType, 
+		digits			[1]DigitsType, 
+		duration		[2]VisibleString, 
+		month			[3]VisibleString,	 
+		money			[4]MoneyType, 
+		number			[5]NumberType, 
+		silence			[6]VisibleString, 
+		time			[7]TimeType, 
+		weekday			[8]VisibleString
+}
+
+VAR::= SEQUENCE
+{
+		vartype			[0]VarType,
+		value			[1]VisibleString,
+		lang			[2]VisibleString OPTIONAL --default is chinese
+}
+
+--FileStruct:audio file used for vipa and aupa
+--language is useful in var and tts
+FileStruct::=CHOICE
+{
+        ttsfile         [0]TTS,
+        filename        [1]VisibleString,
+        caption         [2]OCTET STRING,
+        var				[3]VAR
+}
+--audiofmt and video should be included in audiofile and videofile,but work is so large
+AudioVideo::= SEQUENCE
+{
+        audiofile       [0]FileStruct      OPTIONAL,
+        videofile       [1]VisibleString   OPTIONAL,
+   		audiofmt		[2]VisibleString   OPTIONAL,
+   		videofmt		[3]VisibleString   OPTIONAL
+}
+
+--VnTTS used for vipa
+VnTTS::= SEQUENCE
+{
+        file1   [0]AudioVideo              OPTIONAL,
+        file2   [1]AudioVideo              OPTIONAL,
+        file3   [2]AudioVideo              OPTIONAL,
+        file4   [3]AudioVideo              OPTIONAL,
+        file5   [4]AudioVideo              OPTIONAL,
+        file6   [5]AudioVideo              OPTIONAL,
+        file7   [6]AudioVideo              OPTIONAL,
+        file8   [7]AudioVideo              OPTIONAL,
+        file9   [8]AudioVideo              OPTIONAL,
+        file10  [9]AudioVideo              OPTIONAL
+}
+
+--FileArry used for aupa
+FileArry::=SEQUENCE
+{
+        file1   [0]FileStruct      OPTIONAL,
+        file2   [1]FileStruct      OPTIONAL,
+        file3   [2]FileStruct      OPTIONAL,
+        file4   [3]FileStruct      OPTIONAL,
+        file5   [4]FileStruct      OPTIONAL,
+        file6   [5]FileStruct      OPTIONAL,
+        file7   [6]FileStruct      OPTIONAL,
+        file8   [7]FileStruct      OPTIONAL,
+        file9   [8]FileStruct      OPTIONAL,
+        file10  [9]FileStruct      OPTIONAL
+}
+AuPa::=SEQUENCE
+{
+        file    [0]FileArry        OPTIONAL,
+        it      [1]INTEGER         OPTIONAL,
+        iv      [2]INTEGER         OPTIONAL,
+        du      [3]INTEGER         OPTIONAL,
+        sp      [4]INTEGER         OPTIONAL,
+        vl      [5]INTEGER         OPTIONAL,
+        ni      [6]BOOLEAN         OPTIONAL
+}
+
+ViPa::=SEQUENCE
+{
+        file    [0]VnTTS           OPTIONAL,
+        it      [1]INTEGER         OPTIONAL,
+        iv      [2]INTEGER         OPTIONAL,
+        du      [3]INTEGER         OPTIONAL,
+        sp      [4]INTEGER         OPTIONAL,
+        vl      [5]INTEGER         OPTIONAL,
+        mix     [6]Mix             OPTIONAL,
+        ni      [7]BOOLEAN         OPTIONAL
+}
+
+Mix::=SEQUENCE
+{
+		mixable	    [0]INTEGER    OPTIONAL, --1:not 2:yes
+		volume		[1]Volume	OPTIONAL,
+		audioLocal	[2]INTEGER	OPTIONAL, --0:only remote;1:only file;2:mix remote and file
+		audioRemote	[3]INTEGER	OPTIONAL, --0:only local;1:only file;2:mix local and file
+		videoLocal	[4]INTEGER	OPTIONAL, --0:only remote;1:only file;2:overlay remote and file
+		videoRemote	[5]INTEGER	OPTIONAL --0:only local;1:only file;2:overlay local and file
+} 
+
+Volume::=SEQUENCE
+{
+		volumetype  [0]INTEGER  OPTIONAL,   --0:up 1:down      
+		volume      [1]INTEGER  OPTIONAL
+}
+
+ConfPa::=SEQUENCE
+{
+        roomID  [0]INTEGER,
+        an      [1]An              OPTIONAL,
+        it      [2]INTEGER         OPTIONAL,
+        iv      [3]INTEGER         OPTIONAL,
+        du      [4]INTEGER         OPTIONAL,
+        sp      [5]INTEGER         OPTIONAL,
+        vl      [6]INTEGER         OPTIONAL,
+        ni      [7]BOOLEAN         OPTIONAL
+}
+
+
+AuPc::=SEQUENCE
+{
+        ip              [0]An                      OPTIONAL,
+        rp              [1]An                      OPTIONAL,
+        nd              [2]An                      OPTIONAL,
+        fa              [3]An                      OPTIONAL,
+        sa              [4]An                      OPTIONAL,
+        tp              [5]INTEGER                 OPTIONAL,
+        ni              [6]BOOLEAN                 OPTIONAL,
+        sp              [7]INTEGER                 OPTIONAL,
+        vl              [8]INTEGER                 OPTIONAL,
+        cb              [9]INTEGER                 OPTIONAL,--whether to clear digits buffer
+        mx              [10]INTEGER                 OPTIONAL,
+        mn              [11]INTEGER                 OPTIONAL,
+        fdt             [12]INTEGER                 OPTIONAL,
+        idt             [13]INTEGER                 OPTIONAL,
+        edt             [14]INTEGER                 OPTIONAL,
+        na              [15]INTEGER                 OPTIONAL,
+        dp              [16]VisibleString           OPTIONAL,
+        rsk             [17]VisibleString           OPTIONAL,
+        rik             [18]VisibleString           OPTIONAL,
+        rtk             [19]VisibleString           OPTIONAL,
+        psk             [20]VisibleString           OPTIONAL,
+        stk             [21]VisibleString           OPTIONAL,
+        sik             [22]VisibleString           OPTIONAL,
+        eik             [23]VisibleString           OPTIONAL,
+        iek             [24]VisibleString           OPTIONAL,
+        starttimer		[25]BOOLEAN					OPTIONAL --whether to active fdt
+}
+
+ViPc::=SEQUENCE
+{
+        ip      		[0]Vn              OPTIONAL,
+        rp      		[1]Vn              OPTIONAL,
+        nd      		[2]Vn              OPTIONAL,
+        fa      		[3]Vn              OPTIONAL,
+        sa      		[4]Vn              OPTIONAL,
+        tp      		[5]INTEGER         OPTIONAL,
+        ni      		[6]BOOLEAN         OPTIONAL,
+        sp      		[7]INTEGER         OPTIONAL,
+        vl      		[8]INTEGER         OPTIONAL,
+        cb      		[9]INTEGER         OPTIONAL,--whether to clear digits buffer
+        mx      		[10]INTEGER         OPTIONAL,
+        mn      		[11]INTEGER         OPTIONAL,
+        fdt     		[12]INTEGER         OPTIONAL,
+        idt     		[13]INTEGER         OPTIONAL,
+        edt     		[14]INTEGER         OPTIONAL,
+        na      		[15]INTEGER         OPTIONAL,
+        dp      		[16]VisibleString   OPTIONAL,
+        rsk     		[17]VisibleString   OPTIONAL,
+        rik     		[18]VisibleString   OPTIONAL,
+        rtk     		[19]VisibleString   OPTIONAL,
+        psk     		[20]VisibleString   OPTIONAL,
+        stk     		[21]VisibleString   OPTIONAL,
+        sik     		[22]VisibleString   OPTIONAL,
+        eik     		[23]VisibleString   OPTIONAL,
+        iek     		[24]VisibleString   OPTIONAL,
+        mix     		[25]Mix             OPTIONAL,
+        starttimer		[26]BOOLEAN			OPTIONAL --whether to active fdt
+}
+
+
+ConfPc::=SEQUENCE
+{
+        roomID   		[0]INTEGER,
+        ip       		[1]An               OPTIONAL,
+        rp       		[2]An               OPTIONAL,
+        nd       		[3]An               OPTIONAL,
+        fa       		[4]An               OPTIONAL,
+        sa       		[5]An               OPTIONAL,
+        tp       		[6]INTEGER          OPTIONAL,
+        ni       		[7]BOOLEAN          OPTIONAL,
+        sp       		[8]INTEGER          OPTIONAL,
+        vl       		[9]INTEGER          OPTIONAL,
+        cb       		[10]INTEGER         OPTIONAL,--whether to clear digits buffer
+        mx       		[11]INTEGER         OPTIONAL,
+        mn       		[12]INTEGER         OPTIONAL,
+        fdt      		[13]INTEGER         OPTIONAL,
+        idt      		[14]INTEGER         OPTIONAL,
+        edt      		[15]INTEGER         OPTIONAL,
+        na       		[16]INTEGER         OPTIONAL,
+        dp       		[17]VisibleString   OPTIONAL,
+        rsk      		[18]VisibleString   OPTIONAL,
+        rik      		[19]VisibleString   OPTIONAL,
+        rtk      		[20]VisibleString   OPTIONAL,
+        psk      		[21]VisibleString   OPTIONAL,
+        stk      		[22]VisibleString   OPTIONAL,
+        sik      		[23]VisibleString   OPTIONAL,
+        eik      		[24]VisibleString   OPTIONAL,
+        iek      		[25]VisibleString   OPTIONAL,
+        starttimer		[26]BOOLEAN			OPTIONAL --whether to active fdt
+}
+
+AuPr::=SEQUENCE
+{
+        ip       [0]An                     OPTIONAL,
+        rp       [1]An                     OPTIONAL,
+        ns       [2]An                     OPTIONAL,
+        fa       [3]An                     OPTIONAL,
+        sa       [4]An                     OPTIONAL,
+        rf       [5]VisibleString          OPTIONAL,
+        ni       [6]BOOLEAN                OPTIONAL,
+        sp       [7]INTEGER                OPTIONAL,
+        vl       [8]INTEGER                OPTIONAL,
+        cb       [9]INTEGER                OPTIONAL,
+        prt      [10]INTEGER                OPTIONAL,
+        pst      [11]INTEGER                OPTIONAL,
+        rlt      [12]INTEGER                OPTIONAL,
+        na       [13]INTEGER                OPTIONAL,
+        rsk      [14]VisibleString          OPTIONAL,
+        rik      [15]VisibleString          OPTIONAL,
+        rtk      [16]VisibleString          OPTIONAL,
+        psk      [17]VisibleString          OPTIONAL,
+        stk      [18]VisibleString          OPTIONAL,
+        eik      [19]VisibleString          OPTIONAL,
+        rcdfmt	 [20]VisibleString          OPTIONAL,
+        append	 [21]BOOLEAN				OPTIONAL
+}
+
+ConfPr::=SEQUENCE
+{
+        roomID   [0]INTEGER,
+        ip       [1]An                     OPTIONAL,
+        rp       [2]An                     OPTIONAL,
+        ns       [3]An                     OPTIONAL,
+        fa       [4]An                     OPTIONAL,
+        sa       [5]An                     OPTIONAL,
+        rf       [6]VisibleString          OPTIONAL,
+        ni       [7]BOOLEAN                OPTIONAL,
+        sp       [8]INTEGER                OPTIONAL,
+        vl       [9]INTEGER                OPTIONAL,
+        cb       [10]INTEGER                OPTIONAL,
+        prt      [11]INTEGER                OPTIONAL,
+        pst      [12]INTEGER                OPTIONAL,
+        rlt      [13]INTEGER                OPTIONAL,
+        na       [14]INTEGER                OPTIONAL,
+        rsk      [15]VisibleString          OPTIONAL,
+        rik      [16]VisibleString          OPTIONAL,
+        rtk      [17]VisibleString          OPTIONAL,
+        psk      [18]VisibleString          OPTIONAL,
+        stk      [19]VisibleString          OPTIONAL,
+        eik      [20]VisibleString          OPTIONAL,
+        rcdfmt	 [21]VisibleString          OPTIONAL,
+        append	 [22]BOOLEAN				OPTIONAL
+}
+
+ViPr::=SEQUENCE
+{
+        ip       [0]Vn                     OPTIONAL,
+        rp       [1]Vn                     OPTIONAL,
+        ns       [2]Vn                     OPTIONAL,
+        fa       [3]Vn                     OPTIONAL,
+        sa       [4]Vn                     OPTIONAL,
+        rf       [5]VisibleString          OPTIONAL,
+        ni       [6]BOOLEAN                OPTIONAL,
+        sp       [7]INTEGER                OPTIONAL,
+        vl       [8]INTEGER                OPTIONAL,
+        cb       [9]INTEGER                OPTIONAL,
+        prt      [10]INTEGER                OPTIONAL,
+        pst      [11]INTEGER                OPTIONAL,
+        rlt      [12]INTEGER                OPTIONAL,
+        na       [13]INTEGER                OPTIONAL,
+        rsk      [14]VisibleString          OPTIONAL,
+        rik      [15]VisibleString          OPTIONAL,
+        rtk      [16]VisibleString          OPTIONAL,
+        psk      [17]VisibleString          OPTIONAL,
+        stk      [18]VisibleString          OPTIONAL,
+        eik      [19]VisibleString          OPTIONAL,
+        rcdfmt	 [20]VisibleString          OPTIONAL,
+        append	 [21]BOOLEAN				OPTIONAL
+}
+
+IntraEvent::=SEQUENCE
+{
+        roomID                  [0]INTEGER         OPTIONAL,
+        ntNetfail               [1]NtNetfail       OPTIONAL,
+        ntQualityalert          [2]NtQualityalert  OPTIONAL,
+        rtpPltrans              [3]RtpPltrans      OPTIONAL,
+        eventType               [4]INTEGER,
+        auOc                    [5]AuOc
+}
+
+NtNetfail::=SEQUENCE
+{
+        keepActive              [0]BOOLEAN         OPTIONAL,
+        ntNetfailReturn         [1]VisibleString   OPTIONAL
+}
+
+NtQualityalert::=SEQUENCE
+{
+        keepActive              [0]BOOLEAN         OPTIONAL,
+        ntQalertThreshold       [1]VisibleString
+}
+
+RtpPltrans::=SEQUENCE
+{
+        keepActive              [0]BOOLEAN         OPTIONAL,
+        rtpPltransReturn        [1]VisibleString   OPTIONAL
+}
+
+AuOc::=SEQUENCE
+{
+        keepActive              [0]BOOLEAN OPTIONAL,
+        auOcReturn              [1]AuOcReturn      OPTIONAL
+}
+
+AuOcReturn::=CHOICE
+{
+        auPaReturnCode          [0]PaReturnParam,
+        auPcReturnParam         [1]PcReturnParam,
+        auPrReturnParam         [2]PrReturnParam,
+        viPaReturnCode          [3]PaReturnParam,
+        viPcReturnParam         [4]PcReturnParam,
+        viPrReturnParam         [5]PrReturnParam,
+        confPaReturnCode        [6]PaReturnParam,
+        confPcReturnParam       [7]PcReturnParam,
+        confPrReturnParam       [8]PrReturnParam,
+        sdpcReturnCode          [9]INTEGER
+}
+
+PaReturnParam::=SEQUENCE
+{
+        returnCode      [0]INTEGER,
+        pt            	[1]VisibleString   --played time
+}
+
+PcReturnParam::=SEQUENCE
+{
+        returnCode      [0]INTEGER,
+        ik              [1]VisibleString           OPTIONAL,
+        ap              [2]VisibleString           OPTIONAL,
+        na              [3]VisibleString           OPTIONAL,
+        dc              [4]VisibleString           OPTIONAL,
+        rc              [5]VisibleString           OPTIONAL--equal to returnCode,no use now
+}
+
+PrReturnParam::=SEQUENCE
+{
+        returnCode       [0]INTEGER,
+        vi               [1]VisibleString          OPTIONAL,
+        ap               [2]VisibleString          OPTIONAL,
+        na               [3]VisibleString          OPTIONAL,
+        ri               [4]VisibleString          OPTIONAL,
+        rc               [5]VisibleString          OPTIONAL,--equal to returnCode,no use now
+        rt				 [6]VisibleString	--record time		   
+}
+
+IntraAddReply::=SEQUENCE
+{
+        addReturn       [0]INTEGER,
+        localSDP        [1]VisibleString,
+        localAddr       [2]IntraIP4AddrList        OPTIONAL
+}
+
+IntraSubReply::=SEQUENCE
+{
+        subReturn       [0]INTEGER,
+        ntDur           [1]INTEGER         OPTIONAL,
+        ntOs            [2]VisibleString   OPTIONAL,
+        ntOr            [3]VisibleString   OPTIONAL,
+        rtpPs           [4]VisibleString   OPTIONAL,
+        rtpPr           [5]VisibleString   OPTIONAL,
+        rtpPl           [6]VisibleString   OPTIONAL,
+        rtpJit          [7]VisibleString   OPTIONAL,
+        rtpDelay        [8]VisibleString   OPTIONAL
+}
+
+IntraModifyReply::=SEQUENCE
+{
+        modifyReturn    [0]INTEGER,
+        localSDP        [1]VisibleString
+}
+
+
+IntraEventReply::=IntraEvent
+
+IntraStopReply::=SEQUENCE
+{
+        operationID     [0]INTEGER,
+        stopReturn      [1]INTEGER,
+        dur             [2]INTEGER OPTIONAL
+}
+
+IntraAddConfirm::=SEQUENCE
+{
+        remoteSDP       [0]VisibleString,
+        remoteAddr      [1]IntraIP4AddrList   OPTIONAL
+}
+
+IntraBridge::=SEQUENCE
+{
+        calledEndPointID        [0]TerminationStruct,
+        type					[1]INTEGER OPTIONAL,--0:bridge(default);1,unbridge
+        stop					[2]INTEGER OPTIONAL --0:no stop;1,stop(default)
+}
+
+IntraExitRoom::=SEQUENCE
+{
+        sourceRoomID            [0]INTEGER,
+        returnCode              [1]INTEGER
+}
+
+IntraNotification::=CHOICE
+{
+        nbupResult              [0]INTEGER,
+        byteContent             [1]IntraBytes,
+		notiValue               [2]INTEGER,
+		rtspSdp					[3]VisibleString,
+		rtspBegin				[4]INTEGER,
+		rtspEnd					[5]INTEGER,
+		rtspError				[6]INTEGER,
+		asn				[7]TerminationStructList
+}
+
+TerminationStructList::=SEQUENCE OF TerminationStruct
+
+IntraBytes::=SEQUENCE
+{
+        type                    [0]VisibleString,
+        bytes                   [1]OCTET STRING
+}
+
+IntraRtsp::=CHOICE
+{
+		describle				[0]INTEGER,
+		announce				[1]OCTET STRING,
+        setup					[2]IntraRtspSetup,
+        play					[3]IntraRtspPlay,
+        record					[4]IntraRtspRecord,
+        pause					[5]IntraRtspPause,
+        teardown				[6]INTEGER,
+        options					[7]IntraRtspOpt
+}
+
+IntraRtspSetup::=SEQUENCE
+{
+		streamType				[0]INTEGER,	--0 audio+video,1 audio,2 video
+		mode					[1]INTEGER, --0 play,1 record
+		url						[2]VisibleString	OPTIONAL,
+		transport				[3]INTEGER	OPTIONAL,	--0 TCP,1 UDP
+		ip						[4]VisibleString	OPTIONAL,
+		port					[5]INTEGER	OPTIONAL,
+		filepath				[6]VisibleString	OPTIONAL
+		
+}
+
+IntraRtspPlay::=SEQUENCE
+{
+		range					[0]IntraRtspRange	OPTIONAL,
+		scale					[1]INTEGER OPTIONAL,
+		speed					[2]INTEGER OPTIONAL
+}
+
+IntraRtspPause::=SEQUENCE
+{
+		range					IntraRtspRange	OPTIONAL		
+}
+
+IntraRtspRecord::=SEQUENCE
+{
+		range					[0]IntraRtspRange	OPTIONAL,
+		scale					[1]INTEGER OPTIONAL		
+}
+
+IntraRtspRange::=SEQUENCE
+{
+		npt						[0]VisibleString	OPTIONAL,
+		smpte					[1]VisibleString	OPTIONAL,
+		abst					[2]VisibleString	OPTIONAL
+}
+
+IntraRtspOpt::=CHOICE
+{
+		reserve					VisibleString
+}
+
+IntraRtspRep::=CHOICE
+{
+		describle				[0]IntraRtspDesRep,
+		announce				[1]INTEGER,
+        setup					[2]INTEGER,
+        play					[3]INTEGER,
+        record					[4]INTEGER,
+        pause					[5]INTEGER,
+        teardown				[6]INTEGER,
+        options					[7]INTEGER
+}
+
+IntraRtspDesRep::=SEQUENCE
+{
+		result					[0]INTEGER,
+		sdp						[1]VisibleString	OPTIONAL
+}
+
+IntraOSD::=CHOICE
+{
+        osdAdd                  [0]IntraOSDAdd,
+        osdDelete               [1]IntraOSDDelete,
+        osdUpdate               [2]IntraOSDUpdate,
+        osdHide                 [3]IntraOSDHide,
+        osdDisplay              [4]IntraOSDDisplay
+}
+
+IntraOSDRep::=CHOICE
+{
+        osdAddReturn            [0]INTEGER,
+        osdDeleteReturn         [1]INTEGER,
+        osdUpdateReturn         [2]INTEGER,
+        osdHideReturn           [3]INTEGER,
+        osdDisplayReturn        [4]INTEGER
+}
+
+IntraOSDAdd::=SEQUENCE
+{
+        direction               [0]OSDDirection,
+        osdList                 [1]IntraOSDGroupList
+}
+
+IntraOSDDelete::=SEQUENCE
+{
+        direction               [0]OSDDirection,
+        deleteLayer             [1]IntraOSDGroupList OPTIONAL
+}
+
+IntraOSDUpdate::=SEQUENCE
+{
+        direction               [0]OSDDirection,
+        updateList              [1]IntraOSDGroupList
+}
+
+IntraOSDHide::=SEQUENCE
+{
+        direction               [0]OSDDirection,
+        hideLayer               [1]IntraOSDGroupList OPTIONAL
+}
+
+IntraOSDDisplay::=SEQUENCE
+{
+        direction               [0]OSDDirection,
+        displayLayer            [1]IntraOSDGroupList OPTIONAL
+}
+
+OSDDirection::=ENUMERATED{send, receive, duplex}
+
+IntraOSDGroupList::=SEQUENCE OF IntraOSDGroup
+
+IntraOSDGroup::=SEQUENCE
+{
+        groupID                 [0]INTEGER,
+        layerID                 [1]INTEGER,
+        groupState              [2]INTEGER           OPTIONAL,
+        groupAttr               [3]IntraOSDGroupAttr OPTIONAL,
+        wallPaper               [4]IntraOSDWallPaper OPTIONAL
+}
+
+IntraOSDGroupAttr::=CHOICE
+{
+        osdTextDescript         [0]IntraOSDTextDescript,
+        osdImageDescript        [1]IntraOSDImageDescript
+}
+
+IntraOSDWallPaper::=SEQUENCE
+{
+        wallColorSchema         [0]INTEGER       OPTIONAL,
+        wallColorValue          [1]INTEGER       OPTIONAL,
+        wallImage               [2]VisibleString OPTIONAL
+}
+
+IntraOSDTextDescript::=SEQUENCE
+{
+        osdTextString           [0]VisibleString,
+        osdTextFont             [1]INTEGER  OPTIONAL,
+        osdTextSize             [2]INTEGER  OPTIONAL,
+        osdTextStyle            [3]INTEGER  OPTIONAL,
+        osdCharInstead          [4]INTEGER  OPTIONAL,
+        posTop                  [5]INTEGER  OPTIONAL,
+        posLeft                 [6]INTEGER  OPTIONAL,
+        frontColorSchema        [7]INTEGER  OPTIONAL,
+        frontColorValue         [8]INTEGER  OPTIONAL,
+        frontAlpha              [9]INTEGER  OPTIONAL,
+        bgColorSchema           [10]INTEGER OPTIONAL,
+        bgColorValue            [11]INTEGER OPTIONAL,
+        bgAlpha                 [12]INTEGER OPTIONAL,
+        charSpace               [13]INTEGER OPTIONAL,
+        lineSpace               [14]INTEGER OPTIONAL,
+        areaWidth               [15]INTEGER OPTIONAL,
+        areaHeight              [16]INTEGER OPTIONAL,
+        charCountInLine         [17]INTEGER OPTIONAL,
+        lineCount               [18]INTEGER OPTIONAL,
+        textFlash               [19]INTEGER OPTIONAL,
+        textMoving              [20]INTEGER OPTIONAL
+}
+
+IntraOSDImageDescript::=SEQUENCE
+{
+        imagePath               [0]VisibleString,
+        imageBgDisplay          [1]INTEGER  OPTIONAL,
+        imageAlpha              [2]INTEGER  OPTIONAL,
+        imageFlash              [3]INTEGER  OPTIONAL,
+        imageMoving             [4]INTEGER  OPTIONAL,
+        posTop                  [8]INTEGER  OPTIONAL,
+        posLeft                 [9]INTEGER  OPTIONAL,
+		zoomType                [10]INTEGER OPTIONAL,
+        imageWidth              [11]INTEGER OPTIONAL,
+        imageHeight             [12]INTEGER OPTIONAL
+}
+
+IntraTestAlive::=SEQUENCE
+{
+        seqNo                   [0]INTEGER,
+        rcsMediaType            [1]INTEGER  OPTIONAL -- Direction: RCS->RPS, identifies rcs media type, 0 audio and video, 1 audio only, 2 video only, default is 0
+}
+
+END
+

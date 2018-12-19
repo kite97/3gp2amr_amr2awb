@@ -1,0 +1,12 @@
+configure = {'rcs':
+                [{'id': rcsid,
+                 'host': "rcsip",
+                 'number': rcpp_num}],
+             'rps':
+                [{'id': rpsid,
+                 'host': "rpsip",
+                 'boardtype': 2}],
+             'rms': 
+                [{'id': rmsid,
+                 'host': "rmsip"}],
+             'port_base': port_start}

@@ -1,0 +1,857 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc
+END
+reordernorm.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/reordernorm.c
+END
+gs_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/gs_enc.c
+END
+tfa_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/tfa_enc.c
+END
+hq_classifier_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/hq_classifier_enc.c
+END
+acelp_enc_util.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/acelp_enc_util.c
+END
+core_enc_updt.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/core_enc_updt.c
+END
+core_enc_reconf.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/core_enc_reconf.c
+END
+swb_bwe_enc_lr.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/swb_bwe_enc_lr.c
+END
+swb_bwe_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/swb_bwe_enc.c
+END
+cod_uv.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/cod_uv.c
+END
+waveadjust_fec_cod.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/waveadjust_fec_cod.c
+END
+updt_tar.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/updt_tar.c
+END
+pvq_encode.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/pvq_encode.c
+END
+hvq_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/hvq_enc.c
+END
+enc_prm.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/enc_prm.c
+END
+tns_base_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/tns_base_enc.c
+END
+tcq_core_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/tcq_core_enc.c
+END
+ppp_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/ppp_enc.c
+END
+enc_ppp.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/enc_ppp.c
+END
+bass_psfilter_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/bass_psfilter_enc.c
+END
+noise_adjust.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/noise_adjust.c
+END
+setmodeindex.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/setmodeindex.c
+END
+spec_flatness.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/spec_flatness.c
+END
+set_impulse.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/set_impulse.c
+END
+ACcontextMapping_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/ACcontextMapping_enc.c
+END
+core_enc_switch.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/core_enc_switch.c
+END
+dtx.c
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/dtx.c
+END
+update_decision.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/update_decision.c
+END
+acelp_core_switch_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/acelp_core_switch_enc.c
+END
+pvq_core_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/pvq_core_enc.c
+END
+hq_env_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/hq_env_enc.c
+END
+stat_noise_uv_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/stat_noise_uv_enc.c
+END
+eval_pit_contr.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/eval_pit_contr.c
+END
+lsf_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/lsf_enc.c
+END
+peak_vq_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/peak_vq_enc.c
+END
+transition_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/transition_enc.c
+END
+FEC_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/FEC_enc.c
+END
+swb_pre_proc.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/swb_pre_proc.c
+END
+SNR_calc.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/SNR_calc.c
+END
+igf_scf_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/igf_scf_enc.c
+END
+comvad_decision.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/comvad_decision.c
+END
+lsf_msvq_ma_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/lsf_msvq_ma_enc.c
+END
+analy_lp.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/analy_lp.c
+END
+inov_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/inov_enc.c
+END
+core_enc_2div.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/core_enc_2div.c
+END
+tcx_ltp_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/tcx_ltp_enc.c
+END
+long_enr.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/long_enr.c
+END
+lp_exc_e.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/lp_exc_e.c
+END
+range_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/range_enc.c
+END
+plc_enc_ext.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/plc_enc_ext.c
+END
+sig_clas.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/sig_clas.c
+END
+mdct_selector.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/mdct_selector.c
+END
+lead_indexing.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/lead_indexing.c
+END
+diffcod.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/diffcod.c
+END
+qlpc_stoch.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/qlpc_stoch.c
+END
+detect_transient.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/detect_transient.c
+END
+core_enc_init.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/core_enc_init.c
+END
+enc_acelpx.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/enc_acelpx.c
+END
+transient_detection.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/transient_detection.c
+END
+qlpc_avq.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/qlpc_avq.c
+END
+arith_coder_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/arith_coder_enc.c
+END
+ltd_stable.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/ltd_stable.c
+END
+cod_ace.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/cod_ace.c
+END
+enc_uv.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/enc_uv.c
+END
+encoder.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/encoder.c
+END
+normalizecoefs.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/normalizecoefs.c
+END
+pitch_ol2.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/pitch_ol2.c
+END
+hq_hr_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/hq_hr_enc.c
+END
+cod4t64.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/cod4t64.c
+END
+init_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/init_enc.c
+END
+enc_tran.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/enc_tran.c
+END
+spec_center.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/spec_center.c
+END
+mdct_classifier.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/mdct_classifier.c
+END
+cng_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/cng_enc.c
+END
+vad_proc.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/vad_proc.c
+END
+ari_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/ari_enc.c
+END
+pitch_ol.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/pitch_ol.c
+END
+enc_gen_voic_rf.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/enc_gen_voic_rf.c
+END
+swb_bwe_enc_hr.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/swb_bwe_enc_hr.c
+END
+hf_cod_amrwb.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/hf_cod_amrwb.c
+END
+cod2t32.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/cod2t32.c
+END
+vlpc_1st_cod.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/vlpc_1st_cod.c
+END
+vlpc_2st_cod.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/vlpc_2st_cod.c
+END
+evs_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/evs_enc.c
+END
+nois_est.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/nois_est.c
+END
+mslvq_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/mslvq_enc.c
+END
+igf_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/igf_enc.c
+END
+enc_acelp_tcx_main.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/enc_acelp_tcx_main.c
+END
+enc_amr_wb.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/enc_amr_wb.c
+END
+isf_enc_amr_wb.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/isf_enc_amr_wb.c
+END
+updt_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/updt_enc.c
+END
+tcx_utils_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/tcx_utils_enc.c
+END
+gain_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/gain_enc.c
+END
+corr_xh.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/corr_xh.c
+END
+hq_core_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/hq_core_enc.c
+END
+decision_matrix_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/decision_matrix_enc.c
+END
+pre_proc.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/pre_proc.c
+END
+enc_acelp.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/enc_acelp.c
+END
+find_wsp.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/find_wsp.c
+END
+swb_tbe_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/swb_tbe_enc.c
+END
+avq_cod.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/avq_cod.c
+END
+gp_clip.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/gp_clip.c
+END
+enc_pit_exc.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/enc_pit_exc.c
+END
+acelp_core_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/acelp_core_enc.c
+END
+ext_sig_ana.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/ext_sig_ana.c
+END
+nelp_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/nelp_enc.c
+END
+energy.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/energy.c
+END
+io_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/io_enc.c
+END
+core_switching_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/core_switching_enc.c
+END
+cor_shif.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/cor_shif.c
+END
+amr_wb_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/amr_wb_enc.c
+END
+rst_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/rst_enc.c
+END
+voiced_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/voiced_enc.c
+END
+enc_higher_acelp.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/enc_higher_acelp.c
+END
+q_gain2p.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/q_gain2p.c
+END
+bw_detect.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/bw_detect.c
+END
+multi_harm.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/multi_harm.c
+END
+enc_gain.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/enc_gain.c
+END
+stat_enc.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/stat_enc.h
+END
+fd_cng_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/fd_cng_enc.c
+END
+subband_fft.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/subband_fft.c
+END
+re8_cod.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/re8_cod.c
+END
+cod_tcx.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/cod_tcx.c
+END
+enc_nelp.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/enc_nelp.c
+END
+guided_plc_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/guided_plc_enc.c
+END
+find_tar.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/find_tar.c
+END
+vad_param_updt.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/vad_param_updt.c
+END
+vbr_average_rate.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/vbr_average_rate.c
+END
+frame_spec_dif_cor_rate.c
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/frame_spec_dif_cor_rate.c
+END
+analy_sp.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/analy_sp.c
+END
+core_enc_ol.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/core_enc_ol.c
+END
+vad.c
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/vad.c
+END
+speech_music_classif.c
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/speech_music_classif.c
+END
+find_tilt.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/find_tilt.c
+END
+enc_gen_voic.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/enc_gen_voic.c
+END
+pit_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/pit_enc.c
+END
+rom_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/rom_enc.c
+END
+ari_hm_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/ari_hm_enc.c
+END
+gaus_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/gaus_enc.c
+END
+rom_enc.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/rom_enc.h
+END
+hq_lr_enc.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/hq_lr_enc.c
+END
+find_uv.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs/lib_enc/find_uv.c
+END

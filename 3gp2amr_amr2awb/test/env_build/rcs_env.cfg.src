@@ -1,0 +1,9 @@
+# env.cfg    set enveriment for the process
+
+####### each subsystem has diff DOMAID &&MRFDIR  #########
+export DOMAINID=rcsid
+export MRFDIR=$RCSDIR   
+
+export CINDIR=$MRFDIR
+
+unset USERNAME

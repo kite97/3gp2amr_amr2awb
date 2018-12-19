@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode
+END
+myudp.erl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/oldcode/myudp.erl
+END
+digit_sender.erl
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/oldcode/digit_sender.erl
+END
+icp_server.erl
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode/icp_server.erl
+END
+way3mix.erl
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/oldcode/way3mix.erl
+END
+mixer_agent.erl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode/mixer_agent.erl
+END
+ocarina_tester.erl
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode/ocarina_tester.erl
+END
+ips_emulator.erl
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode/ips_emulator.erl
+END
+ocarina_sup.erl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode/ocarina_sup.erl
+END
+audio_mixer.erl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/oldcode/audio_mixer.erl
+END
+statistic.erl
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode/statistic.erl
+END
+icp.erl
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode/icp.erl
+END
+playmax.erl
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/oldcode/playmax.erl
+END
+ocarina.erl
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode/ocarina.erl
+END
+icp_event.erl
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode/icp_event.erl
+END
+ocarina_app.erl
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode/ocarina_app.erl
+END
+ocarina.app.src.old
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode/ocarina.app.src.old
+END
+ocarina.stop
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode/ocarina.stop
+END
+netmixplayer.erl
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/oldcode/netmixplayer.erl
+END
+icp_server_sup.erl
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode/icp_server_sup.erl
+END
+myrpc.erl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/oldcode/myrpc.erl
+END
+ips_codec.hrl
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode/ips_codec.hrl
+END
+dc_ctl.hrl
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/oldcode/dc_ctl.hrl
+END

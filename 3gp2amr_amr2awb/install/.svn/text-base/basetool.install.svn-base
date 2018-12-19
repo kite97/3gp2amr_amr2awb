@@ -1,0 +1,65 @@
+#!/bin/bash
+BASE_TOP=$PWD
+SRC_NAME=otp_src_17.5.tar.gz
+MAN_NAME=otp_doc_man_17.5.tar.gz
+REBAR_NAME=rebar-2.0.0.tar.gz
+REBAR_DIR=rebar-2.0.0
+SRC_DIR=$PWD/otp_src_17.5
+TARGET_DIR=$HOME/.local/lib/erlang
+LOGFILE=$BASE_TOP/basetool.log
+CORES=$(grep -c ^processor /proc/cpuinfo)
+#export MAKEFLAGS=-j$CORES
+if [ ! -e $SRC_NAME ]; then
+    echo "Not find $SRC_NAME"
+    exit 1
+fi
+
+if [ ! -e $MAN_NAME ]; then
+    echo "Not find $MAN_NAME"
+    exit 1
+fi
+
+if [ ! -e $REBAR_NAME ]; then
+    echo "Not find $REBAR_NAME"
+    exit 1
+fi
+
+if [ -e $TARGET_DIR ]; then
+    echo "$TARGET_DIR is exists, delete it before install basetool"
+    exit 1
+fi
+echo "decompressing erlang"
+tar -zxf $SRC_NAME
+echo "configuring erlang"
+cd $SRC_DIR
+./otp_build configure  --without-javac --without-wx > "$LOGFILE" 2>&1
+echo "building erlang"
+./otp_build boot -a >> "$LOGFILE" 2>&1
+echo "installing erlang"
+cd $SRC_DIR
+mkdir -p $TARGET_DIR
+./otp_build release -a "$TARGET_DIR" > /dev/null 2>&1 &&
+    cd "$TARGET_DIR" &&
+    ./Install "$TARGET_DIR" -minimal >/dev/null 2>&1
+echo "installing erlang man pages"
+cd "$TARGET_DIR" && tar -zxf $BASE_TOP/$MAN_NAME
+
+PATH=$TARGET_DIR/bin:$PATH
+export PATH
+
+cd $BASE_TOP
+echo "building rebar"
+tar -zxf $REBAR_NAME
+cd $REBAR_DIR
+./bootstrap >>$LOGFILE 2>&1
+if [ ! -e rebar ]; then
+    echo "build rebar fail"
+    exit 1
+fi
+
+echo "installing rebar"
+mkdir -p $HOME/.local/bin
+cp rebar $HOME/.local/bin
+
+echo "add this lines to your .bashrc to make imp run correct"
+echo "export PATH=\$HOME/.local/bin:\$HOME/.local/lib/erlang/bin:\$PATH"

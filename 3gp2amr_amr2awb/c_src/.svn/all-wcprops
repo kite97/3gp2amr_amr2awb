@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src
+END
+evs_decode.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs_decode.c
+END
+evs_encoder_port.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs_encoder_port.c
+END
+accessor.c
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/ebmsII/!svn/ver/1512/ocarina/trunk/c_src/accessor.c
+END
+mixer.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/mixer.c
+END
+dtmf_parser.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/dtmf_parser.c
+END
+evs_decoder_port.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs_decoder_port.c
+END
+audio_core.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1681/ocarina/trunk/c_src/audio_core.c
+END
+vox_codec.c
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/vox_codec.c
+END
+evs_encode.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/c_src/evs_encode.c
+END
+amr_codec.c
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/c_src/amr_codec.c
+END

@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/test/env_build
+END
+rpsConfig.xml.src
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ebmsII/!svn/ver/1675/ocarina/trunk/test/env_build/rpsConfig.xml.src
+END
+rcs_env.cfg.src
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/env_build/rcs_env.cfg.src
+END
+rms_makefile.config.src
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/env_build/rms_makefile.config.src
+END
+rps_makefile.config.src
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/env_build/rps_makefile.config.src
+END
+rms_env.cfg.src
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/env_build/rms_env.cfg.src
+END
+env_stop
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ebmsII/!svn/ver/1684/ocarina/trunk/test/env_build/env_stop
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/env_build/README
+END
+rps_env.cfg.src
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/env_build/rps_env.cfg.src
+END
+rcs_stack.cfg.src
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ebmsII/!svn/ver/1675/ocarina/trunk/test/env_build/rcs_stack.cfg.src
+END
+imp_config.src
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ebmsII/!svn/ver/1684/ocarina/trunk/test/env_build/imp_config.src
+END
+rcs_config.src
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/env_build/rcs_config.src
+END
+env_start
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ebmsII/!svn/ver/1684/ocarina/trunk/test/env_build/env_start
+END
+comm_config.src
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/env_build/comm_config.src
+END
+env_create
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/ebmsII/!svn/ver/1755/ocarina/trunk/test/env_build/env_create
+END
+config.rppp.src
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/env_build/config.rppp.src
+END
+rcs_makefile.config.src
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ebmsII/!svn/ver/1393/ocarina/trunk/test/env_build/rcs_makefile.config.src
+END
+create_comm
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ebmsII/!svn/ver/1684/ocarina/trunk/test/env_build/create_comm
+END

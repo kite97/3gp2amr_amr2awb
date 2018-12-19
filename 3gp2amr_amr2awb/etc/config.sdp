@@ -1,0 +1,14 @@
+{ulaw}.
+{alaw}.
+%%{g729}.
+{telephone, {pt, 101}, {rate, 8000}}.
+{telephone, {pt, 102}, {rate, 16000}}.
+%{evs, {pt, 104}, {rate, 16000}}.
+%{amrnb,{pt, 106},{rate, 8000},{align, {[oct, eff], {default, oct}}},{modeset,{[0,1,2,3,4,5,6,7],{default,[0,1,2,3,4,5,6,7]}}}}.
+%{amrwb,{pt,108},{rate,16000},{align,{[oct,eff],{default,oct}}},{modeset,{[0,1,2,3,4,5,6,7,8],{default,[0,1,2,3,4,5,6,7,8]}}}}.
+%{h263}.
+%{h264, {pt, 116}, {rate, 90000}}.
+{addrtype, {[ipv4, ipv6], {default, ipv4}}}.
+{negotype, {common}}.
+%{negotype, {local, {{audio, []}, {video, []}}}}. %%audio: [ulaw,alaw,amrnb,amrnb_oct,amrnb_eff,amrwb,amrwb_oct,amrwb_eff]
+%{negotype, {remote}}                             %%video: [h263, h264]

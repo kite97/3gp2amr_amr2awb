@@ -1,0 +1,399 @@
+%!Tex Program = xelatex
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setmainfont[Mapping=tex-text,BoldFont=WenQuanYi Zen Hei]{WenQuanYi Zen Hei}
+\begin{document}
+\section{数字图像}
+\subsection{人眼对图像的感知}
+    现实世界的物体有两种属性可以被人眼感知：颜色和形状。
+颜色是人眼对于物体反射或发出的电磁波的反映，人眼可以感
+受的电磁波是波长范围在380nm--760nm之间，颜色区间从红色
+过度到紫色。形状是人眼中多个视细胞分别得到物体的一部分
+而形成的点阵，再由大脑合成的一种感觉。客观世界的所有物
+体均是由人眼反映成一幅各种颜色的点阵传入大脑，再由大脑
+合成同时拥有颜色和形状的物体。
+
+    虽然人眼可以识别成千上万种颜色，但人眼只有三种色觉
+细胞，分别感觉红绿蓝三种色光。所以只向人眼传入三种纯色
+的光线，大脑会误以为看到了真识的颜色，而非三种纯色。针
+对人眼的此种性质，只需要三种颜色的光源，改变每种颜色光
+线的强度，就可以向人眼发送成千上万种颜色了。
+\subsection{图像的采集与显示}
+    图像的采集设备完全模仿人眼的结构，记录现实光线对红
+绿蓝三种纯色的亮度，将所有采集到的颜色点按照实际的位置
+排列成点阵存储即可。采集设备记录到是每一个点称为一个像
+素，每个像素均包含三种纯色的亮度值。
+
+    显示设备本身即是一种模仿图像的设备，由若干像素组成
+的一个点阵，每个像素均由三种原色的光源组成，所有像素同
+时发光即可显示图像。对于特定图像的显示非常简单，只需将
+记录到的所有的像素对应到显示设备上显示即可。
+\subsection{图像的数字化与存储}
+    将三种纯色的值进行数字化用于表示一种颜色，就可以将
+颜色数字化。
+
+    人眼对于三种纯色的敏感度不尽相同，对于红色的亮度变化
+最为敏感，而对于绿色的亮度变化就不太敏感。但是将亮度的最
+大值与最小值分成256份以上，则人眼均不能分辨任意两级之间
+的变化。所以三种纯色的数值均可以表示成一个8位整数，一种
+颜色可以用一组RGB值表示。
+
+    将所有的颜色值按照点阵的位置存储为一张表，就可以实
+现图像的数字化了。
+\subsection{颜色空间}
+    人眼对于真实颜色的处理，可以认为是获取一种颜色在三
+种纯色上的分度值。反过来就可以说，三种纯色的值，可以表
+示一种颜色。用三种纯色表示三个维度，则所有的颜色值均可
+对应空间中的一点，空间中所有的颜色组成颜色空间。
+
+    一般根据人眼对于纯色的感觉灵敏度，三种纯色可以取值
+0--255。所以红绿蓝三纯色的颜色空间共可表示1677万种颜色。
+
+    除三纯色的颜色表示法，颜色的分度还可以有其他的分解
+方法，如YCbCr的表示方法。YCbCr中的Y表示光的流明值，Cb是
+蓝色分量，Cr是红色分量，此种表示方法在显示时需要根据显
+示设备的不同，使用不同的数值计算回三纯色并显示，并不方便，
+但使用此种表示方法，图像将比较容易被压缩，节省存储空间。
+\subsection{静态图像与运动图像}
+    一般的图像仅指静态图像（still image）。将静态图像排列
+在一起，快速的变换，利用人眼的视觉暂留，人眼会看到一幅
+运动的图像（moving image）。人眼的视觉暂留时间约为24分之
+1秒，所以每秒变换24幅以上的图像，人眼将会认为图像的变化
+是连续的。在多媒体技术中，运动图像就是普遍意义上是视频（video）。
+\subsection{静态图像的压缩}
+    由于图像占用非常大的存储空间，为便于存储和交换，压缩
+成为重要的技术手段。
+   
+    任何数据的压缩方式无外乎寻找一种编码方式，将数据中重覆
+的部分用编码的方式更简短的方式表达。比如字符序列``aaaaabbbbb''，
+设定编码方式为字符及重覆次数，可以用``a5b5''表达相同的意义，
+而文本的长度明显简少了，即是``压缩''了。
+
+    图像中，可以将每一个像素的数据类比为一个字符串，所有的像
+素序列即可等同于一个字符序列，使用与
+字符序列相同的处理方式，即可对图像信息进行压缩。但图像又与
+字符序列有另一种明显的不同。字符序列间的重覆，是一种一维的
+重覆，字符只需与前后两个方向结合寻找相同的字符。而图像的重覆
+是二维的重覆，即是说图像中某一个小平面可能在图像中多次重覆，
+但组成小平面的像素虽然在二维上相邻，在存储图像的数据中并不
+相邻。所以需要开发针对图像的特别压缩算法才有更好的效果。
+常用的png图像即是选取一种特别的lz77算法用于图像的压缩。
+
+    使用上述的压缩算法对图像进行处理后，经过解压操作可以对
+图像进行还原显示。由于解压后的数据与压缩前的的数据完全相同，
+即是说数据量没有操损失，所以png选用的算法是一种``无损''压缩
+算法。无损压缩对数据的压缩量是有限的，如果在压缩时损失一些
+不必要的数据，但图像解压还原后给人的的感觉仍尽量保持一致，即
+可在不影响图像整体质量的情况下减少大量的存储空间。
+
+    jpeg对于图像的处理即使用有损压缩。jpeg先将原图像每个
+像素的RGB值转换为YUV值，就是说换了一种颜色空间的表示方法，
+与YCrCb类似，其中Y是亮度，U是色调，V是饱合度。由于人眼对于
+亮度的变化更为敏感，而对色调及饱合度的变化相对差一些，所
+以可以将图像中色调和饱合度相近的像素统一替换为相同的值，
+这样图像中重覆的像素就明显增加了，再做压缩时，就可以获得
+更高的压缩率。jpeg对YUV的做法是缩减取样，就是只对部分的
+U和V值进行取样，进行处理。取样后，将图像以8*8大小为单位
+变换为图像的频率值，再利用人眼对高频不敏感而减少高频相关的
+数据，进一步减少最终数据。
+\subsection{运动图像的压缩}
+    运动图像实际存储相当于一组以时间为坐标的静态图像，
+其中每一幅静态图像称之为一帧。所以，只要减少所有帧的大
+小，就可以有效的减少运动图像的存储空间。m-jpeg技述即
+是使用此种思路减少运动图像的存储空间。这种压缩方式称
+为帧内压缩。
+
+    运动图像的帧与帧之间的关系颇为密切，从整体上看，除
+少数例外，大部分帧与之前和之后的帧的差别非常小。所以，
+对于大多数帧，只需存储当前帧与前一帧的不同点，就可以通
+过前一帧的数据得到当前帧的数据，极大的减少了存储空间。
+同理，当前帧也可以存储与后一帧的差达到相同的目的。这种
+压缩方法称为帧间压缩。对于帧间压缩，共有三种不同的帧最终
+会被存储：I帧，是独立帧，本身含有所有的数据；P帧，需要
+参考之前的I帧或P帧来计算当前帧；B帧，需要同时参考之前和
+之后的帧才能计算当前帧。
+
+    例：按存储及播放顺序如下
+
+    IBBPBBPBBPIBBPBBPBBP
+
+    解码时，先解出I，再解出第一个P，再解出两个B，再解出
+第二个P，再解出两个B，以此类推，直至第二个I。第一I帧至
+第二个I帧之前的序列，在mpeg编码中，被称作一个GOP（group of picture）。
+
+\subsection{静态图像的容器格式与网络传输}
+    图像的存储格式基本上均是基于块结构的流式存储，并不需
+要获取全部数据才可以解码显示，除文件头外，可以获取一个块，
+就解码显示一个块。本节说明静态图像的存储与网络专输，下节
+说明动态图像相关内容。
+
+    传统静态图像的存储是一个文件头，紧随图像的相关数据，
+之后是文件结尾数据。如jpeg的容器jfif文件，将整个
+文件分为SOI(start of image)，APP0（图像基本信息），若干SOF
+（图像数据）及一个EOI（end of image）几个部分。网络传输及解
+码时，获得文件头后，顺序获得图像的数据，可以即时对图像的一
+部分进行解码和显示。但jpeg的数据存储顺序是以行为单位从上至下，
+从左至右进行存储，所以图像的显示顺序也将是从上至下，从左至右。
+当文件很大或是网络状况不好，至使加载图像变慢时，图像将只能部
+分的进行显示并等待余下数据。
+
+    像jfif这样的存储方式不能很快的使人整体上对图像有一个把握，
+使用体验并不好，png使用了另一种存储方式。
+
+    png整体上与jfif一致，也是使用文件头与块的方式进行数据存储。
+但是png先将图像分成8*8的小块，先存储所有块的最左上的像素，再存
+储所有块的的四分之一大小的小块最左上的像素。具体存储顺序不在此
+详述，但存储的方式是逐渐细化。这样在显示的过程中，图像的显示将
+是从模糊到清晰，可以很快的总体上把握，体验相对较好。
+\subsection{运动图像的数据流}
+    运动图像因其结构相对静态图像比较复杂，观看时又有时间参量，
+同时有适应网络化传输的客观需求，所以其数据流之中便存在一些结
+构化信息，以便于满足需求。本节主要说明H.263格式的数据流的结
+构信息。
+  
+    前文已经提到运动图像大体存储模式，即所有压缩后静态图像一
+帧一帧的连续顺序存储，并无复杂结构，但每一帧的数据独立成段，
+其内部的有结构的：
+
+\begin{table}[htbp]
+{ \small
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline PSC&TR&PTYPE&PQUANT&CPM&PSBI&TRB&DBQUANT&PEI&GOBs&ESTUF&EOS&PSTUF \\ 
+\hline
+\end{tabular}
+}
+\end{table}
+以下说明重点数据段，详细信息参见ITU-T的H.263的标准文档
+\begin{enumerate}
+    \item PSC： Picture Start Code，22位的同步头，值为0000 0000 0000 0000 1000 00，
+        用于表求一帧的开始。
+    \item TR：Temporal Reference。一般情况下每帧加一。
+    \item PTYPE：类型信息，不定长。前两位为定值，10，表示开始代码仿真并表其为H.263
+    数据。第三位，表是否分割屏
+    幕。第四位，表是否为文档录像。第五位，表是否为全图冻结。第六位至第八位，表示图像
+    格式，如011为CIF，100为4CIF，具体参见文档。第九位，图像编码类型，I帧为0，P帧为1。
+    第十位至第十三位，略。如果第六位至第八位为111，则其为增量PTYPE，后续有其他数据位。
+    \item GOB：Group of Block。每一帧图像按行分成若干个Block，这些Block共同组成GOB。
+        其中，每一个Block可以分成若干MacroBlock，
+    \item EOS：End of Sequence，22位结尾标志，值为0000 0000 0000 0000 1111 11。
+\end{enumerate}
+
+
+\subsection{运动图像的网络传输}
+    本节说明H.263数据流通过RTP的方式在网络上传输。具本信息详见rfc2190。
+
+    RTP首先通过SDP协商指定数据格式，指定rtpmap 34 H263/90000，即为
+指定了视频为H.263。H.263经由RTP输一般选取采样率为90000Hz，此一次采样对
+应一帧的图像。
+
+    RTP承载H.263数据，共有ABC三种模式，在此仅说明最简单的A模式。
+    
+    因为
+运动图像的数据量均偏大，所以在一次RTP传输中完成所有的数据传输是不可能的，
+甚至不能完成一帧的传输，这就涉及到数据分段的问题。模式A规定，RTP整体以
+帧为单位进行数据传输，当单帧亦不能经由一个RTP传输时，一帧的数据可以分成
+多个RTP包传输。当一个RTP包是一帧的最后一个数据包时，RTP头的Mark位置为1，
+其他情况置为0。RTP头中时间戳指定的是当前传输的帧所对应的采样偏移量，当
+一帧被分成多个包传输时，时间戳的值相同。
+
+除RTP头需要做部分修订外，rfc2190特别为H.263制订了头信息（H.263 payload 
+header），其在RTP包中的结构如下：
+
+{  \small
+\begin{verbatim}
+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |                 RTP header                                    |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |                 H.263 payload header                          |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |                 H.263 bitstream                               |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+模式A中的payload header的结构及意义如下：
+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |F|P|SBIT |EBIT | SRC |I|U|S|A|R      |DBQ| TRB |    TR         |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   F: 1 bit
+   The flag bit indicates the mode of the payload header. F=0, mode A;
+   F=1, mode B or mode C depending on P bit defined below.
+
+   P: 1 bit
+   Optional PB-frames mode as defined by the H.263 [4]. "0" implies
+   normal I or P frame, "1" PB-frames. When F=1, P also indicates modes:
+   mode B if P=0, mode C if P=1.
+
+   SBIT: 3 bits
+   Start bit position specifies number of most significant bits that
+   shall be ignored in the first data byte.
+
+   EBIT: 3 bits
+   End bit position specifies number of least significant bits that
+   shall be ignored in the last data byte.
+
+   SRC : 3 bits
+   Source format, bit 6,7 and 8 in PTYPE defined by H.263 [4], specifies
+   the resolution of the current picture.
+
+   I:  1 bit.
+   Picture coding type, bit 9 in PTYPE defined by H.263[4], "0" is
+   intra-coded, "1" is inter-coded.
+
+   U: 1 bit
+   Set to 1 if the Unrestricted Motion Vector option, bit 10 in PTYPE
+   defined by H.263 [4] was set to 1 in the current picture header,
+   otherwise 0.
+
+   S: 1 bit
+   Set to 1 if the Syntax-based Arithmetic Coding option, bit 11 in
+   PTYPE defined by the H.263 [4] was set to 1 for current picture
+   header, otherwise 0.
+
+   A: 1 bit
+   Set to 1 if the Advanced Prediction option, bit 12 in PTYPE defined
+   by H.263 [4] was set to 1 for current picutre header, otherwise 0.
+
+   R: 4 bits
+   Reserved, must be set to zero.
+
+   DBQ: 2 bits
+   Differential quantization parameter used to calculate quantizer for
+   the B frame based on quantizer for the P frame, when PB-frames option
+   is used. The value should be the same as DBQUANT defined by H.263
+   [4].  Set to zero if PB-frames option is not used.
+
+   TRB: 3 bits
+   Temporal Reference for the B frame as defined by H.263 [4]. Set to
+   zero if PB-frames option is not used.
+
+   TR: 8 bits
+   Temporal Reference for the P frame as defined by H.263 [4]. Set to
+   zero if the PB-frames option is not used.
+
+\end{verbatim}
+}
+
+\subsection{运动图像的容器格式}
+    运动图像的存储容器有多种格式，本节只针对3gp等电信相关的的容
+器进行说明。
+  
+    运动图像的容器同样是基于块结构的，每个块都标明了块的名字，
+长度，并包含相关数据。块中的数据也有可能包含子块。块的结构除了
+利于网络上的流式传输之外，由于块的名字表明了块的意义，这样需
+要添加新的功能块时，只要定义新的名字就可以了，非常容易，并有
+很好的兼容性。
+
+    3gp所使用的这种容器定义方法，最早源于苹果的mov文件，之后
+被mpeg文档的第12部分定义为iso base media file format，3gp文件
+又在此基础上扩充了若干新功能块。由于块的结构一致，所以识别
+相关块名字，即可对3gp文件解析。
+
+    3gp文件同时可以包含音频和运动图像，所以3gp文件可以说包含
+的是视频。3gp文件中每一个块称为一个box，重要的块有moov和mdat等。
+每一个块的均是由一个32位的整数表示长度，一个32位的4字节字符串表
+示块的名称，其余的数据均是块的数据。数据部分可以是其他的子块。
+以下仅介绍重要的块，具体请见mpeg文档第12部分。
+
+    样例3gp文件结构分析如：
+
+{  \small
+\begin{verbatim}
+Atom ftyp @ 0 of size: 20, ends @ 20
+Atom mdat @ 20 of size: 925075, ends @ 925095
+Atom moov @ 925095 of size: 7520, ends @ 932615
+     Atom mvhd @ 925103 of size: 108, ends @ 925211
+     Atom trak @ 925211 of size: 2990, ends @ 928201
+         Atom tkhd @ 925219 of size: 92, ends @ 925311
+         Atom mdia @ 925311 of size: 2890, ends @ 928201
+             Atom mdhd @ 925319 of size: 32, ends @ 925351
+             Atom hdlr @ 925351 of size: 45, ends @ 925396
+             Atom minf @ 925396 of size: 2805, ends @ 928201
+                 Atom vmhd @ 925404 of size: 20, ends @ 925424
+                 Atom dinf @ 925424 of size: 36, ends @ 925460
+                     Atom dref @ 925432 of size: 28, ends @ 925460
+                 Atom stbl @ 925460 of size: 2741, ends @ 928201
+                     Atom stsd @ 925468 of size: 117, ends @ 925585
+                         Atom s263 @ 925484 of size: 101, ends @ 925585
+                             Atom d263 @ 925570 of size: 15, ends @ 925585
+                     Atom stts @ 925585 of size: 24, ends @ 925609
+                     Atom stss @ 925609 of size: 120, ends @ 925729
+                     Atom stsc @ 925729 of size: 28, ends @ 925757
+                     Atom stsz @ 925757 of size: 1224, ends @ 926981
+                     Atom stco @ 926981 of size: 1220, ends @ 928201
+     Atom trak @ 928201 of size: 4406, ends @ 932607
+         Atom tkhd @ 928209 of size: 92, ends @ 928301
+         Atom mdia @ 928301 of size: 4306, ends @ 932607
+             Atom mdhd @ 928309 of size: 32, ends @ 928341
+             Atom hdlr @ 928341 of size: 45, ends @ 928386
+             Atom minf @ 928386 of size: 4221, ends @ 932607
+                 Atom smhd @ 928394 of size: 16, ends @ 928410
+                 Atom dinf @ 928410 of size: 36, ends @ 928446
+                     Atom dref @ 928418 of size: 28, ends @ 928446
+                 Atom stbl @ 928446 of size: 4161, ends @ 932607
+                     Atom stsd @ 928454 of size: 69, ends @ 928523
+                         Atom samr @ 928470 of size: 53, ends @ 928523
+                             Atom damr @ 928506 of size: 17, ends @ 928523
+                     Atom stts @ 928523 of size: 24, ends @ 928547
+                     Atom stsc @ 928547 of size: 28, ends @ 928575
+                     Atom stsz @ 928575 of size: 20, ends @ 928595
+                     Atom stco @ 928595 of size: 4012, ends @ 932607
+     Atom udta @ 932607 of size: 8, ends @ 932615
+\end{verbatim}
+}
+    
+\begin{enumerate}
+    \item ftyp：表示文件的的类型。
+    \item mdat：表示3gp内的媒体数据，此样例中，音频图像共用一个数据
+        段。音频数据是amr的媒体流，视频数据是H263的媒体流。
+    \item moov：用于指示mdat中各数据的解释方法，如哪一段是音频，哪一段
+        是图像，数据格式如何等。
+    \item mvhd：说明整体信息。
+    \item trak：轨道。一个轨道可能指明音频，也可能是图像和文字等，轨道
+        内的数据以时间为参量，同时被使用。
+    \item tkhd：每个轨道唯一，内部数据指明轨道的基本数据，如创建时间，轨
+        道ID等。
+    \item mdia：本身无内容，内部数据描述轨道的具体信息。
+    \item mdhd：媒体格式无关的的媒体数据，包括创建时间，修改时间，时间伸缩，
+        持续时间。
+    \item hdlr：媒体的持有类型(handler)。
+    \item minf：本身无内容，内部数据描述媒体信息。
+    \item vmhd：视频媒体头。
+    \item dinf：本身无内容，内部数据描述媒体数据。
+    \item dref：数据参考。
+    \item stbl：本身无内容，内部数据描述采样表。
+    \item stsd：采样描述。
+    \item s263：表示数据是H263。
+    \item d263：内容为解码器信息。
+    \item stts：用于解码的时间向采样转换。
+    \item stss：同步采样表。
+    \item stsc：采样至chunk的转换。
+    \item stsz：采样的数据大小。
+    \item stco：媒体数据chunk的入口，可有多个。
+\end{enumerate}
+    
+
+\subsection{难点}
+    高并发下的预处理。由于运动图像所占内存空间较大，进行大规模
+缓存的压力较大。但是是不需要转码的情况下，所需的计算量比较小。
+在高并发下，可以将运动图像以GOP为单位读入内存，发送完毕后，再
+读取下一个GOP。
+    
+    RTP特别要求。RTP的Mark位在传输运动图像时有特殊用途。由于运动
+图像每一帧都可能很大，无法在一个RTP包中传输完毕，所以，当RTP包是
+当前帧的最后一个包时，mark位设置为1，其他时为0。
+    
+    音视频同步。音视频同步问题并不发生在服务器端。服务器仅能
+以正确的时间间隔发送正确的数据。当接收数据时（录像），也仅能
+做到以正确的顺序存储数据。
+
+    丢帧。由于网络不稳定可能造成丢帧。当丢失B帧时，应假定丢失
+帧与该帧之前一帧数据相同。当丢失P帧时，应假定与前一P帧或I帧相
+同。当丢失I帧时，数据无法估计，应将整个GOP丢弃，以全黑填充。
+\end{document}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SEND: -->
+<!-- EXPECT: play.end=play.complete -->
+<!-- TIMELEN: 20s-->
+<!-- TAG: need check-->
+<msml version="1.1">
+  <dialogstart target="conn:12345" name="audioPlay" mark="7">
+    <play barge="true">
+        <audio uri="audio.wav"/>
+        <playexit>
+            <send target="source" event="terminate" valuelist="play.end" />
+        </playexit>
+    </play>
+  </dialogstart>
+</msml>

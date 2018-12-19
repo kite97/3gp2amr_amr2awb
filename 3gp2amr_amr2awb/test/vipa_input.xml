@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<msml version="1.1">
+  <tag name="viplay"/>
+  <dialogstart target="conn:12345" name="12345">
+    <play>
+      <test>
+        <attrtest defaultvalue="1" name="iterate">
+          <item expect="play.end=play.complete" medialen="5.0s" value="1" />
+          <item expect="play.end=play.complete" medialen="5.0s" value="NONE" />
+        </attrtest>
+      </test>
+      <test>
+        <attrtest defaultvalue="NONE" name="interval">
+          <item expect="play.end=play.complete" medialen="10.0s" timelen="13.0s" value="3s" condition="iterate,2,NONE" />
+          <item expect="play.end=play.complete" medialen="10.0s" value="NONE" condition="iterate,2,NONE" />
+        </attrtest>
+      </test>
+      <test>
+        <attrtest defaultvalue="NONE" name="maxtime">
+          <item expect="play.end=play.complete" medialen="6.0s" value="6s" condition="iterate,2,NONE" />
+          <item expect="play.end=play.complete" medialen="5.0s" value="NONE" />
+          <item expect="play.end=play.complete" medialen="5.0s" timelen="6s" value="6s" condition="iterate,2,NONE;interval,5,NONE" />
+          <item expect="play.end=play.complete" medialen="7.0s" timelen="12s" value="12s" condition="iterate,2,NONE;interval,5,NONE" />
+          <item expect="play.end=play.complete" medialen="9.0s" timelen="14s" value="14s" condition="iterate,2,NONE;interval,5,NONE" />
+          <item expect="play.end=play.complete" medialen="3.0s" value="3s" />
+        </attrtest>
+      </test>
+      <test>
+        <attrtest defaultvalue="NONE" name="offset">
+          <item expect="play.end=play.complete" medialen="3.0s" value="2s" />
+          <item expect="play.end=play.complete" medialen="5.0s" value="NONE" />
+        </attrtest>
+      </test>
+      <test>
+        <attrtest defaultvalue="false" name="barge">
+          <item send="1" expect="play.end=play.complete" medialen="1.0s" value="true" />
+          <item send="1" expect="play.end=play.complete" medialen="5.0s" value="false" />
+          <item send="1" expect="play.end=play.complete" medialen="5.0s" value="NONE" />
+        </attrtest>
+      </test>
+ <video>
+   <test>
+      <attrtest defaultvalue="vga_5s_nb_7_15fps.3gp" name="uri">
+        <item expect="play.end=play.complete" medialen="5.0s" value="hd_5s_nb_7_6fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="hd" framerate="6"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_nb_7_6fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="vga" framerate="6"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="qvga_5s_nb_7_6fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="qvga" framerate="6"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="cif_5s_nb_7_6fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="cif" framerate="6"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="qcif_5s_nb_7_6fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="qcif" framerate="6"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="hd_5s_nb_7_10fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="hd" framerate="10"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_nb_7_10fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="vga" framerate="10"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="qvga_5s_nb_7_10fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="qvga" framerate="10"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="cif_5s_nb_7_10fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="cif" framerate="10"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="qcif_5s_nb_7_10fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="qcif" framerate="10"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="hd_5s_nb_7_15fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="hd" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_nb_7_15fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="vga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="qvga_5s_nb_7_15fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="qvga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="cif_5s_nb_7_15fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="cif" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="qcif_5s_nb_7_15fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="qcif" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="hd_5s_nb_7_30fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="hd" framerate="30"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_nb_7_30fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="vga" framerate="30"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="qvga_5s_nb_7_30fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="qvga" framerate="30"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="cif_5s_nb_7_30fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="cif" framerate="30"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="qcif_5s_nb_7_30fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="qcif" framerate="30"/>
+
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_nb_7_15fps.3gp" mediatype="nb" modeset="7" octetalign="0" framesize="vga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_nb_5_15fps.3gp" mediatype="nb" modeset="5" octetalign="0" framesize="vga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_nb_2_15fps.3gp" mediatype="nb" modeset="2" octetalign="0" framesize="vga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_nb_0_15fps.3gp" mediatype="nb" modeset="0" octetalign="0" framesize="vga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_nb_7_15fps.3gp" mediatype="nb" modeset="7" octetalign="1" framesize="vga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_nb_5_15fps.3gp" mediatype="nb" modeset="5" octetalign="1" framesize="vga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_nb_2_15fps.3gp" mediatype="nb" modeset="2" octetalign="1" framesize="vga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_nb_0_15fps.3gp" mediatype="nb" modeset="0" octetalign="1" framesize="vga" framerate="15"/>
+
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_wb_8_15fps.3gp" mediatype="wb" modeset="8" octetalign="0" framesize="vga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_wb_5_15fps.3gp" mediatype="wb" modeset="5" octetalign="0" framesize="vga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_wb_2_15fps.3gp" mediatype="wb" modeset="2" octetalign="0" framesize="vga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_wb_0_15fps.3gp" mediatype="wb" modeset="0" octetalign="0" framesize="vga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_wb_8_15fps.3gp" mediatype="wb" modeset="8" octetalign="1" framesize="vga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_wb_5_15fps.3gp" mediatype="wb" modeset="5" octetalign="1" framesize="vga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_wb_2_15fps.3gp" mediatype="wb" modeset="2" octetalign="1" framesize="vga" framerate="15"/>
+        <item expect="play.end=play.complete" medialen="5.0s" value="vga_5s_wb_0_15fps.3gp" mediatype="wb" modeset="0" octetalign="1" framesize="vga" framerate="15"/>
+      </attrtest>
+   </test>
+ </video>
+      <playexit>
+        <send target="source" event="terminate" valuelist="play.end"/>
+      </playexit>
+    </play>
+  </dialogstart>
+</msml>
